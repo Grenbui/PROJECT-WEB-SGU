@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#breadcrump-wrapper{
+    background-image: url(../Image/t-shirt.webp);
+    height: 300px;
+    padding: 30 0;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.breadcrumb-content h2{
+    color: #fff;
+}
