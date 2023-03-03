@@ -7,7 +7,7 @@
 #breadcrump-wrapper{
     background-image: url(../Image/t-shirt.webp);
     height: 300px;
-    padding: 30 0;
+    margin-bottom: 20px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,6 +15,42 @@
     position: relative;
 }
 
+.breadcrumb-overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 1;
+}
+
+.breadcrumb-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
 .breadcrumb-content h2{
     color: #fff;
 }
+
+.col-header{
+    
+}
+
+.collections-filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.collections-sort{
+    text-align: right;
+}
+
+
+
