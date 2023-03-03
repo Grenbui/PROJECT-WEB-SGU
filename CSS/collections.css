@@ -37,9 +37,19 @@
     color: #fff;
 }
 
-.collections-container .collections-header {
+.col-header{
+    
+}
+
+.collections-filter{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.collections-sort{
+    text-align: right;
 }
 
 
