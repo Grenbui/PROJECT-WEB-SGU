@@ -84,17 +84,48 @@ html{
 #page-container{
     margin: 30px 0;
 }
-.main-content h1{
-    margin-bottom: 30px;
+.main-content .container h1{
+    margin-bottom: 15px;
 }
 .information{
     margin-bottom: 15px;
 }
 
-.information-link{
-    color: #000;
+
+.bg-1{
+    background-color: #fff;
+}
+.about{
+    position: relative;
 }
 
+.about img{
+    width: 100%;
+    max-width: 50%;
+    position: relative;
+}
+.caption-wrap{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.wrapper{
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+.position-right{
+    position: right;
+}
+.caption{
+    width: 50%;
+}
 
 footer{
     box-shadow: 0px 0px 7px rgb(0 0 0 / 30%);
