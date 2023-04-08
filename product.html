@@ -118,7 +118,7 @@
             </div>
             
         </section>
-        <div class="collections-container container-fluid">
+        <div class="collections-container container">
             <div class="collections-header row text-center">
                 
                 <div class="collections-title col">
@@ -127,25 +127,233 @@
                 
             </div>
             <div class="collections-col row">
-                <div class="filter-col col-2">
-                    <div class="collections-filter">
+                <div class="filter-col col-2 border rounded">
+                    <div class="collections-filter mb-4">
                         <span class="filter"><b>Bộ lọc</b></span>
                     </div>
 
-                    <div class="filter-price">
-
-                    </div>
-                    <div class="filter-stuff">
-
-                    </div>
-                    <div class="filter-material">
-
-                    </div>
-                    <div class="filter-style">
-
-                    </div>
-                    <div class="filter-color">
-                        
+                    <div class="category-filter">
+                        <div class="filter-price">
+                            <button type="button" class="filter-price-name"><b>Khoảng Giá</b></button>
+                            <div class="price-level">
+                                <ul class="price-list">
+                                    <li>
+                                        <label for="">
+                                            <input class="Btn_All" type="radio" name="price-filter" id="">
+                                            <span>Tất cả</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input class="Btn_Less500" type="radio" name="price-filter" id="">
+                                            <span>Dưới 500.000đ</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="price-filter" id="">
+                                            <span>500.000đ -> 1.000.000đ</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="price-filter" id="">
+                                            <span>1.000.000đ -> 2.000.000đ</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="price-filter" id="">
+                                            <span>2.000.000đ -> 3.000.000đ</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="price-filter" id="">
+                                            <span>3.000.000đ -> 4.000.000đáp</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="price-filter" id="">
+                                            <span>Trên 4.000.000đ</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter-stuff">
+                            <button type="button" class="filter-stuff-name"><b>Loại</b></button>
+                            <div class="stuff-category">
+                                <ul class="stuff-list">
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="stuff-filter" id="">
+                                            <span>Dress Boots</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="stuff-filter" id="">
+                                            <span>Mocassins</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="stuff-filter" id="">
+                                            <span>Flip-Flop</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="stuff-filter" id="">
+                                            <span>Thắt lưng (Belt)</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="stuff-filter" id="">
+                                            <span>Ví (Wallet)</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter-material">
+                            <button type="button" class="filter-material-name"><b>Chất liệu</b></button>
+                            <div class="material-category">
+                                <ul class="material-list">
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="material-filter" id="">
+                                            <span>Velvet (Nhung)</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="material-filter" id="">
+                                            <span>Fabric (Bố)</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="material-filter" id="">
+                                            <span>Leather (Da)</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="material-filter" id="">
+                                            <span>Patent (Da bóng)</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="material-filter" id="">
+                                            <span>Suede (da lôn)</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter-style">
+                            <button type="button" class="filter-style-name"><b>Kiểu dáng</b></button>
+                            <div class="style-category">
+                                <ul class="style-list">
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="style-filter" id="">
+                                            <span>Mũi Tròn</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="style-filter" id="">
+                                            <span>Cao cổ</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="style-filter" id="">
+                                            <span>Cột Dây</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="style-filter" id="">
+                                            <span>Không Dây</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="style-filter" id="">
+                                            <span>Đế Bằng</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter-color">
+                            <button type="button" class="filter-color-name"><b>Màu Sắc</b></button>
+                            <div class="color-category">
+                                <ul class="color-list">
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Xanh</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Đỏ</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Tím</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Vàng</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Đen</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Trắng</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Xám</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Nâu</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="">
+                                            <input type="radio" name="color-filter" id="">
+                                            <span>Kem</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="sorting-col col-10">
@@ -159,8 +367,14 @@
                             <option value="price-descending">Giá Cao - Thấp</option>
                         </select>
                     </div>
+                    <div class="row collection-product">
+                        
+                    </div>
                 </div>
             </div>
         </div>
     </body>
+
+    <script src="./Javascript/collections.js"></script>
+    <script src="./Javascript/productList.js"></script>
 </html>

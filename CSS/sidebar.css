@@ -1,79 +1,338 @@
-.sidebar {
+.sidebar
+{
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    padding-bottom: 50px;
+    position: fixed;
+    width: 270px;
+    z-index: 999;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: .5s;
+    box-shadow: 4px 0px 10px rgb(0 0 0 / 16%);
+}
+.icon_admin_header i
+{
+    font-size: 25px !important;
+}
+
+
+.sidebar_list
+{
+    padding: 0;
+}
+.sidebar_list-item
+{
+    list-style: none;
+    font-size: 1.6rem;
+    
+}
+.sidebar_list-item:hover
+{
+    background-color: #939191;
+}
+.sidebar_list-item:hover span
+{
+    color: #fff;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+.icon-item
+{
+    width: 15px;
+    transform: translateY(-3px);
+}
+.sidebar_list-item span
+{
+    margin-left: 10px;
+    color: #676b84;
+}
+.logo
+{
+    margin: 30px;
+    background: #fff;
+    padding: 33px 30px;
+    border-radius: 7px;
+}
+.sidebar_list
+{
+    padding: 0;
+}
+.sidebar_list-item
+{
+    list-style: none;
+    font-size: 1.6rem;
+    
+}
+.sidebar_list-item:hover
+{
+    background-color: #939191;
+}
+
+
+.main-content
+{
+    padding-left: 270px;
+    width: 100%;
+    padding-top: 0!important;
+    transition: .5s;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    overflow: hidden;
+}
+.header_iner
+{
+    background-color: #fff;
     position: fixed;
     top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px;
-    padding: 15px;
-    background: #242e42;
-    color: #fff;
-    overflow-x: hidden;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .sidebar:hover {
-    width: 300px;
-  }
-  
-  .sidebar ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar a {
-    display: block;
-    padding: 10px 15px;
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .sidebar a:hover {
-    background-color: #343a40;
-    color: #fff;
-  }
-  
-  .sidebar .fa-icon {
-    margin-right: 10px;
-  }
-  
-  .sidebar_banner
-  {
-    width: 100%;
-    padding: 20px;
-    margin-bottom: 20px;
-
-  }
-
-
-  .dashbroad
-  {
-    margin-left: 250px;
-    background-color: red;
-    height: 100%;
-  }
-  .dashbroad_header
-  {
-    
-   
-  }
-  .dashbroad_header_name
-  {
-   
-  }
-  .dashbroad_header_nav
-  {
-    
-  }
-  .list_nav
-  {
+    z-index: 99;
+    padding: 30px;
+    position: relative;
+    margin: 27px 30px;
+    border-radius: 7px;
     display: flex;
-    list-style: none;
+    justify-content: space-between;
+}
+.searchbar
+{
+    width: 480px;
+    position: relative;
+}
+.form-control
+{
+    padding: 16px !important;
+    font-size: 16px !important;
+}
+.input_search_header
+{
+    width: 480px;
+    margin-left: 20px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #f9f6f6;
+    padding-left: 50px;
+    font-size: 1.6rem;
+}
+.item
+{
+    padding: 15px 25px 15px 30px;
+    text-decoration: none;
+    display: block;
+    
+}
+.icon-search
+{
+    width: 15px;
+    position: absolute;
+    top: 18px;
+    left: 39px;
+}
+.icon_avatar
+{
+    width: 25px;
+   
+}
+.admin_avatar
+{
+    position: absolute;
+    top: 10px;
+    right: 55px;
+}
+.admin_user
+{
+    display: flex;
     align-items: center;
-    justify-content: space-around;
-  }
+    position: relative;
+}
+.avatar img
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.avatar
+{
+    position: relative;
+}
+.avatar::after{
+    position: absolute;
+    display: block;
+    content: "";
+}
+.menu_admin a,
+.menu_admin p
+{
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: right;
+}
+
+.menu_admin a:hover
+{
+    color: #fff;
+    opacity: 0.8;
+} 
+.menu_admin a 
+{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 0;
+}
+.profile_details
+{
+    margin-top: 20px;
+    border-top: 1px solid #79838b;
+    padding-top: 10px;
+}
+.text-1
+{
+    color: #828bb2 !important;
+}
+.menu_admin a span
+{
+    margin: 0;
+}
+.icon-details
+{
+    width: 15px;
+    margin-left: 5px;
+}
+@keyframes menu_details {
+    0%{
+        transform: scale(0);
+        opacity: 0;
+    }
+    100%
+    {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.menu_admin::before
+{
+    position: absolute;
+    content: "";
+    display: block;
+    top: -56px;
+    border: 36px solid;
+    right: 12px;
+    border-color: transparent transparent #4d4f5c transparent;
+}
+.menu_admin::after
+{
+    position: absolute;
+    content: "";
+    display: block;
+    width: 190px;
+    height: 30px;
+    top: -29px;
+}
+.avatar:hover .menu_admin
+{
+    display: block;
+}
+.menu_admin
+{
+    background-color: #4d4f5c;
+    position: absolute;
+    width: 190px;
+    right: 0px;
+    top: 120px;
+    display: none;
+    animation: menu_details ease-in-out 0.5s;
+    transform-origin: 150px top;
+}
+.admin_user span:hover
+{
+    cursor: pointer;
+}
+.menu_content
+{
+    padding: 30px 30px 20px;
+}
+.admin_user span
+{
+    margin: 0 20px;
+}
+
+.content_iner
+{
+    min-height: 68vh;
+    transition: .5s;
+    margin: 30px;
+}
+.total
+{
+    background: #3b76ef;
+    padding: 41px 50px;
+    color: #fff;
+    border-radius: 10px;
+    height: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+.total h2
+{
+    font-size: 14px;
+}
+.total h3
+{
+    font-size: 30px;
+    transform: translateX(-8px);
+    font-weight: 700;
+}
+.total:hover
+{
+    opacity: 0.8;
+}
+.total:hover::before
+{
+    display: block;
+}
+.total::before
+{
+    position: absolute;
+    content: "";
+    display: block;
+    background-image: url(/Web-index/img/total-before.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    top: 15px;
+    right: -100px;
+    display: none;
+}
+.total p
+{
+    font-size: 13px;
+}
+.bg-1
+{
+    background-color: #63c7ff;
+}
+.bg-2
+{
+    background-color: #a66dd4;
+}
+.bg-3
+{
+    background-color: #6dd4b1;
+}
+.mg {
+    margin-bottom: 20px;
+}
+.img-item
+{
+    width: 100%;
+}
+
+.active_list
+{
+    background-color: #f3efef;
+}

@@ -37,7 +37,18 @@
                         </div>
                         <div class="header-top-navbar-ul">
                             <ul class="header-top-navbar-right-list">
-                                <li class="header-top-navbar-item">
+                                <li class="header-top-navbar-item" id="search-modal">
+                                    <div class="input-group">
+                                        <input type="text" value="" placeholder="Tìm kiếm" id="search-input-form" class="input-group-field">
+                                        <!-- <input type="hidden" name="contact[tags]" value="newsletter"> -->
+                                        <span class="input-group-btn">
+                                            <button class="btn-more-white" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li onclick="openCloseSearch()" class="header-top-navbar-item">
                                     <a href="#" class="header-top-navbar-link  hover-underline-text" id="search-btn">Tìm kiếm
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </a>
@@ -76,12 +87,34 @@
                         <a href="" class="header-under-navbar-link hover-underline-text">Trang chủ</a>
                     </li>
                     <li class="header-under-navbar-item">
-                        <a href="" class="header-under-navbar-link hover-underline-text">Sản phẩm nam (Men) 
+                        <a href="#" class="header-under-navbar-link hover-underline-text">Sản phẩm nam (Men) 
                             <i class="fa-solid fa-angle-down"></i>
                         </a>
                         <ul class="subnav-dropdown-menu">
                             <li class="subnav-item">
-                                <a href="" class="subnav-item-link">Footwears (Giày/ dép)</a>
+                                <a href="#" class="subnav-item-link">Footwears (Giày/ dép)
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                                <ul class="sub-subnav-dropdown-menu">
+                                    <li class="subnav-item">
+                                        <a href="" class="subnav-item-link">Sparkling slippers (Giày thời trang)</a>
+                                    </li>
+                                    <li class="subnav-item">
+                                        <a href="" class="subnav-item-link">Dress shoes (Giày tây công sở)</a>
+                                    </li>
+                                    <li class="subnav-item">
+                                        <a href="" class="subnav-item-link">Comfort sneakers (Giày thể thao)</a>
+                                    </li>
+                                    <li class="subnav-item">
+                                        <a href="" class="subnav-item-link">Mocassins/ Drivers (Giày lười)</a>
+                                    </li>
+                                    <li class="subnav-item">
+                                        <a href="" class="subnav-item-link">Backless (Dép)</a>
+                                    </li>
+                                    <li class="subnav-item">
+                                        <a href="" class="subnav-item-link">Handmade leather soles (Giày đế da may tay)</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="subnav-item">
                                 <a href="" class="subnav-item-link">Belts (Thắt lưng)</a>
@@ -276,12 +309,24 @@
                     </div>
                 </div>
                 <div class="hg-content">
-                    <a href="" id="hgModalYoutube" class="open-youtube">
+                    <a onclick="closeHgModalYoutube()" id="hgModalYoutube" class="open-youtube">
                         <i class="fa-regular fa-circle-play"></i>
                     </a>
                 </div>
                 <div class="hg-more">
                     <a href="" class="hg-more-link btn-more-black">XEM THÊM</a>
+                </div>
+            </div>
+        </div>
+        <div id="modalYoutube">
+            <div class="hg-modal-content">
+                <span class="hg-modal-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+                <div class="hg-modal-body">
+                    <div class="video-wrapper">
+                        <iframe id="home-video-player" width="100%" height="100%" src="https://www.youtube.com/embed/IrjeG5HKB9A" frameborder="0" allowfullscreen=""></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -423,7 +468,7 @@
         </footer>
     </div>
 </body>
-<script src="./Javascript/searchBtn.js"></script>
 <script src="./Javascript/headerScroll.js"></script>
+<script src="./Javascript/indexJS.js"></script>
 
 </html>

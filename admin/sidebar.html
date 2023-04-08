@@ -4,79 +4,99 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../CSS/sidebar.css">
+    <link rel="stylesheet" href="../Web-index/font/fontawesome-free-6.2.0-web/css/all.min.css">
+  <link rel="stylesheet" href="../CSS/sidebar.css">
+    <link rel="stylesheet" href="../CSS/base.css">
     <link rel="stylesheet" href="../Font/fontawesome-free-6.2.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../Framework/bootstrap-4.0.0-dist/css/bootstrap-grid.css">
-    <link rel="stylesheet" href="../Framework/bootstrap-4.0.0-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../Framework/bootstrap-4.0.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../Framework/bootstrap/css.css">
-    <script src="../Framework/bootstrap/js.js"></script>
+    <title>Total</title>
 </head>
 <body>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown button
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
-  </div>
-    <!-- <div class="sidebar">
-      <div class="banner">
-        <img src="../Image/logo.webp" alt="" data-toggle="tooltip" title="This is a tooltip"  class="sidebar_banner">
-      </div>
-        <ul class="list-unstyled mb-0">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-chart-line fa-icon"></i> Doanh thu
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="">
+                <img src="../Image/logo.webp" class="img-logo" style="width: 100%;" alt="">
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-user fa-icon"></i> User
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-box fa-icon"></i> Sản phẩm
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-spinner fa-icon"></i> Sản phẩm đang xử lý
-            </a>
-          </li>
-        </ul>
-      </div>
-     <div class="dashbroad">
-      
-        <div class="dashbroad_header" style="overflow-x: hidden;">
-          <div class="row">
-          <div class="dashbroad_header_name col-lg-5">
-            <span>Chào mừng đến với Admin</span>
-          </div>
-          <div class="dashbroad_header_nav col-lg-7">
-            
-            <ul class="list_nav">
-              <li class="nav_link">
-                <span><i class="fa-regular fa-comment"></i></span>
-              </li>
-              <li class="nav_link">
-                <span><i class="fa-solid fa-bell"></i></span>
-              </li>
-              <li class="nav_link">
-                <span><i class="fa-solid fa-right-from-bracket"></i></span>
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-      
-     </div> -->
-    
+        <ul class="sidebar_list">
+            <li class="sidebar_list-item active_list">
+                <a href="" class="item">
+                  <i class="fa-solid fa-house"></i>
+                    <span>Tổng doanh thu</span>
+                </a>
+            </li>
+            <li class="sidebar_list-item">
+                <a href="" class="item">
+                  <i class="fa-solid fa-users"></i>
+                    <span>Quản lý khách hàng</span>
+                </a>
+            </li>
+            <li class="sidebar_list-item ">
+                <a href="" class="item">
+                  <i class="fa-brands fa-product-hunt"></i>
+                    <span>Danh sách sản phẩm</span>
+                </a>
+            </li>
+            <li class="sidebar_list-item">
+                <a href="" class="item">
+                  <i class="fa-solid fa-spinner"></i>
+                   <span>Danh sách sản phẩm đang xử lý</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <section class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header_iner">
+                        <div class="searchbar">
+                            <div class="searchbar-iner">
+                                <input class="input_search_header" type="text" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="admin_avatar">
+                            <div class="admin_user">
+                                <span >
+                                    <i class="fa-solid fa-bell" style="font-size: 25px;"></i>
+                                </span>
+                                <span >
+                                    <i class="fa-solid fa-comment-medical" style="font-size: 25px;"></i>
+                                 </span>
+                                <div class="avatar">
+                                    <img src="../Image/t-shirt.webp" alt="">
+                                    <div class="menu_admin">
+                                        <div class="menu_content">
+                                            <p class="text-1">Welcome Admin!</p>
+                                            <p class="text-2">Văn Sìnl</p>
+                                           <div class="profile_details">
+                                               <a href="" class="text-5">Log out <span></span></a>
+                                           </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_iner">
+    <div class="total_header">
+        <p>Lọc theo ngày</p>
+    </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Từ ngày" aria-label="Username">
+              <span class="input-group-text" style="font-size: 16px;"><i class="fa-solid fa-arrow-right"></i></span>
+              <input type="text" class="form-control" placeholder="Đến ngày" aria-label="Server">
+            </div>
+            <div class="container">
+                <div class="row">
+                   
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
