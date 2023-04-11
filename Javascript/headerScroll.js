@@ -4,9 +4,11 @@ const scrollPosition = 100;
 
 window.addEventListener('scroll', function() {
   if (window.pageYOffset > scrollPosition) {
-    header.classList.add('fixed');
+    header.classList.add('sticky');
+   
   } else {
-    header.classList.remove('fixed');
+    header.classList.remove('sticky');
+    
   }
 });
 
