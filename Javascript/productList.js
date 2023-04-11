@@ -4,7 +4,9 @@ var ListOfProduct = [
         productName: 'Johny Classique Chelsea',
         productPrice: '50,000đ',
         productImage: './Image/boots/Johny Classique Chelsea1.webp',
-        productType: 'boots',
+        productSytle: 'Mũi Tròn',
+        productMaterial: 'Da',
+        productType: 'Dress boots',
     },
 
     {
@@ -12,7 +14,9 @@ var ListOfProduct = [
         productName: 'Johny Pointed Brogue Chelsea',
         productPrice: '3,050,000đ',
         productImage: './Image/boots/Johny Pointed Brogue Chelsea1.webp',
-        productType: 'boots',
+        productSytle: 'Mũi Nhọn',
+        productMaterial: 'Da',
+        productType: 'Dress boots',
     },
 
     {
@@ -20,6 +24,8 @@ var ListOfProduct = [
         productName: 'Johny Pointed Chelsea',
         productPrice: '3,050,000đ',
         productImage: './Image/boots/Johny Pointed Chelsea1.webp',
+        productSytle: 'Mũi Nhọn',
+        productMaterial: 'Da',
         productType: 'boots',
     },
 
@@ -28,7 +34,9 @@ var ListOfProduct = [
         productName: 'Johny Pointed Patent Chelsea',
         productPrice: '3,050,000đ',
         productImage: './Image/boots/Johny Pointed Patent Chelsea1.webp',
-        productType: 'boots',
+        productSytle: 'Mũi Nhọn',
+        productMaterial: 'Da Bóng',
+        productType: 'Dress boots',
     },
 
     {
@@ -36,14 +44,17 @@ var ListOfProduct = [
         productName: 'Johny Weaving Chelsea',
         productPrice: '3,050,000đ',
         productImage: './Image/boots/Johny Weaving Chelsea2.webp',
-        productType: 'boots',
+        productSytle: 'Mũi Tròn',
+        productMaterial: 'Da',
+        productType: 'Dress boots',
     },
 
     {
         id: 6,
         productName: 'Ronny Moca Smooth (brown)',
         productPrice: '2,650,000đ',
-        productImage: './Image/Mosscasins/Ronny Moca Smooth brown1.webp ',
+        productImage: './Image/Mosscasins/Ronny Moca Smooth brown1.webp',
+        productMaterial: 'Da',
         productType: 'Mosscasins',
     },
 
@@ -51,7 +62,8 @@ var ListOfProduct = [
         id: 7,
         productName: 'Ronny Moca Smooth (black)',
         productPrice: '3,050,000đ',
-        productImage: './Image/Mosscasins/Ronny Moca Smooth5.webp   ',
+        productImage: './Image/Mosscasins/Ronny Moca Smooth5.webp',
+        productMaterial: 'Da',
         productType: 'Mosscasins',
     },
 
@@ -59,7 +71,8 @@ var ListOfProduct = [
         id: 8,
         productName: 'Ronny Moca Suede (blue)',
         productPrice: '3,050,000đ',
-        productImage: './Image/Mosscasins/Ronny Moca Suede(blue)1.webp  ',
+        productImage: './Image/Mosscasins/Ronny Moca Suede(blue)1.webp',
+        productMaterial: 'Da Lộn',
         productType: 'Mosscasins',
     },
 
@@ -67,7 +80,8 @@ var ListOfProduct = [
         id: 9,
         productName: 'Ronny Moca Suede (red)',
         productPrice: '3,050,000đ',
-        productImage: './Image/Mosscasins/Ronny Moca Suede(red)1.webp   ',
+        productImage: './Image/Mosscasins/Ronny Moca Suede(red)1.webp',
+        productMaterial: 'Da Lộn',
         productType: 'Mosscasins',
     },
 
@@ -75,7 +89,8 @@ var ListOfProduct = [
         id: 10,
         productName: 'Ronny Moca Suede (grey)',
         productPrice: '3,050,000đ',
-        productImage: './Image/Mosscasins/Ronny Moca Suede(grey)1.webp  ',
+        productImage: './Image/Mosscasins/Ronny Moca Suede(grey)1.webp',
+        productMaterial: 'Da Lộn',
         productType: 'Mosscasins',
     },
 
@@ -83,7 +98,8 @@ var ListOfProduct = [
         id: 11,
         productName: 'Ronny Moca Suede (brown)',
         productPrice: '3,050,000đ',
-        productImage: './Image/Mosscasins/Ronny Moca Suede(brown)1.webp ',
+        productImage: './Image/Mosscasins/Ronny Moca Suede(brown)1.webp',
+        productMaterial: 'Da Lộn',
         productType: 'Mosscasins',
     },
 
@@ -132,6 +148,7 @@ var ListOfProduct = [
         productName: 'Lokky Taiga Belt 3.4cm Simple',
         productPrice: '3,050,000đ',
         productImage: './Image/Belt/Lokky Taiga Belt 3.4cm Simple1.webp',
+        productMaterial: 'Da',
         productType: 'Belt',
     },
 
@@ -140,6 +157,7 @@ var ListOfProduct = [
         productName: 'Lokky Taiga Belt 3.4cm(black)',
         productPrice: '3,050,000đ',
         productImage: './Image/Belt/Lokky Taiga Belt 3.4cm(black)1.webp',
+        productMaterial: 'Da',
         productType: 'Belt',
     },
 
@@ -148,6 +166,7 @@ var ListOfProduct = [
         productName: 'Lokky Taiga Belt 3.4cm',
         productPrice: '3,050,000đ',
         productImage: './Image/Belt/Lokky Taiga Belt 3.4cm6.webp',
+        productMaterial: 'Da',
         productType: 'Belt',
     },
 
@@ -156,6 +175,7 @@ var ListOfProduct = [
         productName: 'Nokky Classique Belt 3.4cm',
         productPrice: '3,050,000đ',
         productImage: './Image/Belt/Nokky Classique Belt 3.4cm1.webp',
+        productMaterial: 'Da',
         productType: 'Belt',
     },
 
@@ -164,6 +184,7 @@ var ListOfProduct = [
         productName: 'Nokky Croco Belt 2.8cm Simple',
         productPrice: '3,050,000đ',
         productImage: './Image/Belt/Nokky Croco Belt 2.8cm Simple1.webp',
+        productMaterial: 'Da',
         productType: 'Belt',
     },
 
@@ -172,6 +193,7 @@ var ListOfProduct = [
         productName: 'Anchy Blanc Bi-Fold Simple',
         productPrice: '3,050,000đ',
         productImage: './Image/Wallet/Anchy Blanc Bi-Fold Simple1.webp',
+        productMaterial: 'Da',
         productType: 'Wallet',
     },
     
@@ -180,6 +202,7 @@ var ListOfProduct = [
         productName: 'Anchy Grained Bi-Fold Button',
         productPrice: '3,050,000đ',
         productImage: './Image/Wallet/Anchy Grained Bi-Fold Button1.webp',
+        productMaterial: 'Da',
         productType: 'Wallet',
     },
 
@@ -188,6 +211,7 @@ var ListOfProduct = [
         productName: 'Anchy Grained Bi-Fold Simple',
         productPrice: '3,050,000đ',
         productImage: './Image/Wallet/Anchy Grained Bi-Fold Simple1.webp',
+        productMaterial: 'Da',
         productType: 'Wallet',
     },
 
@@ -196,6 +220,7 @@ var ListOfProduct = [
         productName: 'Grained Name Card Holder',
         productPrice: '3,050,000đ',
         productImage: './Image/Wallet/Grained Name Card Holder1.webp',
+        productMaterial: 'Da',
         productType: 'Wallet',
     },
 
@@ -204,12 +229,14 @@ var ListOfProduct = [
         productName: 'Metal Bi-folds',
         productPrice: '3,050,000đ',
         productImage: './Image/Wallet/Metal Bi-folds1.jpg',
+        productMaterial: 'Da',
         productType: 'Wallet',
     },
 ];
 
 var prodList = document.querySelector(".collection-product");
 
+//Note: chạy lệnh php vào thẻ html product
 function renderProd(ListOfProduct){
     var firstpage =ListOfProduct.map(function(product1)
     {
@@ -245,12 +272,36 @@ document.addEventListener("DOMContentLoaded", function() {
 function filterProductsByPrice(priceMin, priceMax) {
     var filteredProducts = ListOfProduct.filter(function(product) {
       // Chuyển đổi giá trị productPrice thành số và so sánh với priceMin và priceMax
+      
       var productPrice = parseInt(product.productPrice.replace(/\D/g, ''));
       return productPrice >= priceMin && productPrice <= priceMax;
     });
     renderProd(filteredProducts);
 }
+document.querySelector(".Btn_All").addEventListener("click", function() {
+    filterProductsByPrice(0, 10000000);
+});
 
 document.querySelector(".Btn_Less500").addEventListener("click", function() {
     filterProductsByPrice(0, 500000);
+});
+
+document.querySelector(".Btn_500kTo1Mil").addEventListener("click", function() {
+    filterProductsByPrice(500000, 1000000);
+});
+
+document.querySelector(".Btn_1MilTo2Mil").addEventListener("click", function() {
+    filterProductsByPrice(1000000, 2000000);
+});
+
+document.querySelector(".Btn_2MilTo3Mil").addEventListener("click", function() {
+    filterProductsByPrice(2000000, 3000000);
+});
+
+document.querySelector(".Btn_3MilTo4Mil").addEventListener("click", function() {
+    filterProductsByPrice(3000000, 4000000);
+});
+
+document.querySelector(".Btn_above4Mil").addEventListener("click", function() {
+    filterProductsByPrice(4000000, 5000000);
 });

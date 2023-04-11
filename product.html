@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./CSS/collections.css">
 
     <!-- BOOSTRAP -->
-    <link rel="stylesheet" href="./Framework/bootstrap-4.0.0-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./Framework/js/bootstrap.js">
     </head>
     
     <body>
@@ -171,10 +171,11 @@
                     <div class="collections-filter mb-4">
                         <span class="filter"><b>Bộ lọc</b></span>
                     </div>
-
                     <div class="category-filter">
                         <div class="filter-price">
-                            <button type="button" class="filter-price-name"><b>Khoảng Giá</b></button>
+                            <button type="button" class="filter-price-name"><b>Khoảng Giá</b>
+                                    <i class="fa-solid fa-plus"></i>
+                            </button>
                             <div class="price-level">
                                 <ul class="price-list">
                                     <li>
@@ -191,31 +192,31 @@
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="price-filter" id="">
+                                            <input class="Btn_500kTo1Mil" type="radio" name="price-filter" id="">
                                             <span>500.000đ -> 1.000.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="price-filter" id="">
+                                            <input class="Btn_1MilTo2Mil" type="radio" name="price-filter" id="">
                                             <span>1.000.000đ -> 2.000.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="price-filter" id="">
+                                            <input class="Btn_2MilTo3Mil" type="radio" name="price-filter" id="">
                                             <span>2.000.000đ -> 3.000.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="price-filter" id="">
+                                            <input class="Btn_3MilTo4Mil" type="radio" name="price-filter" id="">
                                             <span>3.000.000đ -> 4.000.000đáp</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="price-filter" id="">
+                                            <input class="Btn_above4Mil" type="radio" name="price-filter" id="">
                                             <span>Trên 4.000.000đ</span>
                                         </label>
                                     </li>
@@ -223,7 +224,7 @@
                             </div>
                         </div>
                         <div class="filter-stuff">
-                            <button type="button" class="filter-stuff-name"><b>Loại</b></button>
+                            <button type="button" class="filter-stuff-name"><b>Loại</b> <i style="margin-left: 55px;" class="fa-solid fa-plus"></i></button>
                             <div class="stuff-category">
                                 <ul class="stuff-list">
                                     <li>
@@ -260,7 +261,7 @@
                             </div>
                         </div>
                         <div class="filter-material">
-                            <button type="button" class="filter-material-name"><b>Chất liệu</b></button>
+                            <button type="button" class="filter-material-name"><b>Chất liệu</b> <i style="margin-left: 55px;" class="fa-solid fa-plus"></i></button>
                             <div class="material-category">
                                 <ul class="material-list">
                                     <li>
@@ -290,14 +291,14 @@
                                     <li>
                                         <label for="">
                                             <input type="radio" name="material-filter" id="">
-                                            <span>Suede (da lôn)</span>
+                                            <span>Suede (Da lộn)</span>
                                         </label>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="filter-style">
-                            <button type="button" class="filter-style-name"><b>Kiểu dáng</b></button>
+                            <button type="button" class="filter-style-name"><b>Kiểu dáng</b><i style="margin-left: 55px;" class="fa-solid fa-plus"></i></button>
                             <div class="style-category">
                                 <ul class="style-list">
                                     <li>
@@ -333,7 +334,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="filter-color">
+                        <!-- <div class="filter-color">
                             <button type="button" class="filter-color-name"><b>Màu Sắc</b></button>
                             <div class="color-category">
                                 <ul class="color-list">
@@ -393,7 +394,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="sorting-col col-10">

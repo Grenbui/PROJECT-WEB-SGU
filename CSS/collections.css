@@ -4,6 +4,26 @@
     box-sizing: border-box;
 }
 
+.field{
+    width: 100%;
+    float: left;
+    padding: 0.45em;
+    box-sizing: border-box;
+}
+
+.fieldInput {
+    box-shadow: 0 0 0 1px #d9d9d9;
+    transition: all 0.2s ease-out;
+    background-color: white;
+    color: #333333;
+    border-radius: 4px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.94em 2.8em 0.94em 0.8em;
+    word-break: normal;
+}
+
 #breadcrump-wrapper{
     background-image: url(../Image/t-shirt.webp);
     height: 300px;
@@ -47,7 +67,6 @@
 .collections-sort{
     text-align: right;
 }
-
 .collections-container .collections-col .category-filter ul {
     list-style: none;
 }
@@ -60,10 +79,12 @@
     border: none;
     background-color: #fff;
     cursor: pointer;
-    text-align: left;
     outline: none;
     width: 100%;
     margin-bottom: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .category-filter .filter-price .filter-price-name:after,
@@ -71,7 +92,6 @@
 .category-filter .filter-material .filter-material-name::after,
 .category-filter .filter-style .filter-style-name::after,
 .category-filter .filter-color .filter-color-name::after {
-    content: '\02795'; 
     color: white;
     float: right;
     margin-left: 5px;
@@ -89,12 +109,10 @@
 }
 
 .active:after {
-    content: "\2796";
+    /* content: "\2796"; */
     float: right;
     margin-left: 5px;
 }
-
-
 
 
 /*BODY: PRODUCT LIST*/
@@ -192,3 +210,111 @@
 .text__link:hover{    
     text-decoration: none;
 }
+
+
+.input-line {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.receive__COD .input-line1{
+    padding-left: 8px;
+}
+
+.input-line1 {
+    padding: 10px 0;
+    width: 100%;
+    /* margin: 10px; */
+    /* padding-left: 20px; */
+}
+
+.input-name {
+    width: 100%;
+    padding: 8px;
+}
+
+.input-email{
+    width: 60%;
+    padding: 8px;
+    margin-left: 1.3px;
+}
+
+.input-tel{
+    width: 39%;
+    padding: 8px;
+}
+
+.input-border {
+    border: 0.5px solid #000;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.info-heading .inline{
+    display: inline ;
+}
+
+.btn__width {
+    width: 100%;
+    text-align: left;
+}
+
+.btn__receive {
+    background-color: #fff;
+    border: none;
+}
+
+.btn__receive:focus{
+    outline: none;
+    border: none;
+}
+
+.btn__receive:hover{
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.sel_width {
+    width: 33% !important; 
+    border: 1px solid #fafafa;
+    border-radius: 5px;
+}
+
+.select_size {
+    width: 100%;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.receive__COD-detail{
+    display: none;
+}
+
+.receive__inPlace-detail{
+    display: none;
+}
+
+.receive__inPlace .input-line1 span{
+    padding-left: 10px;
+}
+
+.activeReceive {
+    display: block;
+}
+
+.heading__description {
+    text-align: center;
+}
+
+.prod__img {
+    width: 100%;
+}
+
+.secondProd__img {
+    width: 100%;
+}
+
+.disapperDisplay{
+    display: none;
+}
+
