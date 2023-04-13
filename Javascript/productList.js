@@ -26,7 +26,7 @@ var ListOfProduct = [
         productImage: './Image/boots/Johny Pointed Chelsea1.webp',
         productSytle: 'Mũi Nhọn',
         productMaterial: 'Da',
-        productType: 'boots',
+        productType: 'Dress boots',
     },
 
     {
