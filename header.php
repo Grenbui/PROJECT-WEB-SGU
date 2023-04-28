@@ -12,7 +12,7 @@
 </head>
 <body>
     
-    <div id="header">
+    <div id="header" style="z-index: 99;">
         <div class="header-top container-fluid px-0">
             <!-- <div class="row"> -->
                 <div class="header-top-navbar">
@@ -70,16 +70,16 @@
                 <li class="header-under-navbar-item">
                     <a href="" class="header-under-navbar-link hover-underline-text">Trang chủ</a>
                 </li>
-                <li class="header-under-navbar-item">
-                    <a href="#" class="header-under-navbar-link hover-underline-text">Sản phẩm nam (Men) 
+                <li class="header-under-navbar-item" style="z-index: 99">
+                    <a href="#" class="header-under-navbar-link hover-underline-text">Sản phẩm 
                         <i class="fa-solid fa-angle-down"></i>
                     </a>
                     <ul class="subnav-dropdown-menu">
                         <li class="subnav-item">
-                            <a href="#" class="subnav-item-link">Footwears (Giày/ dép)
-                                <i class="fa-solid fa-chevron-right"></i>
+                            <a href="#" class="subnav-item-link">Dress boots
+                                <!-- <i class="fa-solid fa-chevron-right"></i> -->
                             </a>
-                            <ul class="sub-subnav-dropdown-menu">
+                            <!-- <ul class="sub-subnav-dropdown-menu">
                                 <li class="subnav-item">
                                     <a href="" class="subnav-item-link">Sparkling slippers (Giày thời trang)</a>
                                 </li>
@@ -98,20 +98,23 @@
                                 <li class="subnav-item">
                                     <a href="" class="subnav-item-link">Handmade leather soles (Giày đế da may tay)</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Belts (Thắt lưng)</a>
+                            <a href="" class="subnav-item-link">Mosscasins</a>
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Bags/Clutches/Backpack (Túi/ Ba lô)</a>
+                            <a href="" class="subnav-item-link">Flip-flop</a>
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Small leather stuff (Ví/ Phụ kiện)</a>
+                            <a href="" class="subnav-item-link">Belt</a>
+                        </li>
+                        <li class="subnav-item">
+                            <a href="" class="subnav-item-link">Wallet</a>
                         </li>
                     </ul>
                 </li>
-                <li class="header-under-navbar-item">
+                <!-- <li class="header-under-navbar-item">
                     <a href="" class="header-under-navbar-link hover-underline-text">Sản phẩm nữ (Women)
                         <i class="fa-solid fa-angle-down"></i>
                     </a>
@@ -129,10 +132,10 @@
                             <a href="" class="subnav-item-link">Small leather stuff (Ví/ Phụ kiện)</a>
                         </li>
                     </ul>
-                </li>
-                <li class="header-under-navbar-item">
+                </li> -->
+                <!-- <li class="header-under-navbar-item">
                     <a href="" class="header-under-navbar-link hover-underline-text">Sản phẩm khuyến mãi (Sale off items)</a>
-                </li>
+                </li> -->
                 <li class="header-under-navbar-item">
                     <a href="" class="header-under-navbar-link hover-underline-text">FAQS (Hỏi đáp)</a>
                 </li>
@@ -147,4 +150,3 @@
 <script src="./Javascript/indexJS.js"></script>
 <script src="./Javascript/headerScroll.js"></script>
 </html>
-sdddddd

@@ -13,7 +13,6 @@
     
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./CSS/header.css">
     <link rel="stylesheet" href="./CSS/collections.css">
 
     <!-- BOOSTRAP -->
