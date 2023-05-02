@@ -318,3 +318,11 @@
     display: none;
 }
 
+/* Checkout payment CSS */
+
+.product-variation {
+    background-color: #fff;
+    padding: 5px;
+    height: 2.5rem;
+    border: 0.8px solid black;
+}

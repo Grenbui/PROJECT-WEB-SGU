@@ -64,11 +64,11 @@
                 <div class="checkout-header d-flex">
                     <div class="checkout-setting">Phương thức thanh toán: </div>
                     <div class="checkout-setting-tab">
-                        <span><button class="product-variation">Thẻ tín dụng/Ghi nợ</button></span>
-                        <span><button class="product-variation">Thanh toán khi nhận hàng</button></span>
+                        <span><button class="card-payment product-variation">Thẻ tín dụng/Ghi nợ</button></span>
+                        <span><button class="COD-payment product-variation">Thanh toán khi nhận hàng</button></span>
                     </div>
                 </div>
-                <div class="checkout-body">
+                <div class="checkout-payment-body">
                     
                 </div>
             </div>
