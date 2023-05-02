@@ -15,111 +15,67 @@
     <link rel="stylesheet" href="./CSS/collections.css">
 
     <!-- BOOSTRAP -->
-    <link rel="stylesheet" href="./Framework/bootstrap-4.0.0-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./Framework/bootstrap/css.css">
 </head>
 <body>
-    <div class="container-checkout container d-flex">
-        <div class="main-checkout">
-            <div class="heading-checkout">
-                <h1 class="heading-text"><a href="">Pour Homme - Shoes & Leather</a></h1>
+    <?php include 'header.php'; ?>
+    <form action="#" method="post">
+        <div class="container form-checkout">
+            <div class="address-receive">
+                <div>
+                    <i class="fa-solid fa-location-dot"></i>Địa chỉ nhân hàng
+                </div>
             </div>
-            <div class="main-checkout">
-                <form action="">
-                    <div class="content-checkout">
-                        <div class="info-checkout">
-                            <div class="info-heading">
-                                <h2>Thông tin thanh toán</h2>
-                                <p>Bạn đã có tài khoản? <a href="">Đăng nhập</a></p>
-                            </div>
-                            <div class="info-detail">
-                                <div class="input-line">
-                                    <input type="text" class="input-name" placeholder="Họ và tên" required>
-                                </div>
-                                <div class="input-line inline">
-                                    <input type="email" class="input-email" placeholder="Email" required>
-                                    <input type="tel" class="input-tel" placeholder="Số điện thoại" required>
-                                </div>
-                            </div>
-                            <div class="receive-method">
-                                <div class="receive-heading">
-                                    <h2>Hình thức nhận hàng</h2>
-                                </div>
-                                <div class="receive__mehtod">
-                                    <div class="receive__COD border">
-                                        <div class="input-line1 btn__receive">
-                                            <!-- <label class="btn__width p-2"> -->
-                                                <!-- <input type="radio" name="payemt__option" id=""> -->
-                                                <span>Giao Hàng</span>
-                                            <!-- </label> -->
-                                        </div>
-                                        <div class="receive__COD-detail p-3" style="background-color: #fafafa;">
-                                            <div class="address__input">
-                                                <input type="text" class="select_size" placeholder="Địa chỉ" required>
-                                            </div>
-                                            <div class="form-select address__input d-flex">
-                                                <div class="form-select selected__city sel_width">
-                                                    <select name="" id="" class="select_size">
-                                                        <option value="">Chọn tỉnh thành</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-select selected__district sel_width">
-                                                    <select name="" id="" class="select_size">
-                                                        <option value="">Chọn quận huyện</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-select selected__ward sel_width">
-                                                    <select name="" id="" class="select_size">
-                                                        <option value="">Chọn phường xã</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="receive__inPlace border">
-                                        <div type="button" class="input-line1 btn__receive">
-                                            <!-- <label class="btn__width p-2"> -->
-                                                <!-- <input type="radio" name="payemt__option" id=""> -->
-                                                <span>Nhận tại cửa hàng</span>
-                                            <!-- </label> -->
-                                            </div>
-                                        <div class="receive__inPlace-detail p-3" style="background-color: #fafafa;">
-                                            <div class="form-select address__input d-flex">
-                                                <div class="form-select selected__city sel_width">
-                                                    <select name="" id="" class="select_size">
-                                                        <option value="">Chọn tỉnh thành</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-select selected__district sel_width">
-                                                    <select name="" id="" class="select_size">
-                                                        <option value="">Chọn quận huyện</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-select selected__ward sel_width">
-                                                    <select name="" id="" class="select_size">
-                                                        <option value="">Chọn phường xã</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="payment__method">
-                                <div class="payment__heading">
-                                    <h2>Phương thức thanh toán</h2>
-                                </div>
-                                
-                            </div>
-                        </div>
+            
+            <div class="product-checkout">
+                <div class="product-header row">
+                    <div class="text-start col-6">Sản phẩm</div>
+                    <div class="text-center col-2">Đơn giá</div>
+                    <div class="text-center col-1">Số lượng</div>
+                    <div class="text-end col-3">Thành tiền</div>
+                </div>
+                
+                <div class="product-contain row align-items-center">
+                    <div class="product-name text-start col-6">
+                        <span>
+                            <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 20%;">Johny Classique Chelsea</p>
+                            
+                        </span>
                     </div>
-                </form>
+                    <div class="product-price text-center col-2">
+                        <span>
+                            <p>3,050,000đ</p>
+                        </span>
+                    </div>
+                    <div class="product-quality text-center col-1">
+                        <span>
+                            <p>1</p>
+                        </span>
+                    </div>
+                    <div class="product-cost text-end col-3">
+                        <span>
+                            <p>3,050,000đ</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-method">
+                <div class="checkout-header d-flex">
+                    <div class="checkout-setting">Phương thức thanh toán: </div>
+                    <div class="checkout-setting-tab">
+                        <span><button class="product-variation">Thẻ tín dụng/Ghi nợ</button></span>
+                        <span><button class="product-variation">Thanh toán khi nhận hàng</button></span>
+                    </div>
+                </div>
+                <div class="checkout-body">
+                    
+                </div>
             </div>
         </div>
-        <div class="side-checkout">
+    </form>
 
-        </div>
-    </div>
-
+    <?php include 'footer.php'; ?>
     <script src="./Javascript/collections.js"></script>
 </body>
 </html>
