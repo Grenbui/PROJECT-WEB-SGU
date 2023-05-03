@@ -18,13 +18,16 @@
     <!-- BOOSTRAP -->
     <link rel="stylesheet" href="./Framework/bootstrap/css.css">
 
-    <!-- CONNECT DATABASE -->
-   
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </head>
     
     <body>
-        <?php include 'header.php'; ?>
-
+        
+    <?php include 'header.php'; ?>
+        <div id="product-list">
+       
         <section id="breadcrump-wrapper">
             <div class="breadcrumb-overlay"></div>
             <div class="breadcrumb-content text-center">
@@ -55,43 +58,43 @@
                                 <ul class="price-list">
                                     <li>
                                         <label for="">
-                                            <input class="Btn_All" type="radio" name="price-filter" id="">
+                                            <input class="Btn_All" type="radio" name="price-filter" id="" >
                                             <span>Tất cả</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input class="Btn_Less500" type="radio" name="price-filter" id="">
+                                            <input class="Btn_Less500" type="radio" name="price-filter" id="" value="Less500" <?php if (isset($_GET['buyPrice']) && $_GET['buyPrice'] == 'Less500') echo 'checked'; ?>>
                                             <span>Dưới 500.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input class="Btn_500kTo1Mil" type="radio" name="price-filter" id="">
+                                            <input class="Btn_500kTo1Mil" type="radio" name="price-filter" id="" value="500To1M" <?php if (isset($_GET['buyPrice']) && $_GET['buyPrice'] == '500To1M') echo 'checked'; ?>>
                                             <span>500.000đ -> 1.000.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input class="Btn_1MilTo2Mil" type="radio" name="price-filter" id="">
+                                            <input class="Btn_1MilTo2Mil" type="radio" name="price-filter" id="" value="1MTo2M" <?php if (isset($_GET['buyPrice']) && $_GET['buyPrice'] == '1MTo2M') echo 'checked'; ?>>
                                             <span>1.000.000đ -> 2.000.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input class="Btn_2MilTo3Mil" type="radio" name="price-filter" id="">
+                                            <input class="Btn_2MilTo3Mil" type="radio" name="price-filter" id="" value="2MTo3M" <?php if (isset($_GET['buyPrice']) && $_GET['buyPrice'] == '2MTo3M') echo 'checked'; ?>>
                                             <span>2.000.000đ -> 3.000.000đ</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input class="Btn_3MilTo4Mil" type="radio" name="price-filter" id="">
+                                            <input class="Btn_3MilTo4Mil" type="radio" name="price-filter" id="" value="3MTo4M" <?php if (isset($_GET['buyPrice']) && $_GET['buyPrice'] == '3MTo4M') echo 'checked'; ?>>
                                             <span>3.000.000đ -> 4.000.000đáp</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input class="Btn_above4Mil" type="radio" name="price-filter" id="">
+                                            <input class="Btn_above4Mil" type="radio" name="price-filter" id="" value="above4M" <?php if (isset($_GET['buyPrice']) && $_GET['buyPrice'] == 'above4M') echo 'checked'; ?>>
                                             <span>Trên 4.000.000đ</span>
                                         </label>
                                     </li>
@@ -104,31 +107,31 @@
                                 <ul class="stuff-list">
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="">
+                                            <input type="radio" name="stuff-filter" id="" value="boots" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'boots') echo 'checked'; ?>>
                                             <span>Dress Boots</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="">
+                                            <input type="radio" name="stuff-filter" id="" value="Mocassins" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Mocassins') echo 'checked'; ?>>
                                             <span>Mocassins</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="">
+                                            <input type="radio" name="stuff-filter" id="" value="Flip-Flop" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Flip-Flop') echo 'checked'; ?>>
                                             <span>Flip-Flop</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="">
+                                            <input type="radio" name="stuff-filter" id="" value="Belt" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Belt') echo 'checked'; ?>>
                                             <span>Thắt lưng (Belt)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="">
+                                            <input type="radio" name="stuff-filter" id="" value="Wallet" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Wallet') echo 'checked'; ?>>
                                             <span>Ví (Wallet)</span>
                                         </label>
                                     </li>
@@ -141,74 +144,38 @@
                                 <ul class="material-list">
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="">
+                                            <input type="radio" name="material-filter" id="" value="Velvet">
                                             <span>Velvet (Nhung)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="">
+                                            <input type="radio" name="material-filter" id="" value="Fabric">
                                             <span>Fabric (Bố)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="">
+                                            <input type="radio" name="material-filter" id="" value="Leather">
                                             <span>Leather (Da)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="">
+                                            <input type="radio" name="material-filter" id="" value="Patent">
                                             <span>Patent (Da bóng)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="">
+                                            <input type="radio" name="material-filter" id="" value="Suede">
                                             <span>Suede (Da lộn)</span>
                                         </label>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="filter-style">
-                            <button type="button" class="filter-style-name"><b>Kiểu dáng</b><i style="margin-left: 55px;" class="fa-solid fa-plus"></i></button>
-                            <div class="style-category">
-                                <ul class="style-list">
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="style-filter" id="">
-                                            <span>Mũi Tròn</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="style-filter" id="">
-                                            <span>Cao cổ</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="style-filter" id="">
-                                            <span>Cột Dây</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="style-filter" id="">
-                                            <span>Không Dây</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="style-filter" id="">
-                                            <span>Đế Bằng</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                         <!-- <div class="filter-color">
                             <button type="button" class="filter-color-name"><b>Màu Sắc</b></button>
                             <div class="color-category">
@@ -289,6 +256,10 @@
                        
                         try {
 
+                            $productLineID = isset($_GET['productLineID']) ? $_GET['productLineID'] : '';
+                            $priceRange = isset($_GET['buyPrice']) ? $_GET['buyPrice'] : '';
+                            $stuffType = isset($_GET['stuffType']) ? $_GET['stuffType'] : '';
+                            $productMaterial = isset($_GET['productMaterial']) ? $_GET['productMaterial'] : '';
                             // Định nghĩa số lượng sản phẩm muốn hiển thị trên mỗi trang
                             $limit = 12;
 
@@ -300,61 +271,128 @@
                             $sql = "SELECT productName, buyPrice, PRODUCT.productID, PRODUCT_IMAGE.productImageURL
                                     FROM PRODUCT
                                     INNER JOIN PRODUCT_IMAGE ON PRODUCT.productID = PRODUCT_IMAGE.productID
-                                    WHERE PRODUCT_IMAGE.isMainImage = 1
-                                    ORDER BY PRODUCT.productID ASC
+                                    WHERE PRODUCT_IMAGE.isMainImage = 1";
+                             if ($productLineID != '') {
+                                $sql .= " AND PRODUCT.productLineID = '$productLineID'";
+                            }
+                            switch ($priceRange) {
+                                case 'Less500':
+                                    $sql .= " AND buyPrice < 500000";
+                                    break;
+                                case '500To1M':
+                                    $sql .= " AND buyPrice >= 500000 AND buyPrice <= 1000000";
+                                    break;
+                                case '1MTo2M':
+                                    $sql .= " AND buyPrice > 1000000 AND buyPrice <= 2000000";
+                                    break;
+                                case '2MTo3M':
+                                    $sql .= " AND buyPrice > 2000000 AND buyPrice <= 3000000";
+                                    break;
+                                case '3MTo4M':
+                                    $sql .= " AND buyPrice > 3000000 AND buyPrice <= 4000000";
+                                    break;
+                                case 'above4M':
+                                    $sql .= " AND buyPrice > 4000000";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            switch($stuffType){
+                                case 'boots':
+                                    $sql .= " AND productLineID = 'PL1'";
+                                    break;
+                                case 'Mocassins':
+                                    $sql .= " AND productLineID = 'PL2'";
+                                    break;
+                                case 'Flip-flop':
+                                    $sql .= " AND productLineID = 'PL3'";
+                                    break;
+                                case 'Belt':
+                                    $sql .= " AND productLineID = 'PL4'";
+                                    break;
+                                case 'Wallet':
+                                    $sql .= " AND productLineID = 'PL5'";
+                                    break;
+                            }
+                            switch($productMaterial){
+                                case 'Velvet':
+                                    $sql .= " AND productMaterial = 'Nhung'";
+                                    break;
+                                case 'Fabric':
+                                    $sql .= " AND productMaterial = 'Bố'";
+                                    break;
+                                case 'Leather':
+                                    $sql .= " AND productMaterial = 'Da'";
+                                    break;
+                                case 'Patent':
+                                    $sql .= " AND productMaterial = 'Da bóng'";
+                                    break;
+                                case 'Suede':
+                                    $sql .= " AND productMaterial = 'Da lộn'";
+                                    break;
+                            }
+                            
+                            $sql .= " ORDER BY PRODUCT.productID ASC
                                     OFFSET $offset ROWS
                                     FETCH NEXT $limit ROWS ONLY";
                             $stmt = $conn->query($sql);
+                        
 
+                           
                             
-                            while ($row = $stmt->fetch()) {
-                                $price = $row["buyPrice"];
-                                $formatted_price = number_format($price, 0, ',', ',') . '₫';
-                                echo '<div class="body__product col-lg-3" data-aos="fade-up" data-id="' . $row["productID"] . '" onclick="showProductDetail(this)">
-                                        <div class="product__detail">
-                                            <div class="body__product-img-content">
-                                                <a href="#">
-                                                    <img src="' . $row["productImageURL"] . '" alt="Product image" class="body__product-img">
-                                                </a>
+                                while ($row = $stmt->fetch()) {
+                                    $price = $row["buyPrice"];
+                                    $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                                    echo '<div class="body__product col-lg-3" data-aos="fade-up" data-id="' . $row["productID"] . '" onclick="showProductDetail(this)">
+                                            <div class="product__detail">
+                                                <div class="body__product-img-content">
+                                                    <a href="#">
+                                                        <img src="' . $row["productImageURL"] . '" alt="Product image" class="body__product-img">
+                                                    </a>
+                                                </div>
+    
+                                                <div class="body__product-text">
+                                                    <a href="#" class="text__link">
+                                                        <h2 class="body__product-name">' . $row["productName"] . '</h2>
+                                                    </a>
+                                                    <h3 class="body__product-price">' . $formatted_price . '</h3>
+                                                </div>
                                             </div>
-
-                                            <div class="body__product-text">
-                                                <a href="#" class="text__link">
-                                                    <h2 class="body__product-name">' . $row["productName"] . '</h2>
-                                                </a>
-                                                <h3 class="body__product-price">' . $formatted_price . '</h3>
-                                            </div>
-                                        </div>
-                                    </div>';
-                            }
-
-                            // Tạo các nút điều hướng trang
-                            $sql = "SELECT COUNT(*) AS total FROM PRODUCT";
-                            $stmt = $conn->query($sql);
-                            $row = $stmt->fetch();
-                            $total_pages = ceil($row['total'] / $limit);
-                            $prev_page = $page - 1;
-                            $next_page = $page + 1;
-
-                            echo '<div class="pagination">';
-                            if ($prev_page > 0) {
-                                echo '<a href="?page=' . $prev_page . '" class="page-link">&laquo;</a>';
-                            }
-
-                            for ($i = 1; $i <= $total_pages; $i++) {
-                                if ($i == $page) {
-                                    echo '<span class="page-link current">' . $i . '</span>';
-                                } else {
-                                    echo '<a href="?page=' . $i . '" class="page-link">' . $i . '</a>';
+                                        </div>';
+                                    
                                 }
-                            }
-
-                            if ($next_page <= $total_pages) {
-                                echo '<a href="?page=' . $next_page . '" class="page-link">&raquo;</a>';
-                            }
-
-                            echo '</div>';
-
+    
+                                // Tạo các nút điều hướng trang
+                                
+                                    $paginationSQL = "SELECT COUNT(*) AS total FROM PRODUCT";
+                                    $stmt = $conn->query($paginationSQL);
+                                    $row = $stmt->fetch();
+                                    $total_pages = ceil($row['total'] / $limit);
+                                    $prev_page = $page - 1;
+                                    $next_page = $page + 1;
+                                    
+                                    if ($total_pages > 1) { // Kiểm tra nếu tổng số trang > 1 thì mới hiển thị phân trang
+                                        echo '<div class="pagination">';
+                                        if ($prev_page > 0) {
+                                            echo '<a href="?page=' . $prev_page . '" class="page-link">&laquo;</a>';
+                                        }
+                                    
+                                        for ($i = 1; $i <= $total_pages; $i++) {
+                                            if ($i == $page) {
+                                                echo '<span class="page-link current">' . $i . '</span>';
+                                            } else {
+                                                echo '<a href="?page=' . $i . '" class="page-link">' . $i . '</a>';
+                                            }
+                                        }
+                                    
+                                        if ($next_page <= $total_pages) {
+                                            echo '<a href="?page=' . $next_page . '" class="page-link">&raquo;</a>';
+                                        }
+                                    
+                                        echo '</div>';
+                                    }
+                                
+                               
                             $conn = null;
                         } catch (PDOException $e) {
                             echo "Connection failed: " . $e->getMessage();
@@ -370,11 +408,16 @@
             include 'footer.php'; 
         ?>
         
+        
+   
+    
+        </div>
+
+       
 
     </body>
 
-    <script src="./Javascript/collections.js"></script>
-    <script src="./Javascript/productList.js"></script>
+    <!-- <script src="./Javascript/collections.js" async="false"></script> -->
     <script>
         function showProductDetail(element) {
             const productID = element.getAttribute('data-id');
@@ -382,4 +425,47 @@
         }
 
     </script>
+
+    <script>
+        $(document).ready(function() {
+            var priceRange = $('input[name="price-filter"]:checked').val();
+            var stuffType = $('input[name="stuff-filter"]:checked').val();
+            var productMaterial = $('input[name="material-filter"]:checked').val();
+            
+        $('input[name="price-filter"]').change(function() {
+            priceRange  = $(this).val();
+            loadProducts(priceRange , stuffType, productMaterial);
+        });
+
+        $('input[name="stuff-filter"]').change(function() {
+            stuffType = $(this).val();
+            loadProducts(priceRange , stuffType, productMaterial);
+        });
+
+        $('input[name="material-filter"]').change(function() {
+            productMaterial = $(this).val();
+            loadProducts(priceRange , stuffType, productMaterial);
+        });
+
+        function loadProducts(priceRange , stuffType, productMaterial) {
+        var url = 'product.php?buyPrice=' + priceRange  + '&stuffType=' + stuffType + '&productMaterial=' + productMaterial;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                $('#product-list').html(response);
+
+                // Cập nhật URL bằng pushState
+                var stateObj = {buyPrice: priceRange , stuffType: stuffType, productMaterial: productMaterial};
+                history.pushState(stateObj, null, url);
+            }
+        });
+    }
+
+});
+</script>
+
+
+
+
 </html>

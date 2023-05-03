@@ -75,8 +75,8 @@
                                 <!-- <span><button type="button" class="card-payment-btn product-variation" name="card_payment" required>Thẻ tín dụng/Ghi nợ</button></span>
                                 <span><button type="button" class="COD-payment-btn product-variation" name="cod_payment" required>Thanh toán khi nhận hàng</button></span> -->
                                 <span class="label cod__listener">
-                                    <div class="style-label">
-                                    <input type="radio" name="payment-method" value="cod">
+                                    <div class="style-label selectedCODPayement">
+                                    <input type="radio" name="payment-method" value="cod" id="radioCOD">
                                         <div class="cod-method">
                                             <img class="method-icon" src="./Image/Option_Payment/COD_Payment.png" alt="" width="32" height="32">
                                             <div class="method-content">
@@ -87,8 +87,8 @@
                                 </span>
 
                                 <span class="label card__listener">
-                                    <div class="style-label">
-                                    <input type="radio" name="payment-method" value="card">
+                                    <div class="style-label selectedCardPayment">
+                                    <input type="radio" name="payment-method" value="card" id="radioCard">
                                         <div class="cod-method">
                                             <img class="method-icon" src="./Image/Option_Payment/Card_Payment.png" alt="" width="32" height="32">
                                             <div class="method-content d-flex flex-column">
@@ -169,17 +169,7 @@
         </div>
     </section> 
 
-    <script>
-        $(document).ready(function() {
-            $('.card__listener input[type=radio]').click(function() {
-            if ($(this).val() === 'card') {
-                $('.card-info').addClass('active');
-            } else {
-                $('.card-info').removeClass('active');
-            }
-            });
-        });
-    </script>
+    
 
     <script>
         $(document).ready(function() {

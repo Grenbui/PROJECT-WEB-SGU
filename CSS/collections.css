@@ -104,8 +104,8 @@
 .category-filter .filter-style .style-category,
 .category-filter .filter-color .color-category {
     overflow: hidden;
-    display: none;
-    max-height: 0;
+    display: block;
+    /* max-height: 0; */
     transition: max-height 0.5s ease-out;
 }
 
