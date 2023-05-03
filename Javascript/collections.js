@@ -3,20 +3,6 @@ var collStuff = document.getElementsByClassName("filter-stuff-name");
 var collMaterial = document.getElementsByClassName("filter-material-name");
 var collStyle = document.getElementsByClassName("filter-style-name");
 
-const button1 = document.querySelector('.receive__COD .btn__receive');
-const detail = document.querySelector('.receive__COD-detail');
-const detail2 = document.querySelector('.receive__inPlace-detail');
-const button2 = document.querySelector('.receive__inPlace .btn__receive');
-
-// button1.addEventListener('click', () => {
-//   detail.classList.toggle('activeReceive');
-//   detail2.classList.toggle('disapperDisplay');
-// });
-// button2.addEventListener('click', () => {
-//     detail2.classList.toggle('activeReceive');
-//     detail.classList.toggle('disapperDisplay');
-// });
-
 for(let i=0; i<collPrice.length;i++){
     collPrice[i].addEventListener("click",function(){
         this.classList.toggle("active");
@@ -104,3 +90,4 @@ for(let i=0; i<collStyle.length;i++){
         }
     });
 }
+

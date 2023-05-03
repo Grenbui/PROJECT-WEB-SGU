@@ -23,13 +23,15 @@
                         <ul class="header-top-navbar-right-list">
                             <li class="header-top-navbar-item" id="search-modal">
                                 <div class="input-group">
-                                    <input type="text" value="" placeholder="Tìm kiếm" id="search-input-form" class="input-group-field">
-                                    <!-- <input type="hidden" name="contact[tags]" value="newsletter"> -->
-                                    <span class="input-group-btn">
-                                        <button class="btn-more-white" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
-                                    </span>
+                                    <form action="search.php" method="GET" class="search-bar">
+                                        <input type="text" value="" placeholder="Tìm kiếm" id="search-input-form" class="input-group-field" required>
+                                        <input type="hidden" name="contact[tags]" value="newsletter" required>
+                                        <span class="input-group-btn">
+                                            <button class="btn-more-white" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </span>
+                                    </form>
                                 </div>
                             </li>
                             <li onclick="openCloseSearch()" class="header-top-navbar-item">
@@ -68,15 +70,15 @@
         <div class="header-under-navbar">
             <ul class="header-under-navbar-list">
                 <li class="header-under-navbar-item">
-                    <a href="" class="header-under-navbar-link hover-underline-text">Trang chủ</a>
+                    <a href="./index.php" class="header-under-navbar-link hover-underline-text">Trang chủ</a>
                 </li>
                 <li class="header-under-navbar-item" style="z-index: 99">
-                    <a href="#" class="header-under-navbar-link hover-underline-text">Sản phẩm 
+                    <a href="./product.php" class="header-under-navbar-link hover-underline-text">Sản phẩm 
                         <i class="fa-solid fa-angle-down"></i>
                     </a>
                     <ul class="subnav-dropdown-menu">
                         <li class="subnav-item">
-                            <a href="#" class="subnav-item-link">Dress boots
+                            <a href="product.php?productLineID=PL1" class="subnav-item-link">Dress boots
                                 <!-- <i class="fa-solid fa-chevron-right"></i> -->
                             </a>
                             <!-- <ul class="sub-subnav-dropdown-menu">
@@ -101,16 +103,16 @@
                             </ul> -->
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Mosscasins</a>
+                            <a href="./product.php?productLineID=PL2" class="subnav-item-link">Mosscasins</a>
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Flip-flop</a>
+                            <a href="./product.php?productLineID=PL3" class="subnav-item-link">Flip-flop</a>
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Belt</a>
+                            <a href="./product.php?productLineID=PL4" class="subnav-item-link">Belt</a>
                         </li>
                         <li class="subnav-item">
-                            <a href="" class="subnav-item-link">Wallet</a>
+                            <a href="./product.php?productLineID=PL5" class="subnav-item-link">Wallet</a>
                         </li>
                     </ul>
                 </li>
@@ -137,10 +139,10 @@
                     <a href="" class="header-under-navbar-link hover-underline-text">Sản phẩm khuyến mãi (Sale off items)</a>
                 </li> -->
                 <li class="header-under-navbar-item">
-                    <a href="" class="header-under-navbar-link hover-underline-text">FAQS (Hỏi đáp)</a>
+                    <a href="./FAQs.php" class="header-under-navbar-link hover-underline-text">FAQS (Hỏi đáp)</a>
                 </li>
                 <li class="header-under-navbar-item">
-                    <a href="" class="header-under-navbar-link hover-underline-text">Giới thiệu</a>
+                    <a href="./aboutUs.php" class="header-under-navbar-link hover-underline-text">Giới thiệu</a>
                 </li>
             </ul>
         </div>
