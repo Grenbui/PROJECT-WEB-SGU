@@ -22,7 +22,7 @@
             <li class="sidebar_list-item active_list">
                 <a href="" class="item">
                   <i class="fa-solid fa-house"></i>
-                    <span>Tổng doanh thu</span>
+                    <span>Quản lý hóa đơn</span>
                 </a>
             </li>
             <li class="sidebar_list-item">
@@ -86,17 +86,64 @@
     <div class="total_header">
         <p>Lọc theo ngày</p>
     </div>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Từ ngày" aria-label="Username">
-              <span class="input-group-text" style="font-size: 16px;"><i class="fa-solid fa-arrow-right"></i></span>
-              <input type="text" class="form-control" placeholder="Đến ngày" aria-label="Server">
-            </div>
-            <div class="container">
-                <div class="row">
-                   
-                </div>
-            </div>
-        </div>
+    
+    <div class="form_control">
+
+    <div class="form_date">
+        <input type="text" class="" placeholder="Từ ngày" aria-label="Username">
+        <span class="input-group-text" style="font-size: 16px;"><i class="fa-solid fa-arrow-right"></i></span>
+        <input type="text" class="" placeholder="Đến ngày" aria-label="Server">
+    </div>
+    <div class="form_checkbox">
+        <?php 
+         $servername = "LAPTOP-8QF16IA0";
+         $username = "";   
+         $password = "";
+         $dbname = "POURHOMME_MANAGEMENT";
+         // Tạo kết nối
+       
+           
+             $conn = new PDO("sqlsrv:Server=$servername;Database=$dbname", $username, $password);
+             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+             
+             // Thiết lập chế độ lỗi PDO để thông báo lỗi trở lại từ SQL Server
+           
+             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+             // Thực hiện truy vấn SQL
+             $sql = "SELECT DISTINCT city FROM CUSTOMER;";
+             $stmt = $conn->prepare($sql);
+             $stmt->execute();
+             $cities = $stmt->fetchAll();
+           
+             echo " <label for='city'>Chọn vùng:</label>
+             <select id='city'>";
+             echo ' <option value="" disabled selected>Tỉnh/Thành</option>';
+             foreach($cities as $city) {
+                echo ' <option value="' . $city['city'] . '">' . $city['city'] . '</option>';
+               
+             }
+            
+            
+              
+              
+            echo "</select>";
+            
+        ?>
+  
+    </div>
+    </div>
+            
+            <?php 
+            if(empty($_SERVER['QUERY_STRING']) == 1){
+                include 'order.php';
+            }
+           
+            ?>
+           
+            
+
     </section>
+
 </body>
 </html>
+
