@@ -298,8 +298,8 @@
     padding-left: 10px;
 }
 
-.activeReceive {
-    display: block;
+.active {
+    display: block !important;
 }
 
 .heading__description {
@@ -319,10 +319,149 @@
 }
 
 /* Checkout payment CSS */
+.container-checkout-payment {
+    background-color: rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.product-variation {
+.address-receive {
+    background-color: #fff;
+    padding: 28px 30px 24px;
+    margin: 25px 0;
+}
+
+.product-checkout {
+    background-color: #fff;
+    margin: 25px 0;
+    padding: 28px 30px 24px;
+}
+
+.checkout-method {
+    background-color: #fff;
+    margin: 25px 0;
+    padding: 28px 30px 24px;
+}
+
+/* .product-variation {
     background-color: #fff;
     padding: 5px;
     height: 2.5rem;
-    border: 0.8px solid black;
+    border: 0.8px solid rgba(0, 0, 0, 0.20);
+    border-radius: 5px;
+} */
+
+.style-label {
+    display: flex;
+    margin: 20px 0;
 }
+
+.cod-method {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 25px;
+}
+
+.method-icon {
+    margin-right: 10px;
+}
+
+.checkout-setting-tab {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: max-content;
+}
+
+.card-content {
+    width: 100%;    
+}
+
+.card-info {
+    display: none;
+}
+
+.checkout-payment-cost {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 25px 0;
+    padding: 28px 30px 24px;
+}
+
+.cost-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cost-col1,
+.cost-col2 {
+    max-width: fit-content;
+}
+
+.cost-col1{
+    margin-right: 25px;
+}
+
+.cost-col2{
+    float: right;
+}
+
+.checkout-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.checkout-btn {
+    margin: 25px 0;
+}
+
+input[type="submit"] {
+    float: right;
+    padding: 10px 20px;
+    background-color: #f05d40;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 220px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.card-input {
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: 0.2px solid #ccc;
+}
+
+.card-input:focus{
+    outline: none;
+}
+
+.card-expiry_date-input,
+.card-cvc-input {
+    width: 90px;
+}
+
+.card_field {
+    margin: 20px 0;
+}
+
+
+
+/* .cost-payment-container {
+    display: grid;
+    float: right;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 10px;
+} */
