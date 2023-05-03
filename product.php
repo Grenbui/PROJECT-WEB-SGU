@@ -17,6 +17,9 @@
 
     <!-- BOOSTRAP -->
     <link rel="stylesheet" href="./Framework/bootstrap/css.css">
+
+    <!-- CONNECT DATABASE -->
+   
     </head>
     
     <body>
@@ -36,6 +39,7 @@
                     <h2>Sản phẩm</h2>
                 </div>
                 
+
             </div>
             <div class="collections-col row">
                 <div class="filter-col col-2 border rounded">
@@ -280,7 +284,83 @@
                         </select>
                     </div>
                     <div class="row collection-product">
-                        
+                    <?php
+                    include './ConnectDatabase/connectDatabase.php';
+                       
+                        try {
+
+                            // Định nghĩa số lượng sản phẩm muốn hiển thị trên mỗi trang
+                            $limit = 12;
+
+                            // Xác định vị trí bắt đầu của dữ liệu trong truy vấn
+                            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $offset = ($page - 1) * $limit;
+
+                           
+                            $sql = "SELECT productName, buyPrice, PRODUCT.productID, PRODUCT_IMAGE.productImageURL
+                                    FROM PRODUCT
+                                    INNER JOIN PRODUCT_IMAGE ON PRODUCT.productID = PRODUCT_IMAGE.productID
+                                    WHERE PRODUCT_IMAGE.isMainImage = 1
+                                    ORDER BY PRODUCT.productID ASC
+                                    OFFSET $offset ROWS
+                                    FETCH NEXT $limit ROWS ONLY";
+                            $stmt = $conn->query($sql);
+
+                            
+                            while ($row = $stmt->fetch()) {
+                                $price = $row["buyPrice"];
+                                $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                                echo '<div class="body__product col-lg-3" data-aos="fade-up" data-id="' . $row["productID"] . '" onclick="showProductDetail(this)">
+                                        <div class="product__detail">
+                                            <div class="body__product-img-content">
+                                                <a href="#">
+                                                    <img src="' . $row["productImageURL"] . '" alt="Product image" class="body__product-img">
+                                                </a>
+                                            </div>
+
+                                            <div class="body__product-text">
+                                                <a href="#" class="text__link">
+                                                    <h2 class="body__product-name">' . $row["productName"] . '</h2>
+                                                </a>
+                                                <h3 class="body__product-price">' . $formatted_price . '</h3>
+                                            </div>
+                                        </div>
+                                    </div>';
+                            }
+
+                            // Tạo các nút điều hướng trang
+                            $sql = "SELECT COUNT(*) AS total FROM PRODUCT";
+                            $stmt = $conn->query($sql);
+                            $row = $stmt->fetch();
+                            $total_pages = ceil($row['total'] / $limit);
+                            $prev_page = $page - 1;
+                            $next_page = $page + 1;
+
+                            echo '<div class="pagination">';
+                            if ($prev_page > 0) {
+                                echo '<a href="?page=' . $prev_page . '" class="page-link">&laquo;</a>';
+                            }
+
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                if ($i == $page) {
+                                    echo '<span class="page-link current">' . $i . '</span>';
+                                } else {
+                                    echo '<a href="?page=' . $i . '" class="page-link">' . $i . '</a>';
+                                }
+                            }
+
+                            if ($next_page <= $total_pages) {
+                                echo '<a href="?page=' . $next_page . '" class="page-link">&raquo;</a>';
+                            }
+
+                            echo '</div>';
+
+                            $conn = null;
+                        } catch (PDOException $e) {
+                            echo "Connection failed: " . $e->getMessage();
+                        }
+                    ?>
+
                     </div>
                 </div>
             </div>
@@ -289,8 +369,17 @@
         <?php 
             include 'footer.php'; 
         ?>
+        
+
     </body>
 
     <script src="./Javascript/collections.js"></script>
     <script src="./Javascript/productList.js"></script>
+    <script>
+        function showProductDetail(element) {
+            const productID = element.getAttribute('data-id');
+            window.location.href = 'productDetail.php?productID=' + productID;
+        }
+
+    </script>
 </html>
