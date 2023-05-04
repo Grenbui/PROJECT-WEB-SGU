@@ -20,13 +20,13 @@
         </div>
         <ul class="sidebar_list">
             <li class="sidebar_list-item active_list">
-                <a href="" class="item">
+                <a href="sidebar.php" class="item">
                   <i class="fa-solid fa-house"></i>
-                    <span>Quản lý hóa đơn</span>
+                    <span> Quản lý hóa đơn</span>
                 </a>
             </li>
             <li class="sidebar_list-item">
-                <a href="" class="item">
+                <a href="sidebar.php?page=customer" class="item">
                   <i class="fa-solid fa-users"></i>
                     <span>Quản lý khách hàng</span>
                 </a>
@@ -83,67 +83,47 @@
             </div>
         </div>
         <div class="content_iner">
-    <div class="total_header">
-        <p>Lọc theo ngày</p>
+    <div class="header_form">
+        <div class="header_form_1">Lọc theo ngày đặt</div>
+        <div class="header_form_2">Lọc theo tỉnh/thành</div>
     </div>
     
-    <div class="form_control">
-
-    <div class="form_date">
-        <input type="text" class="" placeholder="Từ ngày" aria-label="Username">
-        <span class="input-group-text" style="font-size: 16px;"><i class="fa-solid fa-arrow-right"></i></span>
-        <input type="text" class="" placeholder="Đến ngày" aria-label="Server">
-    </div>
-    <div class="form_checkbox">
+    <div style="width:50%">
         <?php 
-         $servername = "LAPTOP-8QF16IA0";
-         $username = "";   
-         $password = "";
-         $dbname = "POURHOMME_MANAGEMENT";
-         // Tạo kết nối
-       
-           
-             $conn = new PDO("sqlsrv:Server=$servername;Database=$dbname", $username, $password);
-             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-             
-             // Thiết lập chế độ lỗi PDO để thông báo lỗi trở lại từ SQL Server
-           
-             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require_once('connectPHP.php');
              // Thực hiện truy vấn SQL
              $sql = "SELECT DISTINCT city FROM CUSTOMER;";
              $stmt = $conn->prepare($sql);
              $stmt->execute();
              $cities = $stmt->fetchAll();
-           
-             echo " <label for='city'>Chọn vùng:</label>
-             <select id='city'>";
-             echo ' <option value="" disabled selected>Tỉnh/Thành</option>';
-             foreach($cities as $city) {
-                echo ' <option value="' . $city['city'] . '">' . $city['city'] . '</option>';
-               
-             }
-            
-            
-              
-              
-            echo "</select>";
-            
         ?>
-  
+ <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  <div style="display: flex; justify-content: space-between;">
+    <div class="input-group mb-3" >
+      <input type="date" class="date_form" placeholder="Từ ngày" aria-label="Từ ngày" name="start_date">
+      <span class="icon_form"><i class="fa-solid fa-arrow-right"></i></span>
+      <input type="date" class="date_form" placeholder="Đến ngày" aria-label="Đến ngày" name="end_date">
     </div>
+    <div class="input-group mb-3" >
+      <select name="province" class="form-select">
+        <?php foreach($cities as $city) { ?>
+          <option value="<?php echo $city['city']; ?>"><?php echo $city['city']; ?></option>
+        <?php } ?>
+      </select>
+      <button class="btn btn-primary" type="submit" name="submit">Lọc</button>
     </div>
-            
+  </div>
+</form>
+    </div>
             <?php 
             if(empty($_SERVER['QUERY_STRING']) == 1){
                 include 'order.php';
+            }else if ($_GET['page'] == "customer"){
+                include 'customer.php';
             }
-           
-            ?>
-           
             
-
+            ?>
     </section>
-
 </body>
 </html>
 
