@@ -454,5 +454,14 @@ a:hover {
   option {
     font-size: 14px;
   }
-  
- 
+  td {
+    font-size: 16px;
+  }
+  td a,
+  td a:hover {
+    text-decoration: none;
+  }
+ .fa-lock-open {
+    font-size: 1.5rem; /* kích thước của icon */
+    color: green; /* màu sắc của icon */
+  }

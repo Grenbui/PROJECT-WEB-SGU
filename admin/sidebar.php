@@ -20,13 +20,13 @@
         </div>
         <ul class="sidebar_list">
             <li class="sidebar_list-item active_list">
-                <a href="" class="item">
+                <a href="sidebar.php" class="item">
                   <i class="fa-solid fa-house"></i>
-                    <span>Quản lý hóa đơn</span>
+                    <span> Quản lý hóa đơn</span>
                 </a>
             </li>
             <li class="sidebar_list-item">
-                <a href="" class="item">
+                <a href="sidebar.php?page=customer" class="item">
                   <i class="fa-solid fa-users"></i>
                     <span>Quản lý khách hàng</span>
                 </a>
@@ -90,15 +90,7 @@
     
     <div style="width:50%">
         <?php 
-         $servername = "LAPTOP-8QF16IA0";
-         $username = "";   
-         $password = "";
-         $dbname = "POURHOMME_MANAGEMENT";
-         // Tạo kết nối
-             $conn = new PDO("sqlsrv:Server=$servername;Database=$dbname", $username, $password);
-             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-             // Thiết lập chế độ lỗi PDO để thông báo lỗi trở lại từ SQL Server
-             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require_once('connectPHP.php');
              // Thực hiện truy vấn SQL
              $sql = "SELECT DISTINCT city FROM CUSTOMER;";
              $stmt = $conn->prepare($sql);
@@ -122,22 +114,16 @@
     </div>
   </div>
 </form>
-
-
     </div>
-    
-            
             <?php 
             if(empty($_SERVER['QUERY_STRING']) == 1){
                 include 'order.php';
+            }else if ($_GET['page'] == "customer"){
+                include 'customer.php';
             }
-           
-            ?>
-           
             
-
+            ?>
     </section>
-
 </body>
 </html>
 
