@@ -5,36 +5,53 @@
             $password = "";
             $dbname = "POURHOMME_MANAGEMENT";
             // Tạo kết nối
-           
-               
                 $conn = new PDO("sqlsrv:Server=$servername;Database=$dbname", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-         
                 // Thiết lập chế độ lỗi PDO để thông báo lỗi trở lại từ SQL Server
-               
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 // Thực hiện truy vấn SQL
-                $sql = "SELECT * FROM ORDERS";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-                $orders = $stmt->fetchAll();
-               
+                if (isset($_POST['submit'])) {
+                  $sql = "SELECT ORDERS.orderID, ORDERS.customerID, ORDERS.comments, ORDERS.orderDate, ORDERS.shippedDate, ORDERS.subAddress, ORDERS.status
+                  FROM ORDERS
+                  INNER JOIN CUSTOMER ON ORDERS.customerID = CUSTOMER.customerID
+                  WHERE 1=1"; // điều kiện giả để giúp thêm các điều kiện sau dễ dàng hơn
+              
+                  if (!empty($_POST['province'])) {
+                      $province = $_POST['province'];
+                      $sql .= " AND CUSTOMER.city = '" . $province . "'";
+                  }
+              
+                  if (!empty($_POST['start_date']) && !empty($_POST['end_date'])) {
+                      $start_date = $_POST['start_date'];
+                      $end_date = $_POST['end_date'];
+                      $sql .= " AND ORDERS.orderDate BETWEEN '$start_date' AND '$end_date'";
+                  }
+                 $stmt = $conn->prepare($sql);  
+                 $stmt->execute();
+                 $orders = $stmt->fetchAll();
+                }
+                else {
+                  $sql = "SELECT * FROM ORDERS";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->execute();
+                  $orders = $stmt->fetchAll();
+                }
                 echo "<table>";
-echo "<tr><th>Order ID</th><th>Ngày đặt</th><th>Ngày giao</th><th>Trạng thái</th><th>Comments</th><th>Customer ID</th><th>Địa chỉ</th><th>Chi tiết hóa đơn</th></tr>";
-foreach ($orders as $order) {
-    echo "<tr>";
-    echo "<td>" . $order['orderID'] . "</td>";
-    echo "<td>" . $order['orderDate'] . "</td>";
-    echo "<td>" . $order['shippedDate'] . "</td>";
-    echo "<td>" . $order['status'] . "</td>";
-    echo "<td>" . $order['comments'] . "</td>";
-    echo "<td>" . $order['customerID'] . "</td>";
-    echo "<td>" . $order['subAddress'] . "</td>";
-   
-    echo '<td><a href="detailsproduct.php?code='. $order['orderID'].'">View Details</a></td>';
-    echo "</tr>";
-} 
-echo "</table>";
+                 echo "<tr><th>Order ID</th><th>Ngày đặt</th><th>Ngày giao</th><th>Trạng thái</th><th>Comments</th><th>Customer ID</th><th>Địa chỉ</th><th>Chi tiết hóa đơn</th></tr>";
+                 foreach ($orders as $order) {
+                     echo "<tr>";
+                     echo "<td>" . $order['orderID'] . "</td>";
+                     echo "<td>" . $order['orderDate'] . "</td>";
+                     echo "<td>" . $order['shippedDate'] . "</td>";
+                     echo "<td>" . $order['status'] . "</td>";
+                     echo "<td>" . $order['comments'] . "</td>";
+                     echo "<td>" . $order['customerID'] . "</td>";
+                     echo "<td>" . $order['subAddress'] . "</td>";
+                     echo '<td><a href="detailsproduct.php?code='. $order['orderID'].'">View Details</a></td>';
+                     echo "</tr>";
+                 } 
+                 echo "</table>";
+               
             ?>
        
     <div id="product-modal" class="modal_detail">
