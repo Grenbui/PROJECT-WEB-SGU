@@ -49,7 +49,7 @@
                      <td><?php echo $order['comments'] ?></td>
                      <td><?php echo $order['customerID'] ?></td>
                      <td><?php echo $order['subAddress'] ?></td>
-                    <td><a href="detailsproduct.php?code='. $order['orderID'].'">View Details</a></td>
+                    <td><a href="<?php echo 'detailsproduct.php?code='. $order['orderID'] ?>">View Details</a></td>
                      </tr>
                      <?php } ?>
                 </table>

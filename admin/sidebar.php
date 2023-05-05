@@ -94,7 +94,7 @@
              // Thực hiện truy vấn SQL
              $sql = "SELECT DISTINCT city FROM CUSTOMER;";
              $stmt = $conn->prepare($sql);
-             $stmt->execute();
+            // $stmt->execute();
              $cities = $stmt->fetchAll();
         ?>
  <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">

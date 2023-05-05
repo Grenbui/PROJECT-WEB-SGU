@@ -66,17 +66,17 @@
 
     // thực hiện truy vấn
     if(!$customerStatus){
-        $sql = "UPDATE CUSTOMER SET customerStatus = 1 WHERE customerID = '".$customerID."'";
+        $sql = "UPDATE CUSTOMER SET customerStatus = '1' WHERE customerID = '".$customerID."'";
         echo "Bằng 0, đã update lại = 1";
         echo "</br> $customerID";
     }
     else {
-        $sql = "UPDATE CUSTOMER SET customerStatus = 0 WHERE customerID = '".$customerID."'";
+        $sql = "UPDATE CUSTOMER SET customerStatus = '0' WHERE customerID = '".$customerID."'";
         echo "Bằng 1, đã update lại = 0";
         echo "</br> $customerID";
     }
-
-    $stmt = $conn->prepare($sql); 
+echo $sql;
+    $stmt = $conn->query($sql); 
     $stmt->execute(); 
 
     if ($stmt->rowCount() > 0) {
