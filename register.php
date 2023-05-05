@@ -17,34 +17,6 @@
 <body>
     <?php include 'header.php'; ?>
     
-    <?php
-        include './ConnectDatabase/connectDatabase.php';
-        try{
-            if(isset($userName) && isset($email) && isset($password) && isset($firstName) && isset($lastName)){
-                $userName = $_POST['userName'];
-                $email = $_POST['email'];
-                $phoneNum = $_POST['phoneNum'];
-                $password = $_POST['password'];
-            
-                $firstName = $_POST['firstName'];
-                $lastName = $_POST['lastName'];
-                $name = $firstName . $lastName;
-            }
-            
-            $stmt = $conn->prepare("INSERT INTO CUSTOMER VALUES ('c90',:name,:email,:userName,:password,:phoneNum,'','','','',0)");
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':phoneNum', $phoneNum);
-            $stmt->bindParam(':password', $password);
-            $stmt->bindParam(':userName', $userName);
-    
-            $stmt->execute();
-            $conn = null;
-        } catch (PDOException $e) {
-            echo "Connection failed" . $e->getMessage();
-        }
-    ?> 
-    
     <section id="breadcrump-wrapper">
         <div class="breadcrumb-overlay"></div>
         <div class="breadcrumb-content text-center">
@@ -98,6 +70,34 @@
     </div>
 
     <?php include 'footer.php'; ?>
+
+    <?php
+        include './ConnectDatabase/connectDatabase.php';
+        try{
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                $userName = $_POST['userName'];
+                $email = $_POST['email'];
+                $phoneNum = $_POST['phoneNum'];
+                $password = $_POST['password'];
+            
+                $firstName = $_POST['firstName'];
+                $lastName = $_POST['surName'];
+                $name = $firstName .' '. $lastName;
+            }
+            
+            $stmt = $conn->prepare("INSERT INTO CUSTOMER VALUES ('c93',:name,:email,:userName,:password,:phoneNum,'','','','',0)");
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':phoneNum', $phoneNum);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':userName', $userName);
+    
+            $stmt->execute();
+            $conn = null;
+        } catch (PDOException $e) {
+            echo "Connection failed" . $e->getMessage();
+        }
+    ?> 
 
 </body>
 </html>
