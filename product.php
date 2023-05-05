@@ -107,31 +107,31 @@
                                 <ul class="stuff-list">
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="boots" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'boots') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="boots" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'boots') echo 'checked'; ?>>
                                             <span>Dress Boots</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Mocassins" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Mocassins') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Mocassins" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Mocassins') echo 'checked'; ?>>
                                             <span>Mocassins</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Flip-Flop" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Flip-Flop') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Flip-Flop" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Flip-Flop') echo 'checked'; ?>>
                                             <span>Flip-Flop</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Belt" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Belt') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Belt" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Belt') echo 'checked'; ?>>
                                             <span>Thắt lưng (Belt)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Wallet" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Wallet') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Wallet" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Wallet') echo 'checked'; ?>>
                                             <span>Ví (Wallet)</span>
                                         </label>
                                     </li>
@@ -144,31 +144,31 @@
                                 <ul class="material-list">
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Velvet">
+                                            <input type="radio" name="material-filter" id="" value="Velvet" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Velvet') echo 'checked'; ?>>
                                             <span>Velvet (Nhung)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Fabric">
+                                            <input type="radio" name="material-filter" id="" value="Fabric" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Fabric') echo 'checked'; ?>>
                                             <span>Fabric (Bố)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Leather">
+                                            <input type="radio" name="material-filter" id="" value="Leather" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Leather') echo 'checked'; ?>>
                                             <span>Leather (Da)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Patent">
+                                            <input type="radio" name="material-filter" id="" value="Patent" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Patent') echo 'checked'; ?>>
                                             <span>Patent (Da bóng)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Suede">
+                                            <input type="radio" name="material-filter" id="" value="Suede" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Suede') echo 'checked'; ?>>
                                             <span>Suede (Da lộn)</span>
                                         </label>
                                     </li>
