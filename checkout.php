@@ -30,8 +30,11 @@
                         <div class="address-header">
                             <i class="fa-solid fa-location-dot" style="margin-right: 9px;"></i>Địa chỉ nhân hàng
                         </div>
-                        <div class="address customer">
+                        <div class="address__customer">
+                            <div class="address__link">
 
+                            </div>
+                            <div class="address-custom">Thay đổi</div>
                         </div>
                     </div>
                     
