@@ -8,6 +8,7 @@ cardPaymentBtn.addEventListener('click', () => {
     cardContent.classList.add('active');
     radioCard.checked = true;
     radioCOD.checked = false;
+    
 });
   
 codPaymentBtn.addEventListener('click', () => {
@@ -16,3 +17,14 @@ codPaymentBtn.addEventListener('click', () => {
     radioCOD.checked = true;
 });
 
+const editBtn = document.querySelector('.address-edit');
+const popup = document.querySelector('#popup_content');
+
+editBtn.addEventListener('click', () => {
+    popup.classList.add('show_popup');
+});
+
+var cancelBtn = document.querySelector('.cancel_btn');
+cancelBtn.addEventListener('click', () => {
+    popup.classList.remove('show_popup');
+});
