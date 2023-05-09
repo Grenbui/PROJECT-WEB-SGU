@@ -186,16 +186,7 @@
                echo '</ul>';
                echo '</div>';
    
-               echo '<div class = "purchase-info">
-               <input type = "number" min = "0" value = "1">
-               <button type = "button" class = "btn">
-                 Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
-               </button>
-               <button type = "button" class = "btn">
-                 Mua ngay 
-               </button>
-             </div>';
-   
+              
            //   echo '<div class = "social-links">
            //   <p>Share At: </p>
            //   <a href = "#">
@@ -215,13 +206,14 @@
            //   </a>
            // </div>';
    
-               echo '</div>';
+               
    
    
                
             }else{
                 echo 'Không thể lấy được id của sản phẩm';
             }
+            
             
 
            
@@ -233,6 +225,52 @@
 
        
     ?>
+    <form action="./ShoppingCart.php" method="post">
+      <div class = "purchase-info">
+               <input type="number" min = "0" value = "1">
+               <button type = "button" class = "btn" name="add_to_cart">
+                 Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
+               </button>
+               <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
+      </div>
+    </form>
+
+    <?php
+       if(isset($_GET['productID'])){
+          $id = $_GET['productID'];
+
+          // Tạo cartID
+          $maxCartID = "SELECT cartID FROM CART WHERE cartID LIKE 'CA%' " ;
+          $max_i = 0;
+          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // Sử dụng biểu thức chính quy để tách phần số i từ mỗi ID
+            preg_match('/CA(\d+)/', $row['cartID'], $matches);
+            $i = intval($matches[1]);
+            
+            // Sử dụng hàm max() để tìm i lớn nhất
+            if ($i > $max_i) {
+              $max_i = $i;
+            }
+
+            $new_id = 'CA' . ($max_i + 1);
+
+
+            //Lấy customer ID
+            
+            //Lấy ngày cập nhật giỏ hàng
+
+
+          }
+
+
+          
+          
+
+
+       }
+     
+    ?>
+        </div>
       </div>
     </div>
    

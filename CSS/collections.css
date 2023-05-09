@@ -601,6 +601,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .btn-more-white{
     margin: 0 !important;
+    background-color: #000 !important ;
+    color: #fff !important;
+    border-radius: 0 !important;
+    padding: 5px 10px !important;
+    width: 45px !important;
+    padding-bottom: 9px !important;
 }
 footer{
     margin-top: 30px;
@@ -611,3 +617,16 @@ footer{
     text-decoration: underline;
 }
 
+
+.delete-selection{
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.delete-selection:hover{
+    background-color: #fff;
+    color: #000;
+    transition: 0.3s;
+}

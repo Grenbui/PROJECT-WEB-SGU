@@ -1,5 +1,5 @@
 <?php
-    $servername = "localhost";//LAPTOP-8QF16IA0
+    $servername = "LAPTOP-6P46NPUA";//LAPTOP-8QF16IA0
     $username = "root";   
     $password = "";
     $dbname = "POURHOMME_MANAGEMENT";

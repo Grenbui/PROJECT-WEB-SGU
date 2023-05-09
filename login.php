@@ -27,19 +27,19 @@
         <div class="main-container">
             <section class="page-wrapper">
                 <div class="login-container">
-                    <form action="" class="login-customer">
+                    <form action="" class="login-customer" method="post">
                         <h2 class="text-center customer-header">Đăng nhập</h2>
                         <div class="form-group">
                             <label for="email" class="form-label">Địa chỉ Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="abc@email.com" required>
+                            <input name="email" type="email" id="email" class="form-control" placeholder="abc@email.com" required>
                         </div>
                         <div class="form-group">
                             <label for="" class="form-label">Mật Khẩu</label>
-                            <input type="password" id="password" class="form-control" required>
+                            <input name="password" type="password" id="password" class="form-control" required>
                         </div>
                         <div class="optional">
-                            <p><a href="./register.html" class="customer_register_link">Đăng kí</a></p>
-                            <p><a href="./forgetPassword.html" class="customer_forget_password_link">Quên mật khẩu?</a></p>
+                            <p><a href="./register.php" class="customer_register_link">Đăng kí</a></p>
+                            <p><a href="./forgetPassword.php" class="customer_forget_password_link">Quên mật khẩu?</a></p>
                         </div>
                         <input class = "btn btn-dark w-100" type="submit" value="Đăng Nhập">
                         
@@ -48,6 +48,48 @@
             </section>
         </div>
     </div>
+    <?php
+        include './ConnectDatabase/connectDatabase.php';
+
+            $email = '';
+            $password = '';
+            $userName = '';
+            
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+
+                try {
+               
+                    
+                    $stmt = $conn->prepare("SELECT customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail= :email");
+                    $stmt->execute(array(':email' => $email));
+                    $user = $stmt->fetch();
+                    
+
+                    if ($user && $password === $user['userPasswordAccount'] && isset($user['userPasswordAccount'])) {
+                        // Đăng nhập thành công
+                        session_start();
+                        $_SESSION['loggedIn'] = true;
+                        $_SESSION['customerName'] = $user['customerName'];
+                        var_dump($_SESSION);
+                        echo "<script>alert('Đăng nhập thành công!');</script>";
+                        $result = true;
+                        echo "<script>window.location.href='./index.php';</script>";
+                        
+                    } else {
+                        // Sai tên đăng nhập hoặc mật khẩu
+                        echo "<script>alert('Đăng nhập thất bại');</script>";
+                    }
+                } catch (PDOException $e) {
+                    echo 'Connection failed: ' . $e->getMessage();
+                    return false;
+                }
+            }
+    
+            
+
+    ?>
 
     <?php include 'footer.php'; ?>
 
