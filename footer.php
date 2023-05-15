@@ -100,6 +100,8 @@
                                     ĐĂNG KÝ NHẬN TIN TỪ POUR HOMME
                                 </h4>
                                 <form accept-charset="UTF-8" action="./index.php" class="contact-form" method="post">
+
+
                                     <input name="form_type" type="hidden" value="customer">
                                     <input name="utf8" type="hidden" value="✓">
                                     <div class="input-group">

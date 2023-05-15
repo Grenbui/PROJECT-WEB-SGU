@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./Font/fontawesome-free-6.2.0-web/css/all.css">
     <link rel="stylesheet" href="./Framework/bootstrap-4.0.0-dist/css/bootstrap-grid.css">
     <link rel="stylesheet" href="./CSS/contactCSS.css">
+    <link rel="stylesheet" href="./CSS/header.css">
+    <link rel="stylesheet" href="./CSS/footer.css">
 </head>
 <body>
     <div id="main">

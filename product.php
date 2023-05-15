@@ -185,67 +185,7 @@
                             </div>
                         </div>
                         
-                        <!-- <div class="filter-color">
-                            <button type="button" class="filter-color-name"><b>Màu Sắc</b></button>
-                            <div class="color-category">
-                                <ul class="color-list">
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Xanh</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Đỏ</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Tím</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Vàng</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Đen</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Trắng</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Xám</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Nâu</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="">
-                                            <input type="radio" name="color-filter" id="">
-                                            <span>Kem</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
+                       
                     </div>
                 </div>
                 <div class="sorting-col col-10">
@@ -368,14 +308,16 @@
                                 default:
                                     $sql .= " ORDER BY PRODUCT.productID ASC";
                            }
+
                             
                             $sql .= " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY";
                             // $sql .= " LIMIT $limit OFFSET $offset";
+
                             $stmt = $conn->query($sql);
                         
 
                            
-                            
+                           
                                 while ($row = $stmt->fetch()) {
                                     $price = $row["buyPrice"];
                                     $formatted_price = number_format($price, 0, ',', ',') . '₫';

@@ -244,17 +244,7 @@
        
     ?>
 
-
-    <!-- <form action="./ShoppingCart.php" method="post">
-      <div class = "purchase-info">
-                <input type="number" min = "0" value = "0" name="quantity">
-               <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
-                 Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
-               </button>
-              
-      </div>
-    </form> -->
-    <form action="" method="post">
+<    <form action="" method="post">
       <div class = "new">
                 <input type="number" min = "0" value = "0" name="quantity">
                <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
@@ -263,7 +253,8 @@
                <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
       </div>
     </form>
-    
+
+
         </div>
       </div>
     </div>
@@ -334,7 +325,6 @@
         });
     });
 </script>
-
 
 
 </html>

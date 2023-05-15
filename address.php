@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,8 +25,25 @@
     <!-- <script src="./Framework/jquery/jquery.mask.js"></script> -->
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
+
 <body>
+    <?php include './ConnectDatabase/connectDatabase.php' ?>
     <?php include 'header.php'; ?>
+
+    <?php
+    $customerName = "";
+    $customerPhone = "";
+    $customerAddress = "";
+
+    $sql = "SELECT * FROM CUSTOMER WHERE customerID = 'C1' ";
+    $stmt = $conn->query($sql);
+
+    while ($row = $stmt->fetch()) {
+        $customerName = $row['customerName'];
+        $customerPhone = $row['phoneNumber'];
+        $customerAddress = $row['addressLine1'] . $row['city'] . $row['country'];
+    }
+    ?>
 
     <section class="user_container">
         <div class="user_content container">
@@ -59,14 +77,53 @@
                         <h3 class="text-center">Số địa chỉ</h3>
                     </div>
                     <div class="address-container">
-                        <div class="address_add-new">
-                            <a href="./addressEdit.php" class="new-btn">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>Thêm địa chỉ mới</span>
-                            </a>
-                        </div>
-                        <div class="address_content">
+                        <?php
+                        $sql = "SELECT * FROM CUSTOMER WHERE customerID = 'C1'";
+                        $stmt = $conn->query($sql);
 
+                        while ($row = $stmt->fetch()) {
+                            if ($row['addressLine1'] == '') {
+                                echo "<div class='address_add-new'>";
+                                echo    "<a href='./addressEdit.php' class='new-btn'>";
+                                echo         "<i class='fa-solid fa-plus'></i>";
+                                echo         "<span>Thêm địa chỉ mới</span>";
+                                echo     "</a>";
+                                echo "</div>";
+                            } elseif ($row['addressLine2'] == '') {
+                                echo "<div class='address_add-new'>";
+                                echo    "<a href='./addressEdit.php' class='new-btn'>";
+                                echo         "<i class='fa-solid fa-plus'></i>";
+                                echo         "<span>Thêm địa chỉ phụ</span>";
+                                echo     "</a>";
+                                echo "</div>";
+                            }
+                        }
+
+                        ?>
+                        <div class="address_content">
+                            <?php
+                            if($row['addressLine2'] == ''){
+                                echo "<div class='item_addres'>";
+                                echo "<div class='item_left'>";
+                                echo    "<div class='name'>";
+                                echo        "Nguyễn văn A";
+                                echo    "</div>";
+                                echo    "<div class='address'>";
+                                echo        "<span>Địa chỉ: </span>";
+                                echo    "</div>";
+                                echo    "<div class='phoneNumber'>";
+                                echo        "<span>Điện thoại: </span>";
+                                echo    "</div>";
+                                echo "</div>";
+                            echo "</div>";
+                            echo "<div class='item_right'>";
+                                echo "<a class='edit' href=>";
+                                    echo "Chỉnh sửa";
+                                    echo "<i class='fa-solid fa-pen-to-square'></i>";
+                                echo "</a>";
+                            echo "</div>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -76,4 +133,5 @@
 
     <?php include 'footer.php'; ?>
 </body>
+
 </html>

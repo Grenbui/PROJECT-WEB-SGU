@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,9 +14,10 @@
     <link rel="stylesheet" href="./Font/fontawesome-free-6.2.0-web/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <?php include 'header.php'; ?>
-    
+
     <section id="breadcrump-wrapper">
         <div class="breadcrumb-overlay"></div>
         <div class="breadcrumb-content text-center">
@@ -41,23 +43,52 @@
                             <p><a href="./register.php" class="customer_register_link">Đăng kí</a></p>
                             <p><a href="./forgetPassword.php" class="customer_forget_password_link">Quên mật khẩu?</a></p>
                         </div>
-                        <input class = "btn btn-dark w-100" type="submit" value="Đăng Nhập">
-                        
+                        <input class="btn btn-dark w-100" type="submit" value="Đăng Nhập">
+
                     </form>
                 </div>
             </section>
         </div>
     </div>
     <?php
-        include './ConnectDatabase/connectDatabase.php';
+    require_once('./admin/connectPHP.php');
 
-            $email = '';
-            $password = '';
-            $userName = '';
-            
-            if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+    $email = '';
+    $password = '';
+    $userName = '';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+
+
+
+       
+       
+        $stmt = $conn->prepare("SELECT customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
+        
+
+        if ($user && $password === $user['userPasswordAccount'] && isset($user['userPasswordAccount'])) {
+            // Đăng nhập thành công
+            session_start();
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['customerName'] = $user['customerName'];
+            var_dump($_SESSION);
+            echo "<script>alert('Đăng nhập thành công!');</script>";
+            $result = true;
+            echo "<script>window.location.href='./index.php';</script>";
+        } else {
+            // Sai tên đăng nhập hoặc mật khẩu
+            echo "<script>alert('Đăng nhập thất bại');</script>";
+        }
+    }
+
 
                 try {
                
@@ -87,13 +118,15 @@
                     echo 'Connection failed: ' . $e->getMessage();
                     return false;
                 }
-            }
+            
     
             
+
 
     ?>
 
     <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

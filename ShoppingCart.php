@@ -36,6 +36,8 @@
                             <div class="text-center col-2">Xóa sản phẩm</div>
                         </div>
                         
+
+
                         
                            <?php include './ConnectDatabase/connectDatabase.php';
                                 $stmt = $conn->prepare("
@@ -193,33 +195,7 @@ qtyMinusBtn.addEventListener('click', function() {
 });
 
 </script>
-<script>
-    // Hàm xóa dữ liệu
-    function deleteCartItem(cartItemID) {
-        // Gửi yêu cầu xóa dữ liệu thông qua Ajax
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "delete_cart_item.php", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Xử lý kết quả trả về nếu cần thiết
-                // Ví dụ: Cập nhật giao diện sau khi xóa thành công
-                // Ví dụ: Refresh lại trang để cập nhật dữ liệu mới
-                location.reload(); // Refresh lại trang
-            }
-        };
-        xhr.send("cartItemID=" + cartItemID);
-    }
 
-    // Gán sự kiện click vào các thẻ có thuộc tính "data-cart-item-id"
-    var deleteIcons = document.querySelectorAll("[data-cart-item-id]");
-    for (var i = 0; i < deleteIcons.length; i++) {
-        deleteIcons[i].addEventListener("click", function() {
-            var cartItemID = this.getAttribute("data-cart-item-id");
-            deleteCartItem(cartItemID);
-        });
-    }
-</script>
 <script>
     var checkboxes = document.querySelectorAll('.product-select input[type="checkbox"]');
     checkboxes.forEach(function(checkbox) {

@@ -27,7 +27,7 @@
 
 .info_title {
     padding: .375rem .75rem;
-    margin: 1.2rem 0;
+    margin: 0.8rem 0;
 }
 
 .table_user {
@@ -135,6 +135,8 @@ name
 
 .info {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .status {
@@ -142,8 +144,8 @@ name
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     vertical-align: bottom;
 }
 
