@@ -79,11 +79,24 @@ CREATE TABLE ORDER_DETAIL(
 
 
 CREATE TABLE PAYMENT(
-	customerID VARCHAR(50) NOT NULL , checkNumber INT NOT NULL, 
+	customerID VARCHAR(50) NOT NULL , checkNumber VARCHAR(50) NOT NULL, 
 	constraint PK_PAYMENT_customerID_checkNumber PRIMARY KEY (customerID, checkNumber),
 	constraint FK_PAYMENT_customerID FOREIGN KEY (customerID) REFERENCES CUSTOMER (customerID),
 	paymentDate DATE,
 	amount DECIMAL(9, 0)
+)
+
+CREATE TABLE CART(
+	cartID VARCHAR(50) NOT NULL constraint PK_CART_cartID PRIMARY KEY (cartID),
+	customerID VARCHAR(50) NOT NULL constraint FK_CART_customerID FOREIGN KEY(customerID) REFERENCES CUSTOMER(customerID)
+)
+
+CREATE TABLE CART_ITEMS(
+	cartItemID VARCHAR(50) NOT NULL constraint PK_CART_cartItemID PRIMARY KEY (cartItemID),
+	cartID VARCHAR(50) constraint FK_CART_ITEMS_cartID FOREIGN KEY (cartID) REFERENCES CART(cartID),
+	productID VARCHAR(50) constraint FK_CART_ITEMS_productID FOREIGN KEY (productID) REFERENCES PRODUCT(productID),
+	quantity INT,
+	selected BIT DEFAULT 0
 )
 
 

@@ -16,7 +16,15 @@ SELECT * FROM CUSTOMER
 SELECT * FROM ORDERS
 SELECT * FROM ORDER_DETAIL
 SELECT * FROM PAYMENT
+SELECT * FROM CART
+SELECT * FROM CART_ITEMS
 
+SELECT DISTINCT ci.cartItemID, p.productName, ci.quantity, buyPrice, productName FROM CART_ITEMS ci JOIN PRODUCT p ON ci.productID = p.productID WHERE ci.cartID IN (SELECT cartID FROM CART WHERE customerID = :customerID
+ SELECT DISTINCT ci.cartItemID, p.productName, ci.quantity, p.buyPrice, p.productName, pi.productImageURL, pi.isMainImage
+                                    FROM CART_ITEMS ci
+                                    JOIN PRODUCT p ON ci.productID = p.productID
+                                    JOIN PRODUCT_IMAGE pi ON p.productID = pi.productID
+                                    WHERE ci.cartID IN (SELECT cartID FROM CART ) AND isMainImage = 1
 /*Dữ liệu danh mục sản phẩm*/
 INSERT INTO PRODUCT_LINE VALUES 
 ('PL1', 'boots'),
