@@ -8,11 +8,6 @@
     background-color: #efefef;
 }
 
-.user_detail {
-    background-color: #fff;
-    border-radius: 8px;
-}
-
 .detail_sidebar {
     background-color: #efefef;
     border-radius: 8px;
@@ -76,14 +71,7 @@ li {
 
 .form-control {
     border: none !important;
-    margin-bottom: 24px;
-}
-
-.flex_field {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0px 0px 15px !important;
+    margin-bottom: 34px;
 }
 
 .nameInput,
@@ -93,8 +81,6 @@ li {
 .countryInput {
     margin-right: 1.2rem;
 }
-
-name
 
 .input-label {
     width: 110px;
@@ -111,14 +97,8 @@ name
     border-radius: 4px;
     color: rgb(255, 255, 255);
     font-size: 14px;
-    background-color: rgb(0,0,0);
+    background-color: rgb(11, 116, 229);
     cursor: pointer;
-}
-
-.input-btn:hover {
-    background-color: rgb(175,134,92);
-    color: #000;
-    transition: 0.2s;
 }
 
 .list-item {
@@ -126,11 +106,6 @@ name
     justify-content: space-between;
     align-items: center;
     padding: 19px 0px;
-}
-
-.input_field {
-    width: 70%;
-    padding: .2rem .6rem;
 }
 
 .info {
@@ -153,58 +128,37 @@ name
 }
 
 .button {
-    border: 1px solid rgb(0,0,0);
+    border: 1px solid rgb(11, 116, 229);
     background-color: rgb(255, 255, 255);
     height: 28px;
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
     padding: 0px 12px;
-    color: rgb(0,0,0);
+    color: rgb(11, 116, 229);
 }
 
-.button:hover {
-    border: 1px solid rgb(175,134,92);
-    color: rgb(175,134,92);
-    transition: 0.2s;
+.user_detail {
+    background-color: #fff;
+    border-radius: 8px;
 }
 
 .header_title {
-    margin: 1.2rem 0;
-
-}
-
-.text_field {
-    padding-right: 12rem;
-}
-
-.name_field,
-.city_field,
-.district_field,
-.address_field {
-    width: 30rem;
     padding: .375rem .75rem;
-    border: 1px solid rgb(204, 204, 204);
+    margin: 1.2rem 0;
 }
 
-.form-control button[type="submit"] {
+.column-name {
+    margin: 1.2rem 0;
+}
+
+.detail_btn {
     border: 0px;
-    width: 176px;
+    width: 100px;
     height: 40px;
     border-radius: 4px;
     color: rgb(255, 255, 255);
     font-size: 14px;
-    background-color: rgb(0, 0 ,0);
+    background-color: rgb(0,0,0);
     cursor: pointer;
 }
-
-.form-control button[type="submit"]:hover {
-    background-color:rgb(175,134,92);
-    color: rgb(255,255,255);
-    transition: 0.2s;
-}
-
-
-
-
-

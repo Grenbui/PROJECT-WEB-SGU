@@ -25,6 +25,7 @@
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
 <body>
+    <?php include 'connectectDatabase.php' ?>
     <?php include 'header.php'; ?>
 
     <section class="user_container">
@@ -34,19 +35,19 @@
                     <div class="detail_sidebar">
                         <ul class="style_sidebar">
                             <li>
-                                <a href="" class="text_href">
+                                <a href="./accountEdit.php" class="text_href">
                                     <i class="fa-solid fa-user icon"></i>
                                     <span class="text_style">Thông tin tài khoản</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="text_href">
+                                <a href="./historyOrder.php" class="text_href">
                                     <i class="fa-solid fa-receipt icon"></i>
-                                    <span class="text_style">Quản lí đơn hàng</span>
+                                    <span class="text_style">Lịch sử đơn hàng</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="text_href">
+                                <a href="./address.php" class="text_href">
                                     <i class="fa-solid fa-location-dot icon"></i>
                                     <span class="text_style">Số địa chỉ</span>
                                 </a>
@@ -57,17 +58,17 @@
                 <div class="user_detail col-9">
                     <div class="info_detail">
                         <div class="info-left col-6">
-                            <div class="info_title text-center">Thông tin tài khoản</div>
+                            <h3 class="info_title text-center">Thông tin tài khoản</h3>
                             <form action="" class="info_content">
                                 <div class="form-info">
                                     <div class="form-name">
                                         <div class="form-control">
                                             <label class="nameInput" for="">Họ & Tên: </label>
-                                            <input type="text" name="fullname" placeholder="Thêm họ tên">
+                                            <input class="input_field" type="text" name="fullname" placeholder="Thêm họ tên">
                                         </div>
                                         <div class="form-control">
                                             <label class="nicknameInput" for="">Biệt danh: </label>
-                                            <input type="text" name="nickname" placeholder="Thêm biệt danh">
+                                            <input class="input_field" type="text" name="nickname" placeholder="Thêm biệt danh">
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +76,7 @@
                                         <label class="dateInput" for="">Ngày sinh: </label>
                                         <div class="date_selection">
                                             <select name="day">
-                                                <option value="">ngày</option>
+                                                <option value="">Ngày</option>
                                                 <?php
                                                     $month = 4; // Tháng cần tạo danh sách
                                                     for ($i = 1; $i <= 31; $i++) {
@@ -106,12 +107,13 @@
                                                 ?>
                                             </select>
                                             <select name="year">
-                                            <?php
-                                                $currentYear = date('Y');
-                                                for ($i = $currentYear; $i >= 1900; $i--) {
-                                                echo "<option value='$i'>$i</option>";
-                                                }
-                                            ?>
+                                                <option value="">Năm</option>
+                                                <?php
+                                                    $currentYear = date('Y');
+                                                    for ($i = $currentYear; $i >= 1900; $i--) {
+                                                    echo "<option value='$i'>$i</option>";
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -143,7 +145,7 @@
                                     </div>
                                     <div class="form-control">
                                         <label class="countryInput" for="">Quốc gia: </label>
-                                        <input type="text" name="country" placeholder="Thêm quốc gia">
+                                        <input class="input_field" type="text" name="country" placeholder="Thêm quốc gia">
                                     </div>
                                     <div class="form-control">
                                         <label class="input-label">&nbsp;</label>
@@ -153,13 +155,53 @@
                         </div>
                         <div class="info-vertical"></div>
                         <div class="info-right col-6">
-                            <span class="info_title">Số điện thoại và Email</span>
-                            <div>
+                            <div class="info_title">Số điện thoại và Email</div>
+                            <div class="Phone&Email-title">
+                                <div class="list-item">
+                                    <div class="info">
+                                        <img class="icon" src="./Image/icon/phone.png" alt="">
+                                        <div class="info-container">
+                                            <span>Số điện thoại</span>
+                                            <span>
 
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="status">
+                                        <a href="./phoneChange.php"><button class="button">Cập nhật</button></a>
+                                    </div> -->
+                                </div>
+                                <div class="list-item">
+                                    <div class="info">
+                                        <img class="icon" src="./Image/icon/email.png" alt="">
+                                        <div class="info-container">
+                                            <span>Địa chỉ Email</span>
+                                            <span>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="status">
+                                        <a href="./emailChange.php"><button class="button">Cập nhật</button></a>
+                                    </div> -->
+                                </div>
                             </div>
-                            <span>Bảo mật</span>
-                            <div>
+                            <div class="info_title">Bảo mật</div>
+                            <div class="security-title">
+                                <div class="list-item">
+                                    <div class="info">
+                                        <img class="icon" src="./Image/icon/lock.png" alt="">
+                                        <div class="info-container">
+                                            <span>Mật khẩu</span>
+                                            <span>
 
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="status">
+                                        <a href="./passwordChange.php"><button class="button">Cập nhật</button></a>
+                                    </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
