@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pour homme - Product detail</title>
    
     <link rel="stylesheet" href="./Font/fontawesome-free-6.2.0-web/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
@@ -23,7 +23,8 @@
     
 </head>
 <body>
-    <?php include 'header.php'; ?>
+
+    <?php include './header.php'; ?>
 
     <section id="breadcrump-wrapper">
         <div class="breadcrumb-overlay"></div>
@@ -83,6 +84,7 @@
         </div> -->
         <?php
         include './ConnectDatabase/connectDatabase.php';
+       
      
          try {
             
@@ -92,6 +94,12 @@
                 $productImageSQL = "SELECT productImageURL, isMainImage FROM PRODUCT_IMAGE WHERE productID = '$id'";
                 $stmt = $conn->query($productImageSQL);
                 $productImages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                $productSQL = "SELECT productName, buyPrice, productDescription, quantityInStock FROM PRODUCT WHERE productID = '$id'";
+                $stmt = $conn->query($productSQL);
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                
                 
                 if (count($productImages) > 0) {
                     echo '<div class="product-imgs">';
@@ -122,9 +130,7 @@
    
                 echo '<div class = "product-content">';
    
-                $productSQL = "SELECT productName, buyPrice, productDescription, quantityInStock FROM PRODUCT WHERE productID = '$id'";
-                $stmt = $conn->query($productSQL);
-                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                
    
                 if(count($product) > 0){
                    $price = $product['buyPrice'];
@@ -186,16 +192,7 @@
                echo '</ul>';
                echo '</div>';
    
-               echo '<div class = "purchase-info">
-               <input type = "number" min = "0" value = "1">
-               <button type = "button" class = "btn">
-                 Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
-               </button>
-               <button type = "button" class = "btn">
-                 Mua ngay 
-               </button>
-             </div>';
-   
+              
            //   echo '<div class = "social-links">
            //   <p>Share At: </p>
            //   <a href = "#">
@@ -215,29 +212,62 @@
            //   </a>
            // </div>';
    
-               echo '</div>';
-   
-   
                
+          //  if (isset($_POST['quantity'])) {
+          //   $quantity = $_POST['quantity'];
+        
+          //   // Thực hiện các xử lý với $quantity ở đây
+          //   $productCookieArray = array(
+          //     'id' => $id,
+          //     'name' =>  $product['productName'],
+          //     'price' => $formatted_price,
+          //     'quantity' => $quantity
+              
+          // );  
+          //   } else {
+          //   // Xử lý khi không tìm thấy phần tử 'quantity'
+          //      echo 'Không tìm thấy giá trị quantity';
+          //   }
+        
+          
+         
+        
             }else{
                 echo 'Không thể lấy được id của sản phẩm';
             }
-            
 
            
-
-
          } catch (PDOException $e) {
              echo "Connection failed: " . $e->getMessage();
          }
 
        
     ?>
+
+    <form action="" method="POST">
+      <div class = "purchase-info">
+                <input type="number" min = "0" value = "0" name="quantity">
+               <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
+                 Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
+               </button>
+               <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
+      </div>
+    </form>
+    <?php
+        $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+       
+         $productCookieArray = array(
+            'id' => $id,
+            'name' => $product['productName'],
+            'price' => $formatted_price,
+            'quantity' =>  $quantity
+        );
+    ?>
+        </div>
       </div>
     </div>
    
-
-
+    
    
     <?php include 'footer.php';?>
 </body>
@@ -254,6 +284,59 @@
             span.classList.add('selected-color');
         });
     });
+</script>
+
+<script>
+        function addToCart() {
+           
+            // Kiểm tra xem cookie 'cart' đã tồn tại hay chưa
+            var cartItems = [];
+            if (getCookie('cart')) {
+                cartItems = JSON.parse(getCookie('cart'));
+            }
+
+            // Thêm sản phẩm vào giỏ hàng
+            var product = <?php echo json_encode($productCookieArray); ?>;
+            cartItems.push(product);
+            console.log(document.cookie);
+
+
+            // Lưu giỏ hàng vào cookie
+            setCookie('cart', JSON.stringify(cartItems), 1);
+            
+
+        }
+       
+
+
+
+
+
+        // Hàm lấy cookie theo tên
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(';');
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split('=');
+                if (name === cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        // Hàm set cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
+        }
+
+        console.log(document.cookie);
+
 </script>
 
 </html>

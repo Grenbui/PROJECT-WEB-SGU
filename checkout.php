@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,17 +10,20 @@
 
     <!-- ICON -->
     <link rel="stylesheet" href="./Font/fontawesome-free-6.2.0-web/css/all.css">
-    
+
 
     <!-- CSS -->
     <link rel="stylesheet" href="./CSS/collections.css">
 
     <!-- Framework -->
+    <script src="./Framework/aos-master/src/js/aos.js"></script>
     <link rel="stylesheet" href="./Framework/bootstrap/css.css">
+    <script src="./Framework/bootstrap/js.js"></script>
     <script src="./Framework/jquery/jquery.js"></script>
     <!-- <script src="./Framework/jquery/jquery.mask.js"></script> -->
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
+
 <body>
     <?php include 'header.php'; ?>
     <section class="page-wrapper">
@@ -30,24 +34,27 @@
                         <div class="address-header">
                             <i class="fa-solid fa-location-dot" style="margin-right: 9px;"></i>Địa chỉ nhân hàng
                         </div>
-                        <div class="address customer">
-
+                        <div class="address__customer row">
+                            <div class="address__link col-8">
+                    
+                            </div>
+                            <div class="address-edit col-4">Thay đổi</div>
                         </div>
                     </div>
-                    
-                    <div class="product-checkout">
+
+                    <div class="product-checkout ">
                         <div class="product-header row">
                             <div class="text-start col-6">Sản phẩm</div>
                             <div class="text-center col-2">Đơn giá</div>
                             <div class="text-center col-1">Số lượng</div>
                             <div class="text-end col-3">Thành tiền</div>
                         </div>
-                        
+
                         <div class="product-contain row align-items-center">
                             <div class="product-name text-start col-6">
                                 <span>
                                     <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">Johny Classique Chelsea</p>
-                                    
+
                                 </span>
                             </div>
                             <div class="product-price text-center col-2">
@@ -76,7 +83,7 @@
                                 <span><button type="button" class="COD-payment-btn product-variation" name="cod_payment" required>Thanh toán khi nhận hàng</button></span> -->
                                 <span class="label cod__listener">
                                     <div class="style-label selectedCODPayement">
-                                    <input type="radio" name="payment-method" value="cod" id="radioCOD">
+                                        <input type="radio" name="payment-method" value="cod" id="radioCOD">
                                         <div class="cod-method">
                                             <img class="method-icon" src="./Image/Option_Payment/COD_Payment.png" alt="" width="32" height="32">
                                             <div class="method-content">
@@ -88,7 +95,7 @@
 
                                 <span class="label card__listener">
                                     <div class="style-label selectedCardPayment">
-                                    <input type="radio" name="payment-method" value="card" id="radioCard">
+                                        <input type="radio" name="payment-method" value="card" id="radioCard">
                                         <div class="cod-method">
                                             <img class="method-icon" src="./Image/Option_Payment/Card_Payment.png" alt="" width="32" height="32">
                                             <div class="method-content d-flex flex-column">
@@ -102,35 +109,37 @@
                                 </span>
                             </div>
                             <div class="card-content">
-                                    <div class="card-info">
-                                        <div class="title"><h2>Điền thông tin thẻ tín dụng/Ghi nợ</h2></div>
-                                        <div class="card-list">
-                                            <img src="./Image/Option_Payment/example_card_payment.png" alt="" width="auto" height="32">
-                                        </div>
-                                        <div class="write-card-form">
-                                            <div class="left">
-                                                <div class="card-number">
-                                                    <div class="card_field">
-                                                        <div class="label">Số thẻ</div>
-                                                        <input type="text" class="card-number-input card-input" name="number" data-mask="9999-9999-9999-9999" placeholder="VD: 4123 4567 8901 2345">
-                                                    </div>
-                                                    <div class="card_field">
-                                                        <div class="label">Tên in trên thẻ</div>
-                                                        <input type="text" class="card-name-input card-input" name="name" placeholder="VD: NGUYEN VAN A">
-                                                    </div>
-                                                    <div class="card_field">
-                                                        <div class="label">Ngày hết hạn</div>
-                                                        <input type="text" name="expiry" class="card-expiry_date-input card-input" pattern="(0[1-9]|1[0-2])/[0-9]{2}" data-mask="00/00" placeholder="MM/YY" required>
-                                                    </div>
-                                                    <div class="card_field">
-                                                        <div class="label">Mã bảo mật</div>
-                                                        <input type="text" name="cvc" class="card-cvc-input card-input" data-mask="000" placeholder="VD: 123">
-                                                    </div>
+                                <div class="card-info">
+                                    <div class="title">
+                                        <h2>Điền thông tin thẻ tín dụng/Ghi nợ</h2>
+                                    </div>
+                                    <div class="card-list">
+                                        <img src="./Image/Option_Payment/example_card_payment.png" alt="" width="auto" height="32">
+                                    </div>
+                                    <div class="write-card-form">
+                                        <div class="left">
+                                            <div class="card-number">
+                                                <div class="card_field">
+                                                    <div class="label">Số thẻ</div>
+                                                    <input type="text" class="card-number-input card-input" name="number" data-mask="9999-9999-9999-9999" placeholder="VD: 4123 4567 8901 2345">
+                                                </div>
+                                                <div class="card_field">
+                                                    <div class="label">Tên in trên thẻ</div>
+                                                    <input type="text" class="card-name-input card-input" name="name" placeholder="VD: NGUYEN VAN A" >
+                                                </div>
+                                                <div class="card_field">
+                                                    <div class="label">Ngày hết hạn</div>
+                                                    <input type="text" name="expiry" class="card-expiry_date-input card-input" pattern="(0[1-9]|1[0-2])/[0-9]{2}" data-mask="00/00" placeholder="MM/YY">
+                                                </div>
+                                                <div class="card_field">
+                                                    <div class="label">Mã bảo mật</div>
+                                                    <input type="text" name="cvc" class="card-cvc-input card-input" data-mask="000" placeholder="VD: 123">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <div class="checkout-payment-body">
                             <div class="card__payment-selected">
@@ -138,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="checkout-payment-cost">
                         <!-- <div class="cost-payment-container">
                             <div class="product-cost">Tổng tiền hàng</div>
@@ -152,7 +161,7 @@
                             <div class="cost-col1">
                                 <div class="product-cost">Tổng tiền hàng: </div>
                                 <div class="shipping-cost">Phí vận chuyển: </div>
-                                <div class="total-cost">Tổng thanh toán: </div>                       
+                                <div class="total-cost">Tổng thanh toán: </div>
                             </div>
                             <div class="cost-col2">
                                 <div class="product-cost-num">3,050,000đ</div>
@@ -161,14 +170,34 @@
                             </div>
                         </div>
                         <div class="checkout-btn">
-                            <input type="submit" name="payment" value="Đặt hàng">
+                            <button type="submit" name="payment">Đặt hàng</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-    </section> 
+    </section>
 
+    <div id="popup_content">
+        <aside class="popup_container" data-aos="fade-up">
+            <div class="address__popup">
+                <div class="address__popup-container d-flex flex-collumn">
+                    <div class="address__popup-content">
+                        <div class="address__popup-header">
+                            <p>Địa Chỉ Của Tôi</p>
+                        </div>
+                        <div class="address__popup-body">
+
+                        </div>
+                        <div class="address__popup-footer">
+                            <button class="address_btn cancel_btn">Huỷ</button>
+                            <button class="address_btn submit_btn">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
     
 
     <script>
@@ -178,10 +207,103 @@
             $('.card-cvc-input').mask('999');
         });
     </script>
+    <!-- <script>
+        var btnOpen = $('.js-open');
+        var btnClose = $('.js-close');
+        var modal = $('.js-modal');
+        var modalChildren = modal.children();
+
+        function hideModal() {
+        modal.animate({
+            opacity: 0,
+            translateY: 100
+        }, {
+            duration: 1500,
+            easing: 'spring'
+        });
+        }
+
+        function showModal() {
+        // Define initial properties
+        modal.css({
+            opacity: 0,
+            scale: .5
+        });
+        
+        // Animate to final properties
+        modal.animate({
+            opacity: 1,
+            scale: 1
+        }, {
+            duration: 1000,
+            easing: 'spring',
+            queue: false
+        });
+        }
+
+        function showBtn() {
+        btnOpen.css({
+            opacity: 0
+        });
+        
+        btnOpen.animate({
+            opacity: 1
+        }, {
+            duration: 800,
+            easing: 'spring'
+        });
+        }
+
+        function showModalChildren() {
+        // Animate each child individually
+        modalChildren.each(function(i, item) {
+            // Define initial properties
+            $(item).css({
+            opacity: 0,
+            translateY: 30
+            });
+
+            // Animate to final properties
+            $(item).animate({
+            opacity: 1,
+            translateY: 0
+            }, {
+            duration: 1000,
+            easing: 'spring',
+            delay: 100 + i * 40
+            });
+        });
+        }
+
+        function toggleClasses() {
+        btnOpen.toggleClass('is-active');
+        modal.toggleClass('is-active');
+        }
+
+        // Open nav when clicking sandwich button
+        btnOpen.on('click', function(e) {
+        toggleClasses();
+        showModal();
+        showModalChildren();
+        });
+
+        // Open nav when clicking sandwich button
+        btnClose.on('click', function(e) {
+        hideModal();
+        setTimeout(function() {
+            toggleClasses();
+            showBtn();
+        }, 500);
+        });
+    </script>     -->
 
     <?php include 'footer.php'; ?>
+    <script>
+        AOS.init();
+    </script>
     <script src="./Javascript/collections.js"></script>
     <script src="./Javascript/checkout-payment.js"></script>
 
 </body>
+
 </html>

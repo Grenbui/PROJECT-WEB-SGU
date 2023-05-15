@@ -35,7 +35,7 @@
                         <div class="owl-item">
                             <div class="item">
                                 <div class="main-slider-item">
-                                    <a href="" class="main-slider-link">
+                                    <a href="./index.php" class="main-slider-link">
                                         <img src="./Image/slideshow_1.webp" alt="Slider" class="image">
                                     </a>
                                     <div class="collection-info clear-fix">
@@ -226,7 +226,7 @@
             <div class="overlay">
                 <div class="shop-info">
                     <span>Unique Store in Sai Gon - Viet Nam</span>
-                    <a href="" class="btn-more-white">SHOW ON GOOGLE MAP</a>
+                    <a href="https://goo.gl/maps/HDwg3GmYpEiWgLpK6?coh=178572&entry=tt" class="btn-more-white">SHOW ON GOOGLE MAP</a>
                 </div>
             </div>
         </div>

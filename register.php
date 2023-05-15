@@ -9,10 +9,10 @@
     
     <link rel="stylesheet" href="./CSS/account.css">
     <link rel="stylesheet" href="./Framework/bootstrap/css.css">
-    <link rel="stylesheet" href="./Framework/bootstrap/css.css">
     <link rel="stylesheet" href="./Framework/bootstrap/js.js">
     <link rel="stylesheet" href="./Font/fontawesome-free-6.2.0-web/css/all.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -68,11 +68,43 @@
             </section>
         </div>
     </div>
+    
 
     <?php include 'footer.php'; ?>
 
+    <!-- <script>
+        $(document).ready(function() {
+            $("#register-customer").submit(function(e) {
+                e.preventDefault();
+                var firstName = $("#first-Name input").val();
+                var surName = $("#surName").val();
+                var email = $("#email").val();
+                var phoneNum = $("#phoneNum").val();
+                var userName = $("#userName").val();
+                var password = $("#password").val();
+
+                $.ajax({
+                    url: "register.php",
+                    type: "POST",
+                    data: {
+                        firstName: firstName,
+                        surName: surName,
+                        email: email,
+                        phoneNum: phoneNum,
+                        userName: userName,
+                        password: password
+                    },
+                    success: function(response) {
+                        $("#response").html(response);
+                    }
+                });
+            });
+        });
+    </script> -->
+
     <?php
         include './ConnectDatabase/connectDatabase.php';
+
         try{
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $userName = $_POST['userName'];
@@ -83,20 +115,57 @@
                 $firstName = $_POST['firstName'];
                 $lastName = $_POST['surName'];
                 $name = $firstName .' '. $lastName;
-            }
-            
-            $stmt = $conn->prepare("INSERT INTO CUSTOMER VALUES ('c93',:name,:email,:userName,:password,:phoneNum,'','','','',0)");
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':phoneNum', $phoneNum);
-            $stmt->bindParam(':password', $password);
+
+                   // $customerInformation = "SELECT MAX(SUBSTR(customerID, 2)) as max_id FROM CUSTOMER WHERE customerID LIKE 'C1%';";
+            // $stmt = $conn->query($customerInformation);
+            // $max_id = $stmt->fetch(PDO::FETCH_ASSOC)['max_id'];
+
+            // Kiểm tra tên đăng nhập đã tồn tại chưa
+            $stmt = $conn->prepare("SELECT * FROM CUSTOMER WHERE userNameAccount = :userName");
             $stmt->bindParam(':userName', $userName);
-    
             $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $emailStmt = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerEmail = :email");
+            $emailStmt->bindParam(':email', $email);
+            $emailStmt->execute();
+            $result1 = $emailStmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($result) > 0) {
+                echo "<script>alert('Tên đăng nhập đã tồn tại!');</script>";
+            }else{
+                if(count($result1) > 0){
+                    echo "<script>alert('Email đã tồn tại!');</script>";
+                }else{
+                    $new_id = uniqid('C');
+                    
+                    $stmt = $conn->prepare("INSERT INTO CUSTOMER VALUES (:id,:name,:email,:userName,:password,:phoneNum,'','','','',0)");
+                    $stmt->bindParam(':id', $new_id);
+                    $stmt->bindParam(':name', $name);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':phoneNum', $phoneNum);
+                    $stmt->bindParam(':password', $password);
+                    $stmt->bindParam(':userName', $userName);
+            
+                    $stmt->execute();
+                    
+                    echo "<script>alert('Đăng ký thành công!');</script>";
+                    echo "<script>window.location.href='login.php'; </script>";
+                   
+                }
+                
+            }
+
+        }
             $conn = null;
         } catch (PDOException $e) {
             echo "Connection failed" . $e->getMessage();
         }
+    
+
+            
+
+         
     ?> 
 
 </body>

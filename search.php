@@ -3,7 +3,7 @@
 
     $search = $_GET['search'];
 
-    $sql = "SELECT * FROM products WHERE name LIKE '%$search%'";
+    $sql = "SELECT * FROM PRODUCT WHERE name LIKE '%$search%'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
 

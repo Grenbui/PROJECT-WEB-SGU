@@ -15,6 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./CSS/collections.css">
 
+
     <!-- BOOSTRAP -->
     <link rel="stylesheet" href="./Framework/bootstrap/css.css">
 
@@ -24,9 +25,13 @@
     </head>
     
     <body>
-        
-    <?php include 'header.php'; ?>
+    <?php 
+    // session_start(); 
+     $sortValue = isset($_GET['sortBy']) ? $_GET['sortBy'] : '';
+    ?>
+   
         <div id="product-list">
+        <?php include 'header.php'; ?>
        
         <section id="breadcrump-wrapper">
             <div class="breadcrumb-overlay"></div>
@@ -99,6 +104,7 @@
                                         </label>
                                     </li>
                                 </ul>
+                                <button id="clear-price-selection" type="button" class="delete-selection">Xóa lựa chọn giá</button>
                             </div>
                         </div>
                         <div class="filter-stuff">
@@ -107,35 +113,36 @@
                                 <ul class="stuff-list">
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="boots" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'boots') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="boots" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'boots') echo 'checked'; ?>>
                                             <span>Dress Boots</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Mocassins" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Mocassins') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Mocassins" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Mocassins') echo 'checked'; ?>>
                                             <span>Mocassins</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Flip-Flop" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Flip-Flop') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Flip-Flop" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Flip-Flop') echo 'checked'; ?>>
                                             <span>Flip-Flop</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Belt" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Belt') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Belt" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Belt') echo 'checked'; ?>>
                                             <span>Thắt lưng (Belt)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="stuff-filter" id="" value="Wallet" <?php if (isset($_GET['stuffStyle']) && $_GET['stuffStyle'] == 'Wallet') echo 'checked'; ?>>
+                                            <input type="radio" name="stuff-filter" id="" value="Wallet" <?php if (isset($_GET['stuffType']) && $_GET['stuffType'] == 'Wallet') echo 'checked'; ?>>
                                             <span>Ví (Wallet)</span>
                                         </label>
                                     </li>
                                 </ul>
+                                <button id="clear-stuff-selection" type="button" class="delete-selection">Xóa lựa chọn loại</button>
                             </div>
                         </div>
                         <div class="filter-material">
@@ -144,35 +151,37 @@
                                 <ul class="material-list">
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Velvet">
+                                            <input type="radio" name="material-filter" id="" value="Velvet" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Velvet') echo 'checked'; ?>>
                                             <span>Velvet (Nhung)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Fabric">
+                                            <input type="radio" name="material-filter" id="" value="Fabric" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Fabric') echo 'checked'; ?>>
                                             <span>Fabric (Bố)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Leather">
+                                            <input type="radio" name="material-filter" id="" value="Leather" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Leather') echo 'checked'; ?>>
                                             <span>Leather (Da)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Patent">
+                                            <input type="radio" name="material-filter" id="" value="Patent" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Patent') echo 'checked'; ?>>
                                             <span>Patent (Da bóng)</span>
                                         </label>
                                     </li>
                                     <li>
                                         <label for="">
-                                            <input type="radio" name="material-filter" id="" value="Suede">
+                                            <input type="radio" name="material-filter" id="" value="Suede" <?php if (isset($_GET['productMaterial']) && $_GET['productMaterial'] == 'Suede') echo 'checked'; ?>>
                                             <span>Suede (Da lộn)</span>
                                         </label>
                                     </li>
                                 </ul>
+                                <button id="clear-material-selection" type="button" class="delete-selection">Xóa lựa chọn chất liệu</button>
+
                             </div>
                         </div>
                         
@@ -242,24 +251,27 @@
                 <div class="sorting-col col-10">
                     <div class="collections-sort col">
                         <label for="sortBy" class="">Sắp Xếp</label>
+                        <form id="sortForm" action="product.php" method="get">
                         <select name="sortBy" id="sortBy">
                             <option value="best-selling">Bán Chạy Nhất </option>
                             <option value="product-newest">Mới nhất</option>
                             <option value="product-oldest">Cũ nhất</option>
-                            <option value="price-ascending">Giá Thấp - Cao</option>
-                            <option value="price-descending">Giá Cao - Thấp</option>
+                            <option value="price-ascending" <?php if($sortValue == 'price-ascending') echo 'selected'; ?>>Giá Thấp - Cao</option>
+                            <option value="price-descending" <?php if($sortValue == 'price-descending') echo 'selected'; ?>>Giá Cao - Thấp</option>
                         </select>
+                        </form>
                     </div>
                     <div class="row collection-product">
                     <?php
                     include './ConnectDatabase/connectDatabase.php';
                        
                         try {
-
                             $productLineID = isset($_GET['productLineID']) ? $_GET['productLineID'] : '';
                             $priceRange = isset($_GET['buyPrice']) ? $_GET['buyPrice'] : '';
                             $stuffType = isset($_GET['stuffType']) ? $_GET['stuffType'] : '';
                             $productMaterial = isset($_GET['productMaterial']) ? $_GET['productMaterial'] : '';
+                            $search_bar_keyWord = isset($_GET['search_bar']) ? $_GET['search_bar'] : '';
+                           
                             // Định nghĩa số lượng sản phẩm muốn hiển thị trên mỗi trang
                             $limit = 12;
 
@@ -269,12 +281,20 @@
 
                            
                             $sql = "SELECT productName, buyPrice, PRODUCT.productID, PRODUCT_IMAGE.productImageURL
-                                    FROM PRODUCT
-                                    INNER JOIN PRODUCT_IMAGE ON PRODUCT.productID = PRODUCT_IMAGE.productID
-                                    WHERE PRODUCT_IMAGE.isMainImage = 1";
+                                    FROM PRODUCT, PRODUCT_IMAGE, PRODUCT_LINE
+                                    WHERE PRODUCT_IMAGE.isMainImage = 1
+                                        AND  PRODUCT.productID = PRODUCT_IMAGE.productID
+                                        AND PRODUCT.productLineID = PRODUCT_LINE.productLineID
+                                    ";
                              if ($productLineID != '') {
                                 $sql .= " AND PRODUCT.productLineID = '$productLineID'";
                             }
+                            if($search_bar_keyWord!=''){
+                                $sql .= " AND PRODUCT.productName LIKE '%$search_bar_keyWord%'";
+                            }
+                           
+
+    
                             switch ($priceRange) {
                                 case 'Less500':
                                     $sql .= " AND buyPrice < 500000";
@@ -297,23 +317,27 @@
                                 default:
                                     break;
                             }
+
                             switch($stuffType){
                                 case 'boots':
-                                    $sql .= " AND productLineID = 'PL1'";
+                                    $sql .= " AND PRODUCT.productLineID = 'PL1'";
                                     break;
                                 case 'Mocassins':
-                                    $sql .= " AND productLineID = 'PL2'";
+                                    $sql .= " AND PRODUCT.productLineID = 'PL2'";
                                     break;
-                                case 'Flip-flop':
-                                    $sql .= " AND productLineID = 'PL3'";
+                                case 'Flip-Flop':
+                                    $sql .= " AND  PRODUCT.productLineID = 'PL3'";
                                     break;
                                 case 'Belt':
-                                    $sql .= " AND productLineID = 'PL4'";
+                                    $sql .= " AND  PRODUCT.productLineID = 'PL4'";
                                     break;
                                 case 'Wallet':
-                                    $sql .= " AND productLineID = 'PL5'";
+                                    $sql .= " AND  PRODUCT.productLineID = 'PL5'";
+                                    break;
+                                default:
                                     break;
                             }
+
                             switch($productMaterial){
                                 case 'Velvet':
                                     $sql .= " AND productMaterial = 'Nhung'";
@@ -330,11 +354,22 @@
                                 case 'Suede':
                                     $sql .= " AND productMaterial = 'Da lộn'";
                                     break;
+                                default:
+                                    break;
                             }
+
+                            switch($sortValue){
+                                case 'price-ascending':
+                                    $sql .= " ORDER BY PRODUCT.buyPrice ASC"; 
+                                    break;
+                                case 'price-descending';
+                                    $sql .= " ORDER BY PRODUCT.buyPrice DESC";
+                                    break;
+                                default:
+                                    $sql .= " ORDER BY PRODUCT.productID ASC";
+                           }
                             
-                            $sql .= " ORDER BY PRODUCT.productID ASC
-                                    OFFSET $offset ROWS
-                                    FETCH NEXT $limit ROWS ONLY";
+                            $sql .= " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY";
                             $stmt = $conn->query($sql);
                         
 
@@ -343,6 +378,7 @@
                                 while ($row = $stmt->fetch()) {
                                     $price = $row["buyPrice"];
                                     $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                                    
                                     echo '<div class="body__product col-lg-3" data-aos="fade-up" data-id="' . $row["productID"] . '" onclick="showProductDetail(this)">
                                             <div class="product__detail">
                                                 <div class="body__product-img-content">
@@ -418,54 +454,11 @@
     </body>
 
     <!-- <script src="./Javascript/collections.js" async="false"></script> -->
-    <script>
-        function showProductDetail(element) {
-            const productID = element.getAttribute('data-id');
-            window.location.href = 'productDetail.php?productID=' + productID;
-        }
 
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            var priceRange = $('input[name="price-filter"]:checked').val();
-            var stuffType = $('input[name="stuff-filter"]:checked').val();
-            var productMaterial = $('input[name="material-filter"]:checked').val();
-            
-        $('input[name="price-filter"]').change(function() {
-            priceRange  = $(this).val();
-            loadProducts(priceRange , stuffType, productMaterial);
-        });
-
-        $('input[name="stuff-filter"]').change(function() {
-            stuffType = $(this).val();
-            loadProducts(priceRange , stuffType, productMaterial);
-        });
-
-        $('input[name="material-filter"]').change(function() {
-            productMaterial = $(this).val();
-            loadProducts(priceRange , stuffType, productMaterial);
-        });
-
-        function loadProducts(priceRange , stuffType, productMaterial) {
-        var url = 'product.php?buyPrice=' + priceRange  + '&stuffType=' + stuffType + '&productMaterial=' + productMaterial;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            success: function(response) {
-                $('#product-list').html(response);
-
-                // Cập nhật URL bằng pushState
-                var stateObj = {buyPrice: priceRange , stuffType: stuffType, productMaterial: productMaterial};
-                history.pushState(stateObj, null, url);
-            }
-        });
-    }
-
-});
+<script src="./Javascript/productList.js"></script>
+<script>
+    AOS.init();
 </script>
-
-
 
 
 </html>

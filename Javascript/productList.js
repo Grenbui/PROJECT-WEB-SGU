@@ -305,3 +305,88 @@
 // document.querySelector(".Btn_above4Mil").addEventListener("click", function() {
 //     filterProductsByPrice(4000000, 5000000);
 // });
+
+
+$(document).ready(function() {
+  var priceRange = $('input[name="price-filter"]:checked').val();
+  var stuffType = $('input[name="stuff-filter"]:checked').val();
+  var productMaterial = $('input[name="material-filter"]:checked').val();
+  
+$('input[name="price-filter"]').change(function() {
+  priceRange  = $(this).val();
+  loadProducts(priceRange , stuffType, productMaterial);
+});
+
+$('input[name="stuff-filter"]').change(function() {
+  stuffType = $(this).val();
+  loadProducts(priceRange , stuffType, productMaterial);
+});
+
+$('input[name="material-filter"]').change(function() {
+  productMaterial = $(this).val();
+  loadProducts(priceRange , stuffType, productMaterial);
+});
+
+function loadProducts(priceRange , stuffType, productMaterial) {
+var url = 'product.php?buyPrice=' + priceRange  + '&stuffType=' + stuffType + '&productMaterial=' + productMaterial;
+$.ajax({
+  url: url,
+  type: 'GET',
+  success: function(response) {
+      $('#product-list').html(response);
+
+      // Cập nhật URL bằng pushState
+      var stateObj = {buyPrice: priceRange , stuffType: stuffType, productMaterial: productMaterial};
+      history.pushState(stateObj, null, url);
+  }
+});
+}
+
+
+function clearSelection(type) {
+  var radioButtons = document.querySelectorAll('.' + type + '-list input[type="radio"]');
+    for (var i = 0; i < radioButtons.length; i++) {
+     radioButtons[i].checked = false;
+    }
+    if (type === 'price') {
+      priceRange = undefined; 
+      loadProducts(priceRange, stuffType, productMaterial);
+    }
+    if(type === 'stuff'){
+      stuffType = undefined; 
+      loadProducts(priceRange, stuffType, productMaterial);
+    }
+    if(type === 'material'){
+      productMaterial = undefined;
+      loadProducts(priceRange, stuffType, productMaterial);
+    }
+}
+
+$('#clear-price-selection').click(function() {
+  clearSelection('price');
+});
+
+$('#clear-stuff-selection').click(function() {
+  clearSelection('stuff');
+});
+
+$('#clear-material-selection').click(function() {
+  clearSelection('material');
+});
+
+
+});
+
+
+
+
+function showProductDetail(element) {
+  const productID = element.getAttribute('data-id');
+  window.location.href = 'productDetail.php?productID=' + productID;
+}
+
+
+
+document.getElementById('sortBy').onchange = function() {
+  document.getElementById('sortForm').submit();
+}
