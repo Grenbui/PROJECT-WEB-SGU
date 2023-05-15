@@ -230,12 +230,7 @@
           //   }
         
           
-          $productCookieArray = array(
-            'id' => $id,
-            'name' => $product['productName'],
-            'price' => $formatted_price
-            // 'quantity' => $quantity
-        );
+         
         
             }else{
                 echo 'Không thể lấy được id của sản phẩm';
@@ -251,14 +246,23 @@
 
     <form action="" method="POST">
       <div class = "purchase-info">
-                <input type="number" min = "0" value = "1" name="quantity">
-               <button type = "submit" onclick="addToCart(<?php echo '$id' ?>)" class= "btn" name="add_to_cart">
+                <input type="number" min = "0" value = "0" name="quantity">
+               <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
                  Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
                </button>
                <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
       </div>
     </form>
-    
+    <?php
+        $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+       
+         $productCookieArray = array(
+            'id' => $id,
+            'name' => $product['productName'],
+            'price' => $formatted_price,
+            'quantity' =>  $quantity
+        );
+    ?>
         </div>
       </div>
     </div>
@@ -283,11 +287,8 @@
 </script>
 
 <script>
-        function addToCart(productId) {
-            // Lấy thông tin sản phẩm
-            // var quantity = parseInt(document.querySelector('input[name="quantity"]').value);
-                
-
+        function addToCart() {
+           
             // Kiểm tra xem cookie 'cart' đã tồn tại hay chưa
             var cartItems = [];
             if (getCookie('cart')) {
@@ -295,14 +296,21 @@
             }
 
             // Thêm sản phẩm vào giỏ hàng
-            cartItems.push(productCookieArray);
+            var product = <?php echo json_encode($productCookieArray); ?>;
+            cartItems.push(product);
+            console.log(document.cookie);
+
 
             // Lưu giỏ hàng vào cookie
             setCookie('cart', JSON.stringify(cartItems), 1);
+            
 
-            // Chuyển đến trang shopping cart
-            // window.location.href = 'shopping_cart.php';
         }
+       
+
+
+
+
 
         // Hàm lấy cookie theo tên
         function getCookie(name) {
@@ -327,7 +335,7 @@
             document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
         }
 
-      
+        console.log(document.cookie);
 
 </script>
 

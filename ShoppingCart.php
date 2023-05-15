@@ -43,8 +43,9 @@
                                 // Nếu chưa có cookie, tạo mới một mảng rỗng để lưu sản phẩm
                                 $cart_items = array();
                             }
-                            $total_price = 0;
+                           $total_price = 0;
                             foreach ($cart_items as $item) {
+                                // $total_price = $item['nonePrice'] * $item['quantity'];
                                 // $total_price = $item['price'] * $item['quantity'];
                                 echo '
                                 <div class="product-contain row align-items-center">
@@ -64,7 +65,7 @@
                                 </div>
                                 <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
                                     <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
-                                    <input type="number" pattern="\d*" min="0" step="1" value="'. "3" .'" class="qty-input">
+                                    <input type="number" pattern="\d*" min="0" step="1" value="'. $item['quantity'] .'" class="qty-input">
                                     <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
                                 </div>
     
@@ -82,70 +83,8 @@
                                 ';
                             }
                         ?>
-                        <div class="product-contain row align-items-center">
-                            <div class="product-select text-start col-1">
-                                <span><input type="checkbox"></span>
-                            </div>
-                            <div class="product-name text-center col-4">
-                                <span>
-                                    <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">Johny Classique Chelsea</p>
-                                    
-                                </span>
-                            </div>
-                            <div class="product-price text-center col-1">
-                                <span>
-                                    <p>3,050,000đ</p>
-                                </span>
-                            </div>
-                            <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
-                                <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
-                                <input type="number" pattern="\d*" min="0" step="1" value="1" class="qty-input">
-                                <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
-                            </div>
-
-                            <div class="product-cost text-center col-2">
-                                <span>
-                                    <p>3,050,000đ</p>
-                                </span>
-                            </div>
-                            <div class="product-delete-icon text-center col-2">
-                                <span>
-                                    <p><i class="fa-solid fa-trash"></i></p>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="product-contain row align-items-center">
-                            <div class="product-select text-start col-1">
-                                <span><input type="checkbox"></span>
-                            </div>
-                            <div class="product-name text-center col-4">
-                                <span>
-                                    <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">Johny Classique Chelsea</p>
-                                    
-                                </span>
-                            </div>
-                            <div class="product-price text-center col-1">
-                                <span>
-                                    <p>3,050,000đ</p>
-                                </span>
-                            </div>
-                            <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
-                                <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
-                                <input type="number" pattern="\d*" min="0" step="1" value="1" class="qty-input">
-                                <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
-                            </div>
-
-                            <div class="product-cost text-center col-2">
-                                <span>
-                                    <p>3,050,000đ</p>
-                                </span>
-                            </div>
-                            <div class="product-delete-icon text-center col-2">
-                                <span>
-                                    <p><i class="fa-solid fa-trash"></i></p>
-                                </span>
-                            </div>
-                        </div>
+                        
+                        
                     </div>
                     
                     <div class="cart-information" style="display: flex; justify-content: space-between">
@@ -232,9 +171,15 @@ qtyMinusBtn.addEventListener('click', function() {
             console.log('Product ID: ' + product.id);
             console.log('Product Name: ' + product.name);
             console.log('Product Price: ' + product.price);
-            // console.log('Product Quantity: ' + product.quantity);
+            console.log('Product Quantity: ' + product.quantity);
             console.log('--------------------------');
         }
+
+        function deleteCookie(name) {
+    // Đặt cookie với thời gian sống đã hết hạn (trừ đi một khoảng thời gian)
+    setcookie(name, '', time() - 3600, '/');
+}
+deleteCookie('cart')
 
         // Hàm lấy cookie theo tên
         function getCookie(name) {
