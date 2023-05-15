@@ -12,9 +12,7 @@
 </head>
 
 <body>
-<?php
-        include 'header.php';
-    ?>
+<?php include './header.php';?>
     <section class="page-wrapper">
         <div class="container-checkout-payment">
             <form action="#" method="post">
@@ -38,7 +36,51 @@
                         </div>
                         
                         <?php
-                            
+                            if(isset($_COOKIE['cart'])){
+                                $cart_items = json_decode($_COOKIE['cart'], true);
+                               
+                            } else {
+                                // Nếu chưa có cookie, tạo mới một mảng rỗng để lưu sản phẩm
+                                $cart_items = array();
+                            }
+                            $total_price = 0;
+                            foreach ($cart_items as $item) {
+                                // $total_price = $item['price'] * $item['quantity'];
+                                echo '
+                                <div class="product-contain row align-items-center">
+                                <div class="product-select text-start col-1">
+                                    <span><input type="checkbox"></span>
+                                </div>
+                                <div class="product-name text-center col-4">
+                                    <span>
+                                        <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $item['name'] .'</p>
+                                        
+                                    </span>
+                                </div>
+                                <div class="product-price text-center col-1">
+                                    <span>
+                                        <p>'.$item['price'].'</p>
+                                    </span>
+                                </div>
+                                <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
+                                    <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
+                                    <input type="number" pattern="\d*" min="0" step="1" value="'. "3" .'" class="qty-input">
+                                    <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
+                                </div>
+    
+                                <div class="product-cost text-center col-2">
+                                    <span>
+                                        <p>'. $total_price .'</p>
+                                    </span>
+                                </div>
+                                <div class="product-delete-icon text-center col-2">
+                                    <span>
+                                        <p><i class="fa-solid fa-trash"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+                                ';
+                            }
                         ?>
                         <div class="product-contain row align-items-center">
                             <div class="product-select text-start col-1">
@@ -176,6 +218,35 @@ qtyMinusBtn.addEventListener('click', function() {
   qtyInput.value = qty;
 });
 
+</script>
+<script>
+     // Kiểm tra xem cookie 'cart' đã tồn tại hay chưa
+     var cartItems = [];
+        if (getCookie('cart')) {
+            cartItems = JSON.parse(getCookie('cart'));
+        }
+       
+        // Hiển thị thông tin giỏ hàng
+        for (var i = 0; i < cartItems.length; i++) {
+            var product = cartItems[i];
+            console.log('Product ID: ' + product.id);
+            console.log('Product Name: ' + product.name);
+            console.log('Product Price: ' + product.price);
+            // console.log('Product Quantity: ' + product.quantity);
+            console.log('--------------------------');
+        }
+
+        // Hàm lấy cookie theo tên
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(';');
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split('=');
+                if (name === cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
 </script>
 
 

@@ -23,7 +23,8 @@
     
 </head>
 <body>
-    <?php include 'header.php'; ?>
+
+    <?php include './header.php'; ?>
 
     <section id="breadcrump-wrapper">
         <div class="breadcrumb-overlay"></div>
@@ -83,6 +84,7 @@
         </div> -->
         <?php
         include './ConnectDatabase/connectDatabase.php';
+       
      
          try {
             
@@ -92,6 +94,12 @@
                 $productImageSQL = "SELECT productImageURL, isMainImage FROM PRODUCT_IMAGE WHERE productID = '$id'";
                 $stmt = $conn->query($productImageSQL);
                 $productImages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                $productSQL = "SELECT productName, buyPrice, productDescription, quantityInStock FROM PRODUCT WHERE productID = '$id'";
+                $stmt = $conn->query($productSQL);
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                
                 
                 if (count($productImages) > 0) {
                     echo '<div class="product-imgs">';
@@ -122,9 +130,7 @@
    
                 echo '<div class = "product-content">';
    
-                $productSQL = "SELECT productName, buyPrice, productDescription, quantityInStock FROM PRODUCT WHERE productID = '$id'";
-                $stmt = $conn->query($productSQL);
-                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                
    
                 if(count($product) > 0){
                    $price = $product['buyPrice'];
@@ -207,41 +213,57 @@
            // </div>';
    
                
-   
-   
-               
+          //  if (isset($_POST['quantity'])) {
+          //   $quantity = $_POST['quantity'];
+        
+          //   // Thực hiện các xử lý với $quantity ở đây
+          //   $productCookieArray = array(
+          //     'id' => $id,
+          //     'name' =>  $product['productName'],
+          //     'price' => $formatted_price,
+          //     'quantity' => $quantity
+              
+          // );  
+          //   } else {
+          //   // Xử lý khi không tìm thấy phần tử 'quantity'
+          //      echo 'Không tìm thấy giá trị quantity';
+          //   }
+        
+          
+          $productCookieArray = array(
+            'id' => $id,
+            'name' => $product['productName'],
+            'price' => $formatted_price
+            // 'quantity' => $quantity
+        );
+        
             }else{
                 echo 'Không thể lấy được id của sản phẩm';
             }
-            
-            
 
            
-
-
          } catch (PDOException $e) {
              echo "Connection failed: " . $e->getMessage();
          }
 
        
     ?>
-    <form action="./test.php" method="post">
+
+    <form action="" method="POST">
       <div class = "purchase-info">
-               <input type="number" min = "0" value = "1">
-               <button type = "button" class = "btn" name="add_to_cart">
+                <input type="number" min = "0" value = "1" name="quantity">
+               <button type = "submit" onclick="addToCart(<?php echo '$id' ?>)" class= "btn" name="add_to_cart">
                  Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
                </button>
                <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
       </div>
     </form>
     
-    
         </div>
       </div>
     </div>
    
-
-
+    
    
     <?php include 'footer.php';?>
 </body>
@@ -258,6 +280,55 @@
             span.classList.add('selected-color');
         });
     });
+</script>
+
+<script>
+        function addToCart(productId) {
+            // Lấy thông tin sản phẩm
+            // var quantity = parseInt(document.querySelector('input[name="quantity"]').value);
+                
+
+            // Kiểm tra xem cookie 'cart' đã tồn tại hay chưa
+            var cartItems = [];
+            if (getCookie('cart')) {
+                cartItems = JSON.parse(getCookie('cart'));
+            }
+
+            // Thêm sản phẩm vào giỏ hàng
+            cartItems.push(productCookieArray);
+
+            // Lưu giỏ hàng vào cookie
+            setCookie('cart', JSON.stringify(cartItems), 1);
+
+            // Chuyển đến trang shopping cart
+            // window.location.href = 'shopping_cart.php';
+        }
+
+        // Hàm lấy cookie theo tên
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(';');
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split('=');
+                if (name === cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        // Hàm set cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
+        }
+
+      
+
 </script>
 
 </html>

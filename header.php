@@ -81,7 +81,7 @@
                             ?>
                             
                             <li class="header-top-navbar-item">
-                                <a href="" class="header-top-navbar-link">
+                                <a href="./ShoppingCart.php" class="header-top-navbar-link">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </a>
                             </li>
@@ -176,5 +176,5 @@
     
 </body>
 <script src="./Javascript/indexJS.js"></script>
-<script src="./Javascript/headerScroll.js"></script>
+
 </html>
