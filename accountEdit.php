@@ -25,7 +25,7 @@
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
 <body>
-    <?php include 'connectectDatabase.php' ?>
+    <?php include './ConnectDatabase/connectDatabase.php' ?>
     <?php include 'header.php'; ?>
 
     <section class="user_container">
