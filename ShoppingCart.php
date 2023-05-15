@@ -21,7 +21,7 @@
                 <div class="container form-checkout">
                     <div class="address-receive">
                         <div class="address-header">
-                            <i class="fa-solid fa-location-dot" style="margin-right: 9px;"></i>Địa chỉ nhân hàng
+                            <i class="fa-solid fa-location-dot" style="margin-right: 9px;"></i>Địa chỉ nhận hàng
                         </div>
                         <div class="address customer">
 
@@ -157,6 +157,26 @@
     <?php include 'footer.php' ?>
 
 </body>
+<script>
+const qtyInput = document.querySelector('.qty-input');
+const qtyPlusBtn = document.querySelector('.qty-plus');
+const qtyMinusBtn = document.querySelector('.qty-minus');
+
+
+qtyPlusBtn.addEventListener('click', function() {
+  let qty = parseInt(qtyInput.value);
+  qty += 1;
+  qtyInput.value = qty;
+});
+
+
+qtyMinusBtn.addEventListener('click', function() {
+  let qty = parseInt(qtyInput.value);
+  qty = Math.max(qty - 1, 0);
+  qtyInput.value = qty;
+});
+
+</script>
 
 
 </html>

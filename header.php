@@ -60,10 +60,10 @@
                                     // var_dump($_SESSION);
                                     echo "<li class='header-top-navbar-item'>
                                             <a href='' class='header-top-navbar-link'>
-                                                <i class='fa-solid fa-user'></i>" .$userName. "</a>
+                                                <i class='fa-solid fa-user' style='padding-right: 8px;'></i>" .$userName. "</a>
                                                 <ul class='subnav-dropdown-menu'>
                                                     <li class='subnav-item'>
-                                                        <a href='' class='subnav-item-link'>Hồ sơ người dùng</a>
+                                                        <a href='./accountEdit.php' class='subnav-item-link'>Hồ sơ người dùng</a>
                                                     </li>
                                                     <li class='subnav-item'>
                                                         <a href='./logOut.php' class='subnav-item-link'>Đăng xuất</a>
