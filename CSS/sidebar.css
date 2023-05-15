@@ -415,9 +415,9 @@ a:hover {
   }
  .date_form {
     padding: 5px;
-    font-size: 10px;
+    font-size: 16px;
     margin-right: 8px;
-    width: 96px;
+    width: 150px;
  }
  .icon_form {
     border: none;
@@ -429,33 +429,40 @@ a:hover {
  .header_form {
     display: flex;
  }
+ 
 .header_form_2,
 .header_form_1 {
     font-size: 16px;
     margin-bottom: 5px;
 }
 .header_form_2 {
-    margin-left: 152px;
+    margin-left: 257px;
 }
 .date_form::placeholder {
     color: #999;
     font-style: italic;
   }
+  #input_type {
+    border-radius: 5px;
+  }
+  #input_type,
   select {
     background-color: #fff;
     color: #000;
-    width: 200px;
+    padding: 5px;
     height: 30px;
     border-width: 1px;
     border-style: solid;
     border-color: #ccc;
+    font-size: 16px !important;
   }
   
   option {
     font-size: 14px;
   }
+  th,
   td {
-    font-size: 16px;
+    font-size: 18px;
   }
   td a,
   td a:hover {
@@ -464,4 +471,45 @@ a:hover {
  .fa-lock-open {
     font-size: 1.5rem; /* kích thước của icon */
     color: green; /* màu sắc của icon */
+  }
+  .btn_add{
+    padding:0 !important;
+    font-size: 16px;
+  }
+  /* modal */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal_notify {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .modal_buttons {
+    margin-top: 20px;
+  }
+  
+  button {
+    margin: 0 10px;
+  }
+  #cancelDelete,
+  #confirmDelete {
+    padding: 5px 15px;font-size: 16px; cursor: pointer;
+  }
+  #cancelDelete:hover,
+  #confirmDelete:hover {
+    opacity: 0.7;
   }

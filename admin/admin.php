@@ -5,13 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Web-index/font/fontawesome-free-6.2.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/editproduct.css">
   <link rel="stylesheet" href="../CSS/sidebar.css">
     <link rel="stylesheet" href="../CSS/base.css">
     <link rel="stylesheet" href="../Font/fontawesome-free-6.2.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../Framework/bootstrap/css.css">
+    <link rel="stylesheet" href="../Framework/bootstrap/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <title>Total</title>
 </head>
 <body>
+
     <nav class="sidebar">
         <div class="logo">
             <a href="">
@@ -19,33 +22,28 @@
             </a>
         </div>
         <ul class="sidebar_list">
-            <li class="sidebar_list-item active_list">
-                <a href="sidebar.php" class="item">
+            <li class="sidebar_list-item active_list" onclick="clickList(0)">
+                <a href="admin.php?page=0" class="item">
                   <i class="fa-solid fa-house"></i>
                     <span> Quản lý hóa đơn</span>
                 </a>
             </li>
-            <li class="sidebar_list-item">
-                <a href="sidebar.php?page=customer" class="item">
+            <li class="sidebar_list-item" onclick="clickList(1)">
+                <a href="admin.php?page=1" class="item">
                   <i class="fa-solid fa-users"></i>
                     <span>Quản lý khách hàng</span>
                 </a>
             </li>
-            <li class="sidebar_list-item ">
-                <a href="" class="item">
+            <li class="sidebar_list-item " onclick="clickList(2)">
+                <a href="admin.php?page=2" class="item">
                   <i class="fa-brands fa-product-hunt"></i>
                     <span>Danh sách sản phẩm</span>
                 </a>
             </li>
-            <li class="sidebar_list-item">
-                <a href="" class="item">
-                  <i class="fa-solid fa-spinner"></i>
-                   <span>Danh sách sản phẩm đang xử lý</span>
-                </a>
-            </li>
+           
         </ul>
     </nav>
-    <section class="main-content">
+    <section class="main-content">  
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
@@ -83,47 +81,49 @@
             </div>
         </div>
         <div class="content_iner">
-    <div class="header_form">
-        <div class="header_form_1">Lọc theo ngày đặt</div>
-        <div class="header_form_2">Lọc theo tỉnh/thành</div>
-    </div>
-    
-    <div style="width:50%">
-        <?php 
-        require_once('connectPHP.php');
-             // Thực hiện truy vấn SQL
-             $sql = "SELECT DISTINCT city FROM CUSTOMER;";
-             $stmt = $conn->prepare($sql);
-            // $stmt->execute();
-             $cities = $stmt->fetchAll();
-        ?>
- <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  <div style="display: flex; justify-content: space-between;">
-    <div class="input-group mb-3" >
-      <input type="date" class="date_form" placeholder="Từ ngày" aria-label="Từ ngày" name="start_date">
-      <span class="icon_form"><i class="fa-solid fa-arrow-right"></i></span>
-      <input type="date" class="date_form" placeholder="Đến ngày" aria-label="Đến ngày" name="end_date">
-    </div>
-    <div class="input-group mb-3" >
-      <select name="province" class="form-select">
-        <?php foreach($cities as $city) { ?>
-          <option value="<?php echo $city['city']; ?>"><?php echo $city['city']; ?></option>
-        <?php } ?>
-      </select>
-      <button class="btn btn-primary" type="submit" name="submit">Lọc</button>
-    </div>
-  </div>
-</form>
-    </div>
+
+       
             <?php 
-            if(empty($_SERVER['QUERY_STRING']) == 1){
+            if(isset($_GET['page'])==0)
+            include 'order.php';
+            else if($_GET['page'] == 0){
+                
                 include 'order.php';
-            }else if ($_GET['page'] == "customer"){
+            }else if ($_GET['page'] == 1){
                 include 'customer.php';
+            }else if ($_GET['page'] == 2){
+                include 'product.php';
+            }
+            else if ($_GET['page'] == "edit"){
+                $productID = $_GET['productID'];
+                include 'editproduct.php' ;
+            }
+            else if ($_GET['page'] == "add"){
+                include 'addproduct.php' ;
             }
             
             ?>
     </section>
+    <script>
+        
+  
+        var list = document.querySelectorAll('.sidebar_list-item');
+        function clickList(index){
+            console.log(index)
+            list.forEach((e,key)=>{
+            e.classList.remove('active_list');
+            if(key==index)
+            e.classList.add('active_list')
+        })
+        }
+    </script>
+
+    <?php
+    if (isset($_GET['page']))
+    echo '<script>clickList('.$_GET['page'].')</script>';
+    else echo '<script>clickList(0)</script>';
+    ?>
 </body>
+
 </html>
 

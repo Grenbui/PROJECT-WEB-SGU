@@ -24,9 +24,9 @@
                     ADMIN PANEL
                 </div>
 
-                <div class="col-lg-12 login-form">
-                    <div class="col-lg-12 login-form">
-                        <form>
+                <div class="col-lg-3 login-form">
+                    <div class="col-lg-3 login-form">
+                        
                             <div class="form-group">
                                 <label class="form-control-label">USERNAME</label>
                                 <input type="text" class="form-control">
@@ -41,17 +41,31 @@
                                     <!-- Error Message -->
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+                                    <button onclick="checkLogin()"  class="btn btn-outline-primary">LOGIN</button>
                                 </div>
                             </div>
-                        </form>
+                       
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-2"></div>
             </div>
         </div>
 
+<script>
+    let usernmae = document.querySelectorAll('.form-control');
+    let btnLogin = document.querySelector('.btn-outline-primary');
+    const userAdmin = "admin";
+    const pwAdmin = "admin";
+    function checkLogin() {
+      
+  if (usernmae[0].value === userAdmin && usernmae[1].value === pwAdmin) {
+    window.location.assign('admin.php');
+  } else {
+    alert("Đăng nhập sai tài khoản");
+  }
+}
 
+</script>
 
 
 

@@ -2,9 +2,8 @@
   require('connectPHP.php');
      // Thực hiện truy vấn SQL
      $sql ="SELECT * FROM CUSTOMER";
-     $stmt = $conn->prepare($sql);  
-     $stmt->execute();
-     $customers = $stmt->fetchAll();
+     $customers = mysqli_query($conn,$sql);
+ 
 ?>
 
 <table>
@@ -22,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($customers as $customer) { ?>
+    <?php while ( $customer = mysqli_fetch_array($customers)) { ?>
       <tr>
         <td><?php echo $customer['customerID']; ?></td>
         <td><?php echo $customer['customerName']; ?></td>
@@ -33,11 +32,11 @@
         <td><?php echo $customer['country']; ?></td>
         <td><?php echo $customer['customerStatus'] ? 'Active' : 'Inactive'; ?></td>
         <td style="display: flex;justify-content: space-around;"> 
-            <a href="edit_customer.php?id=<?php echo $customer['customerID']; ?>"><i class="fa-solid fa-edit"></i></a>
+           
             <?php 
           echo "<form method='post'>
-          <button type='submit' name='status' value='" . $customer['customerID'] . "|" . $customer['customerStatus'] . "'>
-              <i class='fa " . ($customer['customerStatus'] ? 'fa-lock' : 'fa-lock-open') . "'></i>
+          <button id='status-btn'  type='submit' name='status' value='" . $customer['customerID'] . "|" . $customer['customerStatus'] . "'>
+              <i  class='fa " . ($customer['customerStatus'] ? 'fa-lock' : 'fa-lock-open') . "'></i>
           </button>
       </form>
       ";
@@ -54,44 +53,19 @@
     $statusArr = explode('|', $status);
     $customerID = $statusArr[0];
     $customerStatus = $statusArr[1];
-
-    // chuyển giá trị $customerStatus thành kiểu boolean
     $customerStatus = ($customerStatus === "1") ? true : false;
-
-    // kiểm tra giá trị $customerID và $customerStatus
-    if (!$customerID || !is_bool($customerStatus)) {
-        echo "Giá trị không hợp lệ";
-        return;
-    }
-
-    // thực hiện truy vấn
-    if(!$customerStatus){
-        $sql = "UPDATE CUSTOMER SET customerStatus = '1' WHERE customerID = '".$customerID."'";
-        echo "Bằng 0, đã update lại = 1";
-        echo "</br> $customerID";
-    }
-    else {
-        $sql = "UPDATE CUSTOMER SET customerStatus = '0' WHERE customerID = '".$customerID."'";
-        echo "Bằng 1, đã update lại = 0";
-        echo "</br> $customerID";
-    }
-echo $sql;
-    $stmt = $conn->query($sql); 
-    $stmt->execute(); 
-
-    if ($stmt->rowCount() > 0) {
-        echo ' </br> Cập nhật thành công';
-    } else {
-        echo 'Không có bản ghi nào được cập nhật';
-    }
+    if(!$customerStatus)
+        $sql = "UPDATE CUSTOMER SET customerStatus = 1 WHERE customerID = '".$customerID."'";
+    else 
+        $sql = "UPDATE CUSTOMER SET customerStatus = 0 WHERE customerID = '".$customerID."'";
+    $stmt = mysqli_query($conn, $sql);
 }
                                           
      ?>
   </tbody>
 </table>
-<script>
 
-   
 
-  
-</script>
+
+
+
