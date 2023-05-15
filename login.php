@@ -62,7 +62,7 @@
                 try {
                
                     
-                    $stmt = $conn->prepare("SELECT customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail= :email");
+                    $stmt = $conn->prepare("SELECT customerID, customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail= :email");
                     $stmt->execute(array(':email' => $email));
                     $user = $stmt->fetch();
                     
@@ -72,6 +72,8 @@
                         session_start();
                         $_SESSION['loggedIn'] = true;
                         $_SESSION['customerName'] = $user['customerName'];
+                        $_SESSION['customerEmail'] = $user['customerEmail'];
+                        $_SESSION['customerID'] = $user['customerID'];
                         var_dump($_SESSION);
                         echo "<script>alert('Đăng nhập thành công!');</script>";
                         $result = true;

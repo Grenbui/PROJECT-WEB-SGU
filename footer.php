@@ -99,14 +99,16 @@
                                 <h4 class="footer-title">
                                     ĐĂNG KÝ NHẬN TIN TỪ POUR HOMME
                                 </h4>
-                                <form accept-charset="UTF-8" action="/account/contact" class="contact-form" method="post">
+                                <form accept-charset="UTF-8" action="./index.php" class="contact-form" method="post">
                                     <input name="form_type" type="hidden" value="customer">
                                     <input name="utf8" type="hidden" value="✓">
                                     <div class="input-group">
                                         <input type="email" value="" placeholder="	Nhập email của bạn tại đây" name="contact[email]" id="Email" class="input-group-field" aria-label="email@example.com">
                                         <input type="hidden" name="contact[tags]" value="newsletter">
                                         <span class="input-group-btn">
-                                            <button class="btn-more-white" type="submit" name="subscribe" id="subscribe" value="GỬI">Đăng ký</button>
+                                            <a href="./index.php" class="">
+                                                <button class="btn-more-white" type="submit" name="subscribe" id="subscribe" value="GỬI">Đăng ký</button>
+                                            </a>
                                         </span>
                                     </div>
                                 </form>

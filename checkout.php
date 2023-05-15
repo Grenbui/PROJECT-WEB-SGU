@@ -42,37 +42,122 @@
                         </div>
                     </div>
 
+                   
                     <div class="product-checkout ">
                         <div class="product-header row">
-                            <div class="text-start col-6">Sản phẩm</div>
+                            <div class="text-start col-5">Sản phẩm</div>
                             <div class="text-center col-2">Đơn giá</div>
-                            <div class="text-center col-1">Số lượng</div>
-                            <div class="text-end col-3">Thành tiền</div>
+                            <div class="text-center col-2">Số lượng</div>
+                            <div class="text-end col-2">Thành tiền</div>
                         </div>
 
-                        <div class="product-contain row align-items-center">
-                            <div class="product-name text-start col-6">
-                                <span>
-                                    <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">Johny Classique Chelsea</p>
+                        <?php
+                        include './ConnectDatabase/connectDatabase.php';
+                        $stmt = $conn->prepare("
+                                SELECT DISTINCT ci.cartItemID, p.productName, ci.quantity, p.buyPrice, p.productName, pi.productImageURL, pi.isMainImage, p.productID
+                                FROM CART_ITEMS ci
+                                JOIN PRODUCT p ON ci.productID = p.productID
+                                JOIN PRODUCT_IMAGE pi ON p.productID = pi.productID
+                                WHERE ci.cartID IN (SELECT cartID FROM CART WHERE customerID = :customerID AND isMainImage = 1 AND selected = 1)
 
-                                </span>
-                            </div>
-                            <div class="product-price text-center col-2">
-                                <span>
-                                    <p>3,050,000đ</p>
-                                </span>
-                            </div>
-                            <div class="product-quality text-center col-1">
-                                <span>
-                                    <p>1</p>
-                                </span>
-                            </div>
-                            <div class="product-cost text-end col-3">
-                                <span>
-                                    <p>3,050,000đ</p>
-                                </span>
-                            </div>
-                        </div>
+                               ");
+                                $stmt->bindParam(':customerID', $_SESSION['customerID']);
+                                $stmt->execute();
+
+                                $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
+                                $stmt2->bindParam(':customerID', $_SESSION['customerID']);
+                                $stmt2->execute();
+                                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+                                $customerName = $row2['customerName'];
+                                $address = $row2['addressLine1'];
+                                $phoneNumber = $row2['phoneNumber'];
+
+
+                                $newOrderID = uniqid('O');
+                                $orderDate = date('Y-m-d');
+                                $shippedDate = '';
+
+                                $stmt_insert = $conn->prepare("INSERT INTO ORDERS VALUES (:newOrderID, :orderDate, :shippedDate, :status, '',  :customerID, '')");
+                                $stmt_insert->bindParam(':newOrderID', $newOrderID);
+                                $stmt_insert->bindParam(':orderDate', $orderDate);
+                                $stmt_insert->bindParam(':shippedDate', $shippedDate);
+                                $stmt_insert->bindParam(':status', $status);
+                                $stmt_insert->bindParam(':customerID', $_SESSION['customerID']);
+                                $stmt_insert->execute();
+
+
+                                
+                                if($shippedDate !== ''){
+                                    $status = "Chưa giao hàng";
+                                }else{
+                                    $status = "Đã giao hàng";
+                                }
+
+
+
+                                $countItemCard = 0;
+                                $sum = 0;
+                                $orderLineNumber = 0;
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    $cartItemID = $row['cartItemID'];
+                                    $productName = $row['productName'];
+                                    $quantity = $row['quantity'];
+                                    $price = $row['buyPrice'];
+                                    $total_price = $price * $quantity;
+                                    $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                                    $formatted_price1 = number_format($total_price, 0, ',', ',') . '₫';
+                                    
+                                   
+                                    
+                                    
+                                    $image = $row['productImageURL'];
+                                    $countItemCard++;
+                                    $sum += $total_price;
+
+                                    $newOrderDetailID = uniqid('OD');
+                                    $productID = $row['productID'];
+                                    $orderLineNumber++;
+
+                                    $stmt_insert_OD = $conn->prepare("INSERT INTO ORDER_DETAIL VALUES (:newOrderDetailID, :newOrderID, :productID, :quantity, :price, :orderLineNumber)");
+                                    $stmt_insert_OD->bindParam(':newOrderDetailID', $newOrderDetailID);
+                                    $stmt_insert_OD->bindParam(':newOrderID', $newOrderID);
+                                    $stmt_insert_OD->bindParam(':productID', $productID);
+                                    $stmt_insert_OD->bindParam(':quantity', $quantity);
+                                    $stmt_insert_OD->bindParam(':price', $price);
+                                    $stmt_insert_OD->bindParam(':orderLineNumber', $orderLineNumber);
+                                    $stmt_insert_OD->execute();
+
+                                   echo '
+                                   <div class="product-contain row align-items-center">
+                                   
+                                   <div class="product-name text-center col-5">
+                                       <span>
+                                           <p><img src="'. $image .'" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $productName .'</p>
+                                           
+                                       </span>
+                                   </div>
+                                   <div class="product-price text-center col-2">
+                                       <span>
+                                           <p>'.$formatted_price.'</p>
+                                       </span>
+                                   </div>
+                                   <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
+                                       '.$quantity.'
+                                   </div>
+       
+                                   <div class="product-cost text-end col-2">
+                                       <span>
+                                           <p>'. $formatted_price1 .'</p>
+                                       </span>
+                                   </div>
+                                   
+                               </div>
+                                   ';
+                                }
+                    ?>
+
+
                     </div>
 
                     <div class="checkout-method">
@@ -164,14 +249,31 @@
                                 <div class="total-cost">Tổng thanh toán: </div>
                             </div>
                             <div class="cost-col2">
-                                <div class="product-cost-num">3,050,000đ</div>
+                                <div class="product-cost-num"><?php echo  number_format($sum, 0, ',', ',') . '₫'; ?></div>
                                 <div class="shipping-cost-num">30,000đ</div>
-                                <div class="total-cost-num">3,080,000đ</div>
+                                <div class="total-cost-num"><?php echo number_format($sum + 30000, 0, ',', ',') . '₫'; ?></div>
                             </div>
                         </div>
+                        <form action="" method="post">
                         <div class="checkout-btn">
                             <button type="submit" name="payment">Đặt hàng</button>
                         </div>
+                        </form>
+                        <?php
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                $checkNum = uniqid('PAY');
+                                $paymentDate = date('Y-m-d');;
+                                $amount = $sum + 30000;
+
+                                $stmt_insert_Payment = $conn->prepare("INSERT INTO PAYMENT VALUES(:customerID, :checkNum, :paymentDate, :amount)");
+                                $stmt_insert_Payment->bindParam(':customerID',  $_SESSION['customerID']);
+                                $stmt_insert_Payment->bindParam(':checkNum', $checkNum);
+                                $stmt_insert_Payment->bindParam(':paymentDate', $paymentDate);
+                                $stmt_insert_Payment->bindParam(':amount', $amount);
+                                $stmt_insert_Payment->execute();
+                            }
+                        ?>
+                        
                     </div>
                 </div>
             </form>

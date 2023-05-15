@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
 <?php include './header.php';?>
     <section class="page-wrapper">
         <div class="container-checkout-payment">
@@ -35,55 +36,84 @@
                             <div class="text-center col-2">Xóa sản phẩm</div>
                         </div>
                         
-                        <?php
-                            if(isset($_COOKIE['cart'])){
-                                $cart_items = json_decode($_COOKIE['cart'], true);
-                               
-                            } else {
-                                // Nếu chưa có cookie, tạo mới một mảng rỗng để lưu sản phẩm
-                                $cart_items = array();
-                            }
-                           $total_price = 0;
-                            foreach ($cart_items as $item) {
-                                // $total_price = $item['nonePrice'] * $item['quantity'];
-                                // $total_price = $item['price'] * $item['quantity'];
-                                echo '
-                                <div class="product-contain row align-items-center">
-                                <div class="product-select text-start col-1">
-                                    <span><input type="checkbox"></span>
-                                </div>
-                                <div class="product-name text-center col-4">
-                                    <span>
-                                        <p><img src="./Image/boots/Johny Classique Chelsea1.webp" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $item['name'] .'</p>
-                                        
-                                    </span>
-                                </div>
-                                <div class="product-price text-center col-1">
-                                    <span>
-                                        <p>'.$item['price'].'</p>
-                                    </span>
-                                </div>
-                                <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
-                                    <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
-                                    <input type="number" pattern="\d*" min="0" step="1" value="'. $item['quantity'] .'" class="qty-input">
-                                    <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
-                                </div>
-    
-                                <div class="product-cost text-center col-2">
-                                    <span>
-                                        <p>'. $total_price .'</p>
-                                    </span>
-                                </div>
-                                <div class="product-delete-icon text-center col-2">
-                                    <span>
-                                        <p><i class="fa-solid fa-trash"></i></p>
-                                    </span>
-                                </div>
-                            </div>
-                                ';
-                            }
-                        ?>
                         
+                           <?php include './ConnectDatabase/connectDatabase.php';
+                                $stmt = $conn->prepare("
+                                SELECT DISTINCT ci.cartItemID, p.productName, ci.quantity, p.buyPrice, p.productName, pi.productImageURL, pi.isMainImage
+                                FROM CART_ITEMS ci
+                                JOIN PRODUCT p ON ci.productID = p.productID
+                                JOIN PRODUCT_IMAGE pi ON p.productID = pi.productID
+                                WHERE ci.cartID IN (SELECT cartID FROM CART WHERE customerID = :customerID AND isMainImage = 1)
+
+                               ");
+                                $stmt->bindParam(':customerID', $_SESSION['customerID']);
+                                $stmt->execute();
+
+                                $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
+                                $stmt2->bindParam(':customerID', $_SESSION['customerID']);
+                                $stmt2->execute();
+                                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+                                $customerName = $row2['customerName'];
+                                $address = $row2['addressLine1'];
+                                $phoneNumber = $row2['phoneNumber'];
+
+
+                                $countItemCard = 0;
+                                $sum = 0;
+
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    $cartItemID = $row['cartItemID'];
+                                    $productName = $row['productName'];
+                                    $quantity = $row['quantity'];
+                                    $price = $row['buyPrice'];
+                                    $total_price = $price * $quantity;
+                                    $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                                    $formatted_price1 = number_format($total_price, 0, ',', ',') . '₫';
+                                    
+                                  
+                                    
+                                    
+                                    $image = $row['productImageURL'];
+                                    $countItemCard++;
+                                    $sum += $total_price;
+                                   echo '
+                                   <div class="product-contain row align-items-center">
+                                   <div class="product-select text-start col-1">
+                                       <span><input type="checkbox" data-cart-item-id1="' . $cartItemID .'"></span>
+                                   </div>
+                                   <div class="product-name text-center col-4">
+                                       <span>
+                                           <p><img src="'. $image .'" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $productName .'</p>
+                                           
+                                       </span>
+                                   </div>
+                                   <div class="product-price text-center col-1">
+                                       <span>
+                                           <p>'.$formatted_price.'</p>
+                                       </span>
+                                   </div>
+                                   <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
+                                       <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
+                                       <input type="number" pattern="\d*" min="0" step="1" value="'. $quantity .'" class="qty-input">
+                                       <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
+                                   </div>
+       
+                                   <div class="product-cost text-center col-2">
+                                       <span>
+                                           <p>'. $formatted_price1 .'</p>
+                                       </span>
+                                   </div>
+                                   <div class="product-delete-icon text-center col-2" >
+                                       <span>
+                                           <p><i class="fa-solid fa-trash" data-cart-item-id="' . $cartItemID .'"></i></p>
+                                       </span>
+                                   </div>
+                               </div>
+                                   ';
+                                }
+                           ?> 
+                         
                         
                     </div>
                     
@@ -93,18 +123,20 @@
                             <div class="product-contain row align-items-center">
                                 <div class="ship-information text-start">
                                     <p>
-                                        <span>Họ và tên: </span> Huỳnh Thị Tuyết Ngọc
+                                        <span>Họ và tên: </span> <?php echo $customerName?>
                                     </p>
                                     <p>
-                                        <span>Địa chỉ: </span> 217/32/9 Bà Hom Phường 13 Quận 6
+                                        <span>Địa chỉ: </span> <?php echo  $address?>
                                     </p>
                                     <p>
-                                        <span>Số điện thoại: </span>0899307672
+                                        <span>Số điện thoại: </span><?php echo $phoneNumber?>
                                     </p>
                                     
                                 </div>  
                                 <div class="ship-information text-center">
-                                    <button class="btn">Thay đổi địa chỉ giao hàng</button>
+                                    <a href="./addressEdit.php" class="">
+                                        <button class="btn">Thay đổi địa chỉ giao hàng</button>
+                                    </a>
                                 </div>  
                             </div>
                         </div>
@@ -113,16 +145,19 @@
                             <div class="product-header row text-bold" style="margin-bottom: 10px; font-size: 18px">Thông tin thanh toán </div>
                             <div class="product-contain row align-items-center">
                                  <div class="payment-information text-start">
-                                    <p><span>Số lượng sản phẩm: </span> 3</p>
+                                    <p><span>Số lượng sản phẩm: </span> <?php echo $countItemCard?></p>
                                 </div>
                                 <div class="payment-information text-start">
-                                    <p><span>Tạm tính: </span> 1,000,000d</p>
+                                    <p><span>Tạm tính: </span><?php echo number_format($sum, 0, ',', ',') . '₫'?></p>
                                 </div>
                                 <div class="payment-information text-start">
-                                    <p><span>Tổng tiền: </span> 1,000,000d</p>
+                                    <p><span>Tổng tiền: </span><?php echo number_format($sum, 0, ',', ',') . '₫'?> </p>
                                 </div>
                                 <div class="payment-information text-center">
-                                    <button class="btn">Mua hàng</button>
+                                   
+                                         <button type="submit" class="btn buyProductBtn">Mua hàng</button>
+                                    
+
                                 </div>
                             </div>
                         </div>
@@ -159,40 +194,63 @@ qtyMinusBtn.addEventListener('click', function() {
 
 </script>
 <script>
-     // Kiểm tra xem cookie 'cart' đã tồn tại hay chưa
-     var cartItems = [];
-        if (getCookie('cart')) {
-            cartItems = JSON.parse(getCookie('cart'));
-        }
-       
-        // Hiển thị thông tin giỏ hàng
-        for (var i = 0; i < cartItems.length; i++) {
-            var product = cartItems[i];
-            console.log('Product ID: ' + product.id);
-            console.log('Product Name: ' + product.name);
-            console.log('Product Price: ' + product.price);
-            console.log('Product Quantity: ' + product.quantity);
-            console.log('--------------------------');
-        }
-
-        function deleteCookie(name) {
-    // Đặt cookie với thời gian sống đã hết hạn (trừ đi một khoảng thời gian)
-    setcookie(name, '', time() - 3600, '/');
-}
-deleteCookie('cart')
-
-        // Hàm lấy cookie theo tên
-        function getCookie(name) {
-            var cookieArr = document.cookie.split(';');
-            for (var i = 0; i < cookieArr.length; i++) {
-                var cookiePair = cookieArr[i].split('=');
-                if (name === cookiePair[0].trim()) {
-                    return decodeURIComponent(cookiePair[1]);
-                }
+    // Hàm xóa dữ liệu
+    function deleteCartItem(cartItemID) {
+        // Gửi yêu cầu xóa dữ liệu thông qua Ajax
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "delete_cart_item.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Xử lý kết quả trả về nếu cần thiết
+                // Ví dụ: Cập nhật giao diện sau khi xóa thành công
+                // Ví dụ: Refresh lại trang để cập nhật dữ liệu mới
+                location.reload(); // Refresh lại trang
             }
-            return null;
-        }
+        };
+        xhr.send("cartItemID=" + cartItemID);
+    }
+
+    // Gán sự kiện click vào các thẻ có thuộc tính "data-cart-item-id"
+    var deleteIcons = document.querySelectorAll("[data-cart-item-id]");
+    for (var i = 0; i < deleteIcons.length; i++) {
+        deleteIcons[i].addEventListener("click", function() {
+            var cartItemID = this.getAttribute("data-cart-item-id");
+            deleteCartItem(cartItemID);
+        });
+    }
 </script>
+<script>
+    var checkboxes = document.querySelectorAll('.product-select input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            var cartItemID = this.dataset.cartItemId1;
+            var selected = this.checked ? 1 : 0;
+
+            // Gửi yêu cầu cập nhật dữ liệu qua Ajax
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'update_selected.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Xử lý kết quả trả về (nếu cần)
+                }
+            };
+            xhr.send('cartItemID=' + cartItemID + '&selected=' + selected);
+        });
+
+        
+    });
+</script>
+
+<script>
+    var button = document.querySelector('.buyProductBtn');
+button.addEventListener('click', function() {
+    window.location.href = './checkout.php';
+});
+
+</script>
+
 
 
 </html>

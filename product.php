@@ -370,6 +370,7 @@
                            }
                             
                             $sql .= " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY";
+                            // $sql .= " LIMIT $limit OFFSET $offset";
                             $stmt = $conn->query($sql);
                         
 

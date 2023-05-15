@@ -23,7 +23,7 @@
     
 </head>
 <body>
-
+  
     <?php include './header.php'; ?>
 
     <section id="breadcrump-wrapper">
@@ -244,8 +244,18 @@
        
     ?>
 
-    <form action="" method="POST">
+
+    <!-- <form action="./ShoppingCart.php" method="post">
       <div class = "purchase-info">
+                <input type="number" min = "0" value = "0" name="quantity">
+               <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
+                 Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
+               </button>
+              
+      </div>
+    </form> -->
+    <form action="" method="post">
+      <div class = "new">
                 <input type="number" min = "0" value = "0" name="quantity">
                <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
                  Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
@@ -253,21 +263,60 @@
                <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
       </div>
     </form>
-    <?php
-        $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
-       
-         $productCookieArray = array(
-            'id' => $id,
-            'name' => $product['productName'],
-            'price' => $formatted_price,
-            'quantity' =>  $quantity
-        );
-    ?>
+    
         </div>
       </div>
     </div>
    
+    <?php
+      
+    //    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    //        $quantity =  $_POST['quantity'] ;
+    //    }else{
+    //     $quantity =1;
+    //    }
+    //    $productCookieArray = array(
+    //        'id' => $id,
+    //        'name' => $product['productName'],
+    //        'price' => $formatted_price,
+    //        'quantity' =>  $quantity
+    //    );
+   
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true){
+            if(isset($_POST['add_to_cart'])){
+                $idCart = uniqid('CA');
+                $customerID = $_SESSION['customerID'];
+
+                $idCartItem = uniqid('CAI');
+                $id = $id;
+                $quantity = $_POST['quantity'];
+                $selected = 0;
+               
+                $stmt = $conn->prepare("INSERT INTO CART VALUES (:idCart, :customerID)");
+                $stmt->bindParam(':idCart', $idCart);
+                $stmt->bindParam(':customerID', $customerID);
+                $stmt->execute();
+
+                $stmt1 = $conn->prepare("INSERT INTO CART_ITEMS VALUES (:idCartItem, :idCart, :productId, :quantity, :selected)");
+                $stmt1->bindParam(':idCartItem', $idCartItem);
+                $stmt1->bindParam(':idCart', $idCart);
+                $stmt1->bindParam(':productId', $id);
+                $stmt1->bindParam(':quantity', $quantity);
+                $stmt1->bindParam(':selected', $selected);
+                $stmt1->execute();
+
+
+
+            }
+        }else{
+            echo "<script>alert('Vui lòng đăng nhập!');</script>";
+            echo "<script>window.location.href='./login.php'; </script>";
+        }
+           
+    }
     
+   ?>
    
     <?php include 'footer.php';?>
 </body>
@@ -286,57 +335,6 @@
     });
 </script>
 
-<script>
-        function addToCart() {
-           
-            // Kiểm tra xem cookie 'cart' đã tồn tại hay chưa
-            var cartItems = [];
-            if (getCookie('cart')) {
-                cartItems = JSON.parse(getCookie('cart'));
-            }
 
-            // Thêm sản phẩm vào giỏ hàng
-            var product = <?php echo json_encode($productCookieArray); ?>;
-            cartItems.push(product);
-            console.log(document.cookie);
-
-
-            // Lưu giỏ hàng vào cookie
-            setCookie('cart', JSON.stringify(cartItems), 1);
-            
-
-        }
-       
-
-
-
-
-
-        // Hàm lấy cookie theo tên
-        function getCookie(name) {
-            var cookieArr = document.cookie.split(';');
-            for (var i = 0; i < cookieArr.length; i++) {
-                var cookiePair = cookieArr[i].split('=');
-                if (name === cookiePair[0].trim()) {
-                    return decodeURIComponent(cookiePair[1]);
-                }
-            }
-            return null;
-        }
-
-        // Hàm set cookie
-        function setCookie(name, value, days) {
-            var expires = "";
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
-        }
-
-        console.log(document.cookie);
-
-</script>
 
 </html>
