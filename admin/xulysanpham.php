@@ -117,6 +117,6 @@ foreach ($target_files as $key => $target_file) {
     }
     
 }
- header('Location: admin.php?page=product');
+ header('Location: admin.php?page=2');
  exit();
 ?>

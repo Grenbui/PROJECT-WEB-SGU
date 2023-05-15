@@ -2,9 +2,6 @@
 require_once('connectPHP.php');
 $sql = "SELECT * FROM PRODUCT";
 $products =  mysqli_query($conn, $sql);
-
-
-
 ?>
 <div class="header_form" style="justify-content:end">
   <div class="btn_add">
