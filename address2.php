@@ -29,13 +29,8 @@
     <?php include './ConnectDatabase/connectDatabase.php'?>
 
     <?php
-    $customerID = $_SESSION['customerID'];
 
-    $address = "";
-    $district = "";
-    $city = "";
-    $addressLine = "";
-
+$customerID = $_SESSION['customerID'];
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $address = $_POST['address'];
             $district = $_POST['district'];
@@ -43,16 +38,16 @@
             $addressLine = $address . " " . $district . " " . $city;
 
             try {
-                $sql = "UPDATE CUSTOMER SET addressLine1 = :address WHERE customerID = '$customerID'";
+                $sql = "UPDATE CUSTOMER SET addressLine2 = :address WHERE customerID = '$customerID'";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':address', $addressLine);
                 $stmt->execute();
 
                 $rowsAffected = $stmt->rowCount();
                 if ($rowsAffected > 0) {
-                    echo '<script>alert("Tạo mới thành công");</script>';
+                    echo '<script>alert("Lưu thay đổi thành công");</script>';
                 } else {
-                    echo '<script>alert("Tạo mới thất bại");</script>';
+                    echo '<script>alert("Lưu thay đổi thất bại");</script>';
                 }
 
             } catch (PDOException $e){
@@ -127,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="form-control flex_field justify-content-center">
-                                <button type="submit">Tạo mới</button>
+                                <button type="submit">Lưu thay đổi</button>
                             </div>
                         </form>
                     </div>

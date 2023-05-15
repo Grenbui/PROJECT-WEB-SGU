@@ -210,7 +210,7 @@ li {
 
 .address__popup-content {
     position: relative;
-    width: 500px;
+    width: 1200px;
     height: 600px;
 }
 
@@ -278,17 +278,27 @@ li {
     color: rgb(120, 120, 120);
 }
 
-.address_content .item_right {
+.item_right {
     display: flex;
     align-items: center;
 }
 
-.address_content .edit {
+.content .edit {
     font-size: 16px;
     color: rgb(27, 168, 255);
     display: inline-block;
     padding: 6px 12px;
     text-decoration: none;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.2rem 0;
+}
+
+.close_btn:hover {
+    cursor: pointer;
 }
 
 .fade-out {

@@ -6,7 +6,7 @@ detailBtn.addEventListener('click', () => {
     // popup.classList.add('fade-out');
 });
 
-var cancelBtn = document.querySelector('.cancel_btn');
+var cancelBtn = document.querySelector('.close_btn');
 cancelBtn.addEventListener('click', () => {
     popup.classList.remove('show_popup');
 });

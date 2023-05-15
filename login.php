@@ -51,7 +51,8 @@
         </div>
     </div>
     <?php
-    require_once('./admin/connectPHP.php');
+    // require_once('./admin/connectPHP.php');
+    include './ConnectDatabase/connectDatabase.php';
 
     $email = '';
     $password = '';
@@ -62,32 +63,28 @@
         $password = $_POST['password'];
 
 
-
-
-       
-       
-        $stmt = $conn->prepare("SELECT customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
-        $stmt->close();
+    //     $stmt = $conn->prepare("SELECT customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail = ?");
+    //     $stmt->bind_param("s", $email);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
+    //     $user = $result->fetch_assoc();
+    //     $stmt->close();
         
 
-        if ($user && $password === $user['userPasswordAccount'] && isset($user['userPasswordAccount'])) {
-            // Đăng nhập thành công
-            session_start();
-            $_SESSION['loggedIn'] = true;
-            $_SESSION['customerName'] = $user['customerName'];
-            var_dump($_SESSION);
-            echo "<script>alert('Đăng nhập thành công!');</script>";
-            $result = true;
-            echo "<script>window.location.href='./index.php';</script>";
-        } else {
-            // Sai tên đăng nhập hoặc mật khẩu
-            echo "<script>alert('Đăng nhập thất bại');</script>";
-        }
-    }
+    //     if ($user && $password === $user['userPasswordAccount'] && isset($user['userPasswordAccount'])) {
+    //         // Đăng nhập thành công
+    //         session_start();
+    //         $_SESSION['loggedIn'] = true;
+    //         $_SESSION['customerName'] = $user['customerName'];
+    //         var_dump($_SESSION);
+    //         echo "<script>alert('Đăng nhập thành công!');</script>";
+    //         $result = true;
+    //         echo "<script>window.location.href='./index.php';</script>";
+    //     } else {
+    //         // Sai tên đăng nhập hoặc mật khẩu
+    //         echo "<script>alert('Đăng nhập thất bại');</script>";
+    //     }
+    // }
 
 
                 try {
@@ -119,7 +116,7 @@
                     return false;
                 }
             
-    
+            }
             
 
 

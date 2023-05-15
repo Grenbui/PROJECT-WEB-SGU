@@ -98,15 +98,18 @@
             <div class="address__popup">
                 <div class="address__popup-container d-flex flex-collumn">
                     <div class="address__popup-content">
-                        <div class="address__popup-header">
-                            <p>Địa Chỉ Của Tôi</p>
+                        <div class="address__popup-header d-flex justify-content-between">
+                            <p>Đơn hàng</p>
+                            <div class="close_btn">
+                                <i class="fa-solid fa-xmark" style="font-size: 24px;"></i>
+                            </div>
                         </div>
                         <div class="address__popup-body">
 
                         </div>
                         <div class="address__popup-footer">
-                            <button class="address_btn cancel_btn">Huỷ</button>
-                            <button class="address_btn submit_btn">Xác nhận</button>
+                            <!-- <button class="address_btn cancel_btn">Huỷ</button>
+                            <button class="address_btn submit_btn">Xác nhận</button> -->
                         </div>
                     </div>
                 </div>

@@ -29,6 +29,7 @@
     <?php include 'header.php'; ?>
 
     <?php
+        $customerID = $_SESSION['customerID'];
 
         $customerName = "";
         $customerNickName = "";
@@ -66,7 +67,7 @@
             
         }
 
-        $sql = "SELECT * FROM CUSTOMER WHERE customerID = 'C1' ";
+        $sql = "SELECT * FROM CUSTOMER WHERE customerID = '$customerID' ";
         $stmt = $conn->query($sql);
 
         while ($row = $stmt->fetch()){

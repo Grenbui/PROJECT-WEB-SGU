@@ -31,18 +31,12 @@
     <?php include 'header.php'; ?>
 
     <?php
+    $customerID = $_SESSION['customerID'];
+
     $customerName = "";
     $customerPhone = "";
-    $customerAddress = "";
-
-    $sql = "SELECT * FROM CUSTOMER WHERE customerID = 'C1' ";
-    $stmt = $conn->query($sql);
-
-    while ($row = $stmt->fetch()) {
-        $customerName = $row['customerName'];
-        $customerPhone = $row['phoneNumber'];
-        $customerAddress = $row['addressLine1'] . $row['city'] . $row['country'];
-    }
+    $customerAddress1 = "";
+    $customerAddress2 = "";
     ?>
 
     <section class="user_container">
@@ -78,7 +72,7 @@
                     </div>
                     <div class="address-container">
                         <?php
-                        $sql = "SELECT * FROM CUSTOMER WHERE customerID = 'C1'";
+                        $sql = "SELECT * FROM CUSTOMER WHERE customerID = '$customerID'";
                         $stmt = $conn->query($sql);
 
                         while ($row = $stmt->fetch()) {
@@ -96,35 +90,95 @@
                                 echo         "<span>Thêm địa chỉ phụ</span>";
                                 echo     "</a>";
                                 echo "</div>";
+                            } else {
+                                echo '';
                             }
                         }
 
                         ?>
-                        <div class="address_content">
+                        <!-- <div class="address_content"> -->
                             <?php
-                            if($row['addressLine2'] == ''){
-                                echo "<div class='item_addres'>";
-                                echo "<div class='item_left'>";
-                                echo    "<div class='name'>";
-                                echo        "Nguyễn văn A";
-                                echo    "</div>";
-                                echo    "<div class='address'>";
-                                echo        "<span>Địa chỉ: </span>";
-                                echo    "</div>";
-                                echo    "<div class='phoneNumber'>";
-                                echo        "<span>Điện thoại: </span>";
-                                echo    "</div>";
+                            $sql = "SELECT * FROM CUSTOMER WHERE customerID = '$customerID' ";
+                            $stmt = $conn->query($sql);
+
+                            while ($row = $stmt->fetch()) {
+                                $customerName = $row['customerName'];
+                                $customerPhone = $row['phoneNumber'];
+                                $customerAddress1 = $row['addressLine1'];
+                                $customerAddress2 = $row['addressLine2'];
+
+                                if($row['addressLine2'] == ''){
+                                    echo "<div class='item_addres'>";
+                                    echo "<div class='item_left'>";
+                                    echo    "<div class='name'>";
+                                    echo        $customerName;
+                                    echo    "</div>";
+                                    echo    "<div class='address'>";
+                                    echo        "<span>Địa chỉ: </span>" . $customerAddress1 ;
+                                    echo    "</div>";
+                                    echo    "<div class='phoneNumber'>";
+                                    echo        "<span>Điện thoại: </span>" . $customerPhone;
+                                    echo    "</div>";
+                                    echo "</div>";
                                 echo "</div>";
-                            echo "</div>";
-                            echo "<div class='item_right'>";
-                                echo "<a class='edit' href=>";
-                                    echo "Chỉnh sửa";
-                                    echo "<i class='fa-solid fa-pen-to-square'></i>";
-                                echo "</a>";
-                            echo "</div>";
+                                echo "<div class='item_right'>";
+                                    echo "<a class='edit' href='./address1'>";
+                                        echo "Chỉnh sửa";
+                                        echo "<i class='fa-solid fa-pen-to-square'></i>";
+                                    echo "</a>";
+                                echo "</div>";
+                                } else {
+                                    echo "<div class='content'";
+                                    echo "<div class='item_addres'>";
+                                    echo "<div class='item_left'>";
+                                    echo    "<div class='name'>";
+                                    echo        $customerName;
+                                    echo    "</div>";
+                                    echo    "<div class='address'>";
+                                    echo        "<span>Địa chỉ: </span>" . $customerAddress1 ;
+                                    echo    "</div>";
+                                    echo    "<div class='phoneNumber'>";
+                                    echo        "<span>Điện thoại: </span>" . $customerPhone;
+                                    echo    "</div>";
+                                    echo "</div>";
+                                    echo "<div class='item_right'>";
+                                    echo "<a class='edit' href='./address1.php'>";
+                                        echo "Chỉnh sửa";
+                                        echo "<i class='fa-solid fa-pen-to-square'></i>";
+                                    echo "</a>";
+                                echo "</div>";
+                                echo "</div>";
+                                
+                                echo "</div>";
+
+                                echo "<div class='content'";
+                                    echo "<div class='item_addres'>";
+                                    echo "<div class='item_left'>";
+                                    echo    "<div class='name'>";
+                                    echo        $customerName;
+                                    echo    "</div>";
+                                    echo    "<div class='address'>";
+                                    echo        "<span>Địa chỉ: </span>" . $customerAddress2 ;
+                                    echo    "</div>";
+                                    echo    "<div class='phoneNumber'>";
+                                    echo        "<span>Điện thoại: </span>" . $customerPhone;
+                                    echo    "</div>";
+                                    echo "</div>";
+                                    echo "<div class='item_right'>";
+                                    echo "<a class='edit' href='./address2.php'>";
+                                        echo "Chỉnh sửa";
+                                        echo "<i class='fa-solid fa-pen-to-square'></i>";
+                                    echo "</a>";
+                                echo "</div>";
+                                echo "</div>";
+                                
+                                echo "</div>";
+
+                                
+                                }
                             }
                             ?>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>

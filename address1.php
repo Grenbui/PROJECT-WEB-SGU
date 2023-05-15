@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,9 +25,10 @@
     <!-- <script src="./Framework/jquery/jquery.mask.js"></script> -->
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
+
 <body>
     <?php include 'header.php'; ?>
-    <?php include './ConnectDatabase/connectDatabase.php'?>
+    <?php include './ConnectDatabase/connectDatabase.php' ?>
 
     <?php
     $customerID = $_SESSION['customerID'];
@@ -36,30 +38,29 @@
     $city = "";
     $addressLine = "";
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $address = $_POST['address'];
-            $district = $_POST['district'];
-            $city = $_POST['city'];
-            $addressLine = $address . " " . $district . " " . $city;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $address = $_POST['address'];
+        $district = $_POST['district'];
+        $city = $_POST['city'];
+        $addressLine = $address . $district . $city;
 
-            try {
-                $sql = "UPDATE CUSTOMER SET addressLine1 = :address WHERE customerID = '$customerID'";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':address', $addressLine);
-                $stmt->execute();
+        try {
+            $sql = "UPDATE CUSTOMER SET addressLine1 = :address WHERE customerID = '$customerID'";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':address', $addressLine);
+            $stmt->execute();
 
-                $rowsAffected = $stmt->rowCount();
-                if ($rowsAffected > 0) {
-                    echo '<script>alert("Tạo mới thành công");</script>';
-                } else {
-                    echo '<script>alert("Tạo mới thất bại");</script>';
-                }
-
-            } catch (PDOException $e){
-                echo 'Connection failed: ' . $e->getMessage();
-                return false;
+            $rowsAffected = $stmt->rowCount();
+            if ($rowsAffected > 0) {
+                echo '<script>alert("Lưu thay đổi thành công");</script>';
+            } else {
+                echo '<script>alert("Lưu thay đổi thất bại");</script>';
             }
+        } catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+            return false;
         }
+    }
     ?>
 
     <section class="user_container">
@@ -91,12 +92,12 @@
                 </div>
                 <div class="user_detail col-9">
                     <div class="address_content">
-                    <div class="header_title">
-                        <h3 class="text-center">Tạo địa chỉ mới</h3>
-                    </div>
-                    <div class="address-container">
-                        <form action="" class="" method="post">
-                            <!-- <div class="form-control flex_field">
+                        <div class="header_title">
+                            <h3 class="text-center">Tạo địa chỉ mới</h3>
+                        </div>
+                        <div class="address-container">
+                        <form class="" method="post">
+                                <!-- <div class="form-control flex_field">
                                 <label for="">Họ và tên: </label>
                                 <div class="text_field">
                                     <input type="text" class="name_field" name="" id="" placeholder="Nhập họ và tên">
@@ -108,29 +109,31 @@
                                     <input type="text" class="name_field" name="" id="" placeholder="Nhâp số điện thoại">
                                 </div>
                             </div> -->
-                            <div class="form-control flex_field">
-                                <label for="">Tỉnh/Thành phố: </label>
-                                <div class="text_field">
-                                    <input type="text" class="city_field" name="city" id="" placeholder="Nhập tỉnh/thành phố">
+                                <div class="form-control flex_field">
+                                    <label for="">Tỉnh/Thành phố: </label>
+                                    <div class="text_field">
+                                        <input type="text" class="city_field" name="city" id="" placeholder="Nhập tỉnh/thành phố">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-control flex_field">
-                                <label for="">Quận/Huyện: </label>
-                                <div class="text_field">
-                                    <input type="text" class="district_field" name="district" id="" placeholder="Nhập quận/huyện">
+                                <div class="form-control flex_field">
+                                    <label for="">Quận/Huyện: </label>
+                                    <div class="text_field">
+                                        <input type="text" class="district_field" name="district" id="" placeholder="Nhập quận/huyện">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-control flex_field">
-                                <label for="">Địa chỉ: </label>
-                                <div class="text_field">
-                                    <input type="text" class="address_field" name="address" id="" placeholder="Nhập địa chỉ">
+                                <div class="form-control flex_field">
+                                    <label for="">Địa chỉ: </label>
+                                    <div class="text_field">
+                                        <input type="text" class="address_field" name="address" id="" placeholder="Nhập địa chỉ">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-control flex_field justify-content-center">
-                                <button type="submit">Tạo mới</button>
-                            </div>
-                        </form>
-                    </div>
+                                <div class="form-control flex_field justify-content-center">
+                                    <button type="submit">Lưu thay đổi</button>
+                                </div>
+                            </form>
+
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,4 +142,5 @@
 
     <?php include 'footer.php'; ?>
 </body>
+
 </html>
