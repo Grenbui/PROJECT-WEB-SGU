@@ -28,6 +28,59 @@
     <?php include './ConnectDatabase/connectDatabase.php' ?>
     <?php include 'header.php'; ?>
 
+    <?php
+
+        $customerName = "";
+        $customerNickName = "";
+        $customerEmail = "";
+        $customerCountry = "";
+        $customerPhone = "";
+        $customerAddress = "";
+
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $name = $_POST['fullname'];
+            $nickname = $_POST['nickname'];
+            $country = $_POST['country'];
+
+            try {
+                $sql = "UPDATE CUSTOMER SET customerName = :name, userNameAccount = :nickname , country = :country WHERE customerID = 'C1'";
+                
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':name', $name);
+                $stmt->bindParam(':nickname', $nickname);
+                $stmt->bindParam(':country', $country);
+                $stmt->execute();
+
+                $rowsAffected = $stmt->rowCount();
+                if ($rowsAffected > 0) {
+                    echo '<script>alert("Lưu thay đổi thành công");</script>';
+                } else {
+                    echo '<script>alert("Cập nhật dữ liệu thất bại");</script>';
+                }
+
+            } catch (PDOException $e) {
+                echo 'Connection failed: ' . $e->getMessage();
+                return false;
+            }
+            
+        }
+
+        $sql = "SELECT * FROM CUSTOMER WHERE customerID = 'C1' ";
+        $stmt = $conn->query($sql);
+
+        while ($row = $stmt->fetch()){
+            $customerName = $row['customerName'];
+            $customerNickName = $row['userNameAccount'];
+            $customerEmail = $row['customerEmail'];
+            $customerCountry = $row['country'];
+            $customerPhone = $row['phoneNumber'];
+            $customerAddress = $row['addressLine1'] . $row['city'] . $row['country'];
+        }
+
+        
+    ?>
+
     <section class="user_container">
         <div class="user_content container">
             <div class="table_user row">
@@ -59,20 +112,24 @@
                     <div class="info_detail">
                         <div class="info-left col-6">
                             <h3 class="info_title text-center">Thông tin tài khoản</h3>
-                            <form action="" class="info_content">
+                            <form action="" class="info_content" method="post">
                                 <div class="form-info">
                                     <div class="form-name">
                                         <div class="form-control">
                                             <label class="nameInput" for="">Họ & Tên: </label>
-                                            <input class="input_field" type="text" name="fullname" placeholder="Thêm họ tên">
+                                            <?php 
+                                                echo '<input class="input_field" type="text" name="fullname" placeholder="Thêm họ tên" value="'.$customerName.'">';
+                                            ?>
                                         </div>
                                         <div class="form-control">
                                             <label class="nicknameInput" for="">Biệt danh: </label>
-                                            <input class="input_field" type="text" name="nickname" placeholder="Thêm biệt danh">
+                                            <?php
+                                                echo '<input class="input_field" type="text" name="nickname" placeholder="Thêm biệt danh" value="'.$customerNickName.'">';
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-control d-flex">
+                                <!-- <div class="form-control d-flex">
                                         <label class="dateInput" for="">Ngày sinh: </label>
                                         <div class="date_selection">
                                             <select name="day">
@@ -142,16 +199,24 @@
                                                 </label>
                                             </label>
                                         </label>
-                                    </div>
+                                    </div> -->
                                     <div class="form-control">
                                         <label class="countryInput" for="">Quốc gia: </label>
-                                        <input class="input_field" type="text" name="country" placeholder="Thêm quốc gia">
+                                        <?php
+                                            echo '<input class="input_field" type="text" name="country" placeholder="Thêm quốc gia" value="'.$customerCountry.'">'
+                                        ?>
                                     </div>
+                                   
                                     <div class="form-control">
                                         <label class="input-label">&nbsp;</label>
                                         <button type="submit" class="input-btn">Lưu thay đổi</button>
                                     </div>
                             </form>
+
+                            <?php
+                                
+                            ?>
+                            
                         </div>
                         <div class="info-vertical"></div>
                         <div class="info-right col-6">
@@ -163,7 +228,9 @@
                                         <div class="info-container">
                                             <span>Số điện thoại</span>
                                             <span>
-
+                                                <?php
+                                                    echo $customerPhone;
+                                                ?>
                                             </span>
                                         </div>
                                     </div>
@@ -177,7 +244,9 @@
                                         <div class="info-container">
                                             <span>Địa chỉ Email</span>
                                             <span>
-
+                                                <?php
+                                                    echo $customerEmail;
+                                                ?>
                                             </span>
                                         </div>
                                     </div>

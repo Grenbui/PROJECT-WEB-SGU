@@ -45,6 +45,14 @@
                             }
                            $total_price = 0;
                             foreach ($cart_items as $item) {
+                                // Loại bỏ các ký tự không cần thiết
+$price_without_currency = str_replace(',', '', $item['price']); // Xóa dấu ","
+$price_without_currency = str_replace('₫', '', $price_without_currency); // Xóa ký tự "₫"
+
+// Chuyển đổi thành kiểu số nguyên
+$price_integer = intval($price_without_currency);
+
+                                $total_price = $price_integer * $item['quantity'];
                                 // $total_price = $item['nonePrice'] * $item['quantity'];
                                 // $total_price = $item['price'] * $item['quantity'];
                                 echo '
@@ -174,12 +182,7 @@ qtyMinusBtn.addEventListener('click', function() {
             console.log('Product Quantity: ' + product.quantity);
             console.log('--------------------------');
         }
-
-        function deleteCookie(name) {
-    // Đặt cookie với thời gian sống đã hết hạn (trừ đi một khoảng thời gian)
-    setcookie(name, '', time() - 3600, '/');
-}
-deleteCookie('cart')
+        setcookie('cart', '', time() - 3600, '/');
 
         // Hàm lấy cookie theo tên
         function getCookie(name) {

@@ -244,23 +244,28 @@
        
     ?>
 
-    <form action="" method="POST">
+    <form action="" method="post">
       <div class = "purchase-info">
-                <input type="number" min = "0" value = "0" name="quantity">
-               <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
+        <input type="text" min = "0" value = "2" name="quantity">
+        <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
                  Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
                </button>
                <!-- <button type = "button" class = "btn"> Mua ngay</button> -->
       </div>
     </form>
     <?php
-        $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
-       
-         $productCookieArray = array(
-            'id' => $id,
-            'name' => $product['productName'],
-            'price' => $formatted_price,
-            'quantity' =>  $quantity
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+          $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+        } else {
+          $quantity = 0;
+        }
+        // $quantity = isset($_GET['quantity']) ? $_GET['quantity'] : 1;
+
+        $productCookieArray = array(
+          'id' => $id,
+          'name' => $product['productName'],
+          'price' => $formatted_price,
+          'quantity' =>  $quantity
         );
     ?>
         </div>
@@ -302,7 +307,8 @@
 
 
             // Lưu giỏ hàng vào cookie
-            setCookie('cart', JSON.stringify(cartItems), 1);
+            // setCookie('cart', JSON.stringify(cartItems), 1);
+            setcookie('cart', '', time() + 1, '/');
             
 
         }
