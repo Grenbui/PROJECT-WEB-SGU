@@ -136,9 +136,13 @@
                                     
                                 </div>  
                                 <div class="ship-information text-center">
-                                    <a href="./addressEdit.php" class="">
-                                        <button class="btn">Thay đổi địa chỉ giao hàng</button>
-                                    </a>
+                                    
+                                        
+                                            <a href="./addressEdit.php" class="link_btn">
+                                                Thay đổi địa chỉ giao hàng
+                                            </a>
+                                        
+                                    
                                 </div>  
                             </div>
                         </div>

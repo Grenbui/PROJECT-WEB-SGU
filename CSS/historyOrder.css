@@ -307,6 +307,8 @@ li {
     transition: all linear 0.3s;
 }
 
+
+
 @keyframes fadeOut {
     from {
       opacity: 1;
