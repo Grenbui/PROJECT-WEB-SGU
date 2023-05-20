@@ -18,14 +18,14 @@
         <div class="container-checkout-payment">
             <form action="#" method="post">
                 <div class="container form-checkout">
-                    <div class="address-receive">
+                    <!-- <div class="address-receive">
                         <div class="address-header">
                             <i class="fa-solid fa-location-dot" style="margin-right: 9px;"></i>Địa chỉ nhận hàng
                         </div>
                         <div class="address customer">
 
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="product-checkout" >
                         <div class="product-header row" style="margin-bottom: 10px;">
@@ -50,7 +50,7 @@
                                ");
                                 $stmt->bindParam(':customerID', $_SESSION['customerID']);
                                 $stmt->execute();
-
+                              
                                 $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
                                 $stmt2->bindParam(':customerID', $_SESSION['customerID']);
                                 $stmt2->execute();
@@ -63,10 +63,14 @@
 
                                 $countItemCard = 0;
                                 $sum = 0;
-
+                              
+                                $idCheck = "";
+                               
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     $cartItemID = $row['cartItemID'];
                                     $productName = $row['productName'];
+                                    $idCheck = $cartItemID;
+                                   
                                     $quantity = $row['quantity'];
                                     $price = $row['buyPrice'];
                                     $total_price = $price * $quantity;
@@ -76,9 +80,10 @@
                                   
                                     
                                     
-                                    $image = $row['productImageURL'];
-                                    $countItemCard++;
+                                    $image = $row['productImageURL'].'.webp';
+                                    $countItemCard += $quantity;
                                     $sum += $total_price;
+                                   
                                    echo '
                                    <div class="product-contain row align-items-center">
                                    <div class="product-select text-start col-1">
@@ -114,12 +119,16 @@
                                </div>
                                    ';
                                 }
+                               
                            ?> 
                          
                         
                     </div>
-                    
-                    <div class="cart-information" style="display: flex; justify-content: space-between">
+                    <?php 
+                    if($idCheck != '')
+                    {
+                        echo '
+                        <div class="cart-information" style="display: flex; justify-content: space-between">
                         <div class="product-checkout " style="width: 45%">
                             <div class="product-header row text-bold" style="margin-bottom: 10px; font-size: 18px">Thông tin giao hàng </div>
                             <div class="product-contain row align-items-center">
@@ -136,33 +145,43 @@
                                     
                                 </div>  
                                 <div class="ship-information text-center">
-                                    <a href="./addressEdit.php" class="">
-                                        <button class="btn">Thay đổi địa chỉ giao hàng</button>
+                                    <a href="./addressEdit.php" class="buy_btn">
+                                        Thay đổi địa chỉ giao hàng
                                     </a>
                                 </div>  
                             </div>
                         </div>
-                        
                         <div class="product-checkout " style="width: 50%">
-                            <div class="product-header row text-bold" style="margin-bottom: 10px; font-size: 18px">Thông tin thanh toán </div>
-                            <div class="product-contain row align-items-center">
-                                 <div class="payment-information text-start">
-                                    <p><span>Số lượng sản phẩm: </span> <?php echo $countItemCard?></p>
-                                </div>
-                                <div class="payment-information text-start">
-                                    <p><span>Tạm tính: </span><?php echo number_format($sum, 0, ',', ',') . '₫'?></p>
-                                </div>
-                                <div class="payment-information text-start">
-                                    <p><span>Tổng tiền: </span><?php echo number_format($sum, 0, ',', ',') . '₫'?> </p>
-                                </div>
-                                <div class="payment-information text-center">
-                                   
-                                         <button type="submit" class="btn buyProductBtn">Mua hàng</button>
+                        <div class="product-header row text-bold" style="margin-bottom: 10px; font-size: 18px">Thông tin thanh toán </div>
+                        <div class="product-contain row align-items-center">
+                             <div class="payment-information text-start">
+                                <p><span>Số lượng sản phẩm: </span> <?php echo $countItemCard?></p>
+                            </div>
+                            <div class="payment-information text-start">
+                                <p><span>Tạm tính: </span><?php echo number_format($sum, 0, ',', ',') . "₫"?></p>
+                            </div>
+                            <div class="payment-information text-start">
+                                <p><span>Tổng tiền: </span><?php echo number_format($sum, 0, ',', ',') . "₫"?> </p>
+                            </div>
+                            <div class="payment-information text-center">
+                                <a href="./checkout.php" class="buy_btn">
+                                    Mua hàng
+                                </a>
                                     
+                                
 
-                                </div>
                             </div>
                         </div>
+                    </div>
+                        ';
+                    }
+                    ?>
+                   
+                       
+                       
+
+
+
                     </div>
                    
                   
@@ -217,6 +236,33 @@ qtyMinusBtn.addEventListener('click', function() {
 
         
     });
+</script>
+<script>
+ function deleteCartItem(cartItemID) {
+        // Gửi yêu cầu xóa dữ liệu thông qua Ajax
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "delete_cart_item.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Xử lý kết quả trả về nếu cần thiết
+                // Ví dụ: Cập nhật giao diện sau khi xóa thành công
+                // Ví dụ: Refresh lại trang để cập nhật dữ liệu mới
+                location.reload(); // Refresh lại trang
+            }
+        };
+        xhr.send("cartItemID=" + cartItemID);
+    }
+
+    // Gán sự kiện click vào các thẻ có thuộc tính "data-cart-item-id"
+    var deleteIcons = document.querySelectorAll("[data-cart-item-id]");
+    for (var i = 0; i < deleteIcons.length; i++) {
+        deleteIcons[i].addEventListener("click", function() {
+            var cartItemID = this.getAttribute("data-cart-item-id");
+            deleteCartItem(cartItemID);
+        });
+    }
+
 </script>
 
 <script>

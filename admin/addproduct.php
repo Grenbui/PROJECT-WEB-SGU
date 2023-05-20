@@ -20,7 +20,7 @@ while (mysqli_num_rows($result) > 0) {
     $sql_add_ = "SELECT productID FROM product WHERE productID = '$ID_new'";
     $result = mysqli_query($conn, $sql__add2);
 }
-
+echo $ID_new;
 
 // sử dụng hàm
 // echo ;

@@ -76,8 +76,12 @@
 
                                 $newOrderID = uniqid('O');
                                 $orderDate = date('Y-m-d');
-                                $shippedDate = '';
-
+                                $shippedDate = date('2023-05-17');
+                                if($shippedDate !== ''){
+                                    $status = "Chưa giao hàng";
+                                }else{
+                                    $status = "Đã giao hàng";
+                                }
                                 $stmt_insert = $conn->prepare("INSERT INTO ORDERS VALUES (:newOrderID, :orderDate, :shippedDate, :status, '',  :customerID, '')");
                                 $stmt_insert->bindParam(':newOrderID', $newOrderID);
                                 $stmt_insert->bindParam(':orderDate', $orderDate);
@@ -88,11 +92,7 @@
 
 
                                 
-                                if($shippedDate !== ''){
-                                    $status = "Chưa giao hàng";
-                                }else{
-                                    $status = "Đã giao hàng";
-                                }
+                                
 
 
 
@@ -111,7 +111,7 @@
                                    
                                     
                                     
-                                    $image = $row['productImageURL'];
+                                    $image = $row['productImageURL'].'.webp';
                                     $countItemCard++;
                                     $sum += $total_price;
 
@@ -254,11 +254,14 @@
                                 <div class="total-cost-num"><?php echo number_format($sum + 30000, 0, ',', ',') . '₫'; ?></div>
                             </div>
                         </div>
-                        <form action="" method="post">
+                        
                         <div class="checkout-btn">
-                            <button type="submit" name="payment">Đặt hàng</button>
+                            <a href="./deleteCart.php?cartItem=<?php echo $cartItemID; ?>" class="buy_btn">
+                                Đặt hàng
+                            </a>
+                            
                         </div>
-                        </form>
+                    
                         <?php
                             if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                                 $checkNum = uniqid('PAY');

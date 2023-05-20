@@ -225,6 +225,7 @@
                                     WHERE PRODUCT_IMAGE.isMainImage = 1
                                         AND  PRODUCT.productID = PRODUCT_IMAGE.productID
                                         AND PRODUCT.productLineID = PRODUCT_LINE.productLineID
+                                        AND  PRODUCT.productStatus = 1
                                     ";
                              if ($productLineID != '') {
                                 $sql .= " AND PRODUCT.productLineID = '$productLineID'";
@@ -310,8 +311,8 @@
                            }
 
                             
-                            $sql .= " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY";
-                            // $sql .= " LIMIT $limit OFFSET $offset";
+                            // $sql .= " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY";
+                            $sql .= " LIMIT $limit OFFSET $offset";
 
                             $stmt = $conn->query($sql);
                         
@@ -322,11 +323,13 @@
                                     $price = $row["buyPrice"];
                                     $formatted_price = number_format($price, 0, ',', ',') . '₫';
                                     
+                                    
                                     echo '<div class="body__product col-lg-3" data-aos="fade-up" data-id="' . $row["productID"] . '" onclick="showProductDetail(this)">
                                             <div class="product__detail">
                                                 <div class="body__product-img-content">
                                                     <a href="#">
-                                                        <img src="' . $row["productImageURL"] . '" alt="Product image" class="body__product-img">
+                                                    <img src="' . $row["productImageURL"] . '.webp" alt="Product image" class="body__product-img">
+
                                                     </a>
                                                 </div>
     

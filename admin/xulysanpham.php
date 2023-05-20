@@ -39,22 +39,50 @@
     $rows = mysqli_query($conn,$sql);
    
     }
-
-   
+    function generateRandomString()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = str_shuffle($characters);
+        $randomString = substr($randomString, 0, 3);
+        return $randomString;
+    }
     
+   if($_GET['action'] == 'add') {
+    $i=0;
+    while ($i<5) {
+        $productImageID[$i] =generateRandomString();
+        echo $productImageID[$i]. " ";
+       $i++;
+    }
+   }
+    else
+    {
+        $sql_2 = "SELECT productImageID FROM product_image WHERE productID = '$productID' ORDER BY `isMainImage` DESC";
+        $listproductImage = mysqli_query($conn, $sql_2);
+        $productImageID = array();
+        while ($row = mysqli_fetch_assoc($listproductImage)) {
+            $productImageID[] = $row['productImageID'];
+           
+        }
+    }
     // cập nhật hình ảnh
     $target_dir = "../Image/".$productLine;
     $productImageID_ischange = array();
-    $productImageID = array();
-    $sql_2 = "SELECT * FROM product_image WHERE productID = '$productID' ORDER BY `isMainImage` DESC";
-    $listproductImage = mysqli_query($conn,$sql_2);
-    while ($row = mysqli_fetch_assoc($listproductImage)) {
-        $productImageID[] = $row['productImageID'];
-    }
+   
+  
+    
+   
+    
+    
+   
+    
+    
+    
     $file_names = array("main_img", "img_1", "img_2", "img_3", "img_4");
     $file_names_notempty = array();
     $target_files = array();
     foreach ($file_names as $key => $file_names) {
+        // echo $key . " day";
         if (!empty($_FILES[$file_names]["name"])) {
             $target_files[] = $target_dir ."/" . basename($_FILES[$file_names]["name"]);
             $file_names_notempty[] = $file_names;
@@ -91,10 +119,10 @@ foreach ($target_files as $key => $target_file) {
     }
     
     // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-        $uploadOk = 0;
-    }
+    // if($imageFileType !=" jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    // && $imageFileType != "gif" ) {
+    //     $uploadOk = 0;
+    // }
     
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
@@ -103,11 +131,17 @@ foreach ($target_files as $key => $target_file) {
     } else {
         $filename_without_ext = substr($UrlImage, 0, strrpos($UrlImage, '.')); 
         $newUrlImage_insertVisual = $filename_without_ext . '.webp';
+        
         $UrlImage = substr($UrlImage, 1, strrpos($UrlImage, '.') - 1);
         if (move_uploaded_file($_FILES[$file_name]["tmp_name"], $newUrlImage_insertVisual)) {
-            if($file_name == 'main_img')
+            echo $UrlImage . " ";
+            if($file_name == 'main_img' && $_GET['action'] == 'edit')
             $sql = "UPDATE `product_image` SET `productImageURL` = '$UrlImage', `isMainImage`= 1 WHERE `productID` = '$productID' AND `productImageID` = '$productImageID'";
-            else 
+            if($file_name == 'main_img' && $_GET['action'] == 'add')
+            $sql = "INSERT INTO `product_image`(`productImageID`, `productID`, `productImageURL`, `isMainImage`) VALUES ('$productImageID','$productID','$UrlImage','1')";
+            if($file_name != 'main_img' && $_GET['action'] == 'add')
+            $sql = "INSERT INTO `product_image`(`productImageID`, `productID`, `productImageURL`, `isMainImage`) VALUES ('$productImageID','$productID','$UrlImage','0')";
+            if($file_name != 'main_img' && $_GET['action'] == 'edit')
             $sql = "UPDATE `product_image` SET `productImageURL` = '$UrlImage', `isMainImage`= 0 WHERE `productID` = '$productID' AND `productImageID` = '$productImageID'";
             $row = mysqli_query($conn,$sql);
             if($row) echo "Thành công";

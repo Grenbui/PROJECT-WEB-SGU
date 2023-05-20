@@ -85,7 +85,7 @@
                                 echo "</div>";
                             } elseif ($row['addressLine2'] == '') {
                                 echo "<div class='address_add-new'>";
-                                echo    "<a href='./addressEdit.php' class='new-btn'>";
+                                echo    "<a href='./address2.php' class='new-btn'>";
                                 echo         "<i class='fa-solid fa-plus'></i>";
                                 echo         "<span>Thêm địa chỉ phụ</span>";
                                 echo     "</a>";
@@ -107,7 +107,10 @@
                                 $customerAddress1 = $row['addressLine1'];
                                 $customerAddress2 = $row['addressLine2'];
 
-                                if($row['addressLine2'] == ''){
+                                if($row['addressLine1'] == ''){
+                                    echo '';
+                                } elseif ($row['addressLine2'] == '') {
+                                    echo "<div class='content'";
                                     echo "<div class='item_addres'>";
                                     echo "<div class='item_left'>";
                                     echo    "<div class='name'>";
@@ -120,12 +123,14 @@
                                     echo        "<span>Điện thoại: </span>" . $customerPhone;
                                     echo    "</div>";
                                     echo "</div>";
-                                echo "</div>";
-                                echo "<div class='item_right'>";
-                                    echo "<a class='edit' href='./address1'>";
+                                    echo "<div class='item_right'>";
+                                    echo "<a class='edit' href='./address1.php'>";
                                         echo "Chỉnh sửa";
                                         echo "<i class='fa-solid fa-pen-to-square'></i>";
                                     echo "</a>";
+                                echo "</div>";
+                                echo "</div>";
+                                
                                 echo "</div>";
                                 } else {
                                     echo "<div class='content'";
@@ -151,7 +156,7 @@
                                 
                                 echo "</div>";
 
-                                echo "<div class='content'";
+                                    echo "<div class='content'";
                                     echo "<div class='item_addres'>";
                                     echo "<div class='item_left'>";
                                     echo    "<div class='name'>";
@@ -171,11 +176,9 @@
                                     echo "</a>";
                                 echo "</div>";
                                 echo "</div>";
-                                
-                                echo "</div>";
+                                }
 
                                 
-                                }
                             }
                             ?>
                         <!-- </div> -->

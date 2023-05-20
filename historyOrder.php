@@ -27,6 +27,28 @@
 <body>
     <?php include 'header.php'; ?>
 
+    <?php 
+    require_once('./admin/connectPHP.php');
+
+    $customerID = $_SESSION['customerID'];
+
+    $stmt = 
+    "SELECT
+    ORDERS.orderID, 
+    ORDERS.orderDate,
+    SUM(ORDER_DETAIL.quantityOrdered * ORDER_DETAIL.priceEach) AS total
+  FROM 
+    ORDERS 
+    JOIN CUSTOMER ON ORDERS.customerID = CUSTOMER.customerID
+    JOIN ORDER_DETAIL ON ORDERS.orderID = ORDER_DETAIL.orderID
+    JOIN PRODUCT ON ORDER_DETAIL.productID = PRODUCT.productID
+  WHERE 
+  customer.customerID = '$customerID'
+  ";
+
+$orders = mysqli_query($conn, $stmt);
+$orders = mysqli_fetch_array($orders); 
+    ?>
     <section class="user_container">
         <div class="user_content container">
             <div class="table_user row">
@@ -69,17 +91,23 @@
                                 <div class="column-name col-3"></div>
                                 
                                 <div class="column-content col-3">
-
+                                <?php
+                                    echo $orders['orderID'];
+                                ?>
                                 </div>
                                 <div class="column-content text-center col-3">
-
+                                <?php
+                                    echo $orders['total'];
+                                ?>
                                 </div>
                                 <div class="column-content text-center col-3">
-
+                                <?php
+                                    echo $orders['orderDate'];
+                                ?>
                                 </div>
-                                <div class="column-content text-center col-3">
+                                <!-- <div class="column-content text-center col-3">
                                     <div class="detail_btn">Chi tiết</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 

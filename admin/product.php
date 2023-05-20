@@ -94,6 +94,8 @@ $products =  mysqli_query($conn, $sql);
             modal.style.display = 'none';
           });
         }
+        else
+        window.location.href = element.getAttribute("href");
 
 
       }

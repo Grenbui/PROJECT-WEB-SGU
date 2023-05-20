@@ -15,10 +15,11 @@
     <?php 
     require_once('connectPHP.php');
      $orderID = $_GET['code'];
-      $sql_1 = "SELECT   `quantityOrdered`, `priceEach`,PRODUCT.productName FROM ORDER_DETAIL 
-      JOIN PRODUCT ON ORDER_DETAIL.productID = PRODUCT.productID  WHERE ORDER_DETAIL.productID = 'P1'";
+    
+      $sql_1 = "SELECT `quantityOrdered`, `priceEach`,PRODUCT.productName FROM ORDER_DETAIL 
+      JOIN PRODUCT ON ORDER_DETAIL.productID = PRODUCT.productID  WHERE ORDER_DETAIL.productID = PRODUCT.productID AND ORDER_DETAIL.orderID = '$orderID' ";
       $products =  mysqli_query($conn,$sql_1);
-     
+    
          // Thực hiện truy vấn SQL
          $sql =  "SELECT 
          CUSTOMER.customerName, 
