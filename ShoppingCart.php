@@ -125,8 +125,7 @@
                         
                     </div>
                     <?php 
-                    if($idCheck != '')
-                    {
+                   
                         echo '
                         <div class="cart-information" style="display: flex; justify-content: space-between">
                         <div class="product-checkout " style="width: 45%">
@@ -134,13 +133,13 @@
                             <div class="product-contain row align-items-center">
                                 <div class="ship-information text-start">
                                     <p>
-                                        <span>Họ và tên: </span> <?php echo $customerName?>
+                                        <span>Họ và tên: </span>'.$customerName.'
                                     </p>
                                     <p>
-                                        <span>Địa chỉ: </span> <?php echo  $address?>
+                                        <span>Địa chỉ: </span>'. $address .'
                                     </p>
                                     <p>
-                                        <span>Số điện thoại: </span><?php echo $phoneNumber?>
+                                        <span>Số điện thoại: </span>'. $phoneNumber .'
                                     </p>
                                     
                                 </div>  
@@ -155,13 +154,13 @@
                         <div class="product-header row text-bold" style="margin-bottom: 10px; font-size: 18px">Thông tin thanh toán </div>
                         <div class="product-contain row align-items-center">
                              <div class="payment-information text-start">
-                                <p><span>Số lượng sản phẩm: </span> <?php echo $countItemCard?></p>
+                                <p><span>Số lượng sản phẩm: </span>' . $countItemCard .'</p>
                             </div>
                             <div class="payment-information text-start">
-                                <p><span>Tạm tính: </span><?php echo number_format($sum, 0, ',', ',') . "₫"?></p>
+                                <p><span>Tạm tính: </span>'.number_format($sum, 0, ',', ',') . "₫" .'</p>
                             </div>
                             <div class="payment-information text-start">
-                                <p><span>Tổng tiền: </span><?php echo number_format($sum, 0, ',', ',') . "₫"?> </p>
+                                <p><span>Tổng tiền: </span>'.number_format($sum, 0, ',', ',') . "₫".' </p>
                             </div>
                             <div class="payment-information text-center">
                                 <a href="./checkout.php" class="buy_btn">
@@ -174,7 +173,7 @@
                         </div>
                     </div>
                         ';
-                    }
+                   
                     ?>
                    
                        
