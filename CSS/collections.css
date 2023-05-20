@@ -335,7 +335,7 @@
 /* Checkout payment CSS */
 .container-checkout-payment {
     background-color: rgba(0, 0, 0, 0.06);
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
 }
@@ -440,8 +440,11 @@
     color: #4080ee;
 }
 
-button[type="submit"] {
+.buy_btn {
     float: right;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
     padding: 10px 20px;
     background-color: #f05d40;
     color: white;

@@ -42,11 +42,12 @@
         $address = $_POST['address'];
         $district = $_POST['district'];
         $city = $_POST['city'];
-        $addressLine = $address . $district . $city;
+        $addressLine = $address . $district ;
 
         try {
-            $sql = "UPDATE CUSTOMER SET addressLine1 = :address WHERE customerID = '$customerID'";
+            $sql = "UPDATE CUSTOMER SET city = :city, addressLine1 = :address WHERE customerID = '$customerID'";
             $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':city',  $city);
             $stmt->bindParam(':address', $addressLine);
             $stmt->execute();
 

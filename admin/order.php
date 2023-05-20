@@ -51,6 +51,7 @@
     </div>
     <div style="height:100%" class="input-group mb-3" >
       <select name="province" class="form-select">
+        <option value="" selected disabled>Chọn vùng</option>
         <?php while( $city = mysqli_fetch_array($cities)) { ?>
           <option value="<?php echo $city['city']; ?>"><?php echo $city['city']; ?></option>
         <?php } ?>

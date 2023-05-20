@@ -90,24 +90,30 @@
                 try {
                
                     
-                    $stmt = $conn->prepare("SELECT customerID, customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail= :email");
+                    $stmt = $conn->prepare("SELECT customerStatus,customerID, customerEmail, userPasswordAccount, customerName FROM CUSTOMER WHERE customerEmail= :email ");
                     $stmt->execute(array(':email' => $email));
                     $user = $stmt->fetch();
                     
 
                     if ($user && $password === $user['userPasswordAccount'] && isset($user['userPasswordAccount'])) {
                         // Đăng nhập thành công
-                        session_start();
-                        $_SESSION['loggedIn'] = true;
-                        $_SESSION['customerName'] = $user['customerName'];
-                        $_SESSION['customerEmail'] = $user['customerEmail'];
-                        $_SESSION['customerID'] = $user['customerID'];
-                        var_dump($_SESSION);
-                        echo "<script>alert('Đăng nhập thành công!');</script>";
-                        $result = true;
-                        echo "<script>window.location.href='./index.php';</script>";
+                        if($user['customerStatus'] == 1){
+                            echo "<script>alert('Tài khoản bạn đã bị khóa!');</script>";
+                        }else{
+                            session_start();
+                            $_SESSION['loggedIn'] = true;
+                            $_SESSION['customerName'] = $user['customerName'];
+                            $_SESSION['customerEmail'] = $user['customerEmail'];
+                            $_SESSION['customerID'] = $user['customerID'];
+                            var_dump($_SESSION);
+                            echo "<script>alert('Đăng nhập thành công!');</script>";
+                            $result = true;
+                            echo "<script>window.location.href='./index.php';</script>";
+                        }
+                       
                         
                     } else {
+
                         // Sai tên đăng nhập hoặc mật khẩu
                         echo "<script>alert('Đăng nhập thất bại');</script>";
                     }

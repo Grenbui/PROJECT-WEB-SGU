@@ -107,7 +107,8 @@
                     echo '<div class="img-showcase">';
                     foreach ($productImages as $row) {
                         if ($row["isMainImage"] == 1) {
-                            echo '<img src="' . $row["productImageURL"] . '" alt="shoe image">';
+                          echo '<img src="' . $row["productImageURL"] . '.webp" alt="shoe image">';
+
                         }
                     }
                     echo '</div>';
@@ -117,7 +118,8 @@
                         if ($row["isMainImage"] == 0) {
                            echo '<div class="img-item">';
                            echo '<a href="#" data-id="1">';
-                           echo '<img src="' . $row["productImageURL"] . '" alt="shoe image">';
+                           echo '<img src="' . $row["productImageURL"] . '.webp" alt="shoe image">';
+
                            echo '</a>';
                            echo '</div>';
                        }
@@ -244,9 +246,9 @@
        
     ?>
 
-<    <form action="" method="post">
-      <div class = "new">
-                <input type="number" min = "0" value = "0" name="quantity">
+  <form action="" method="post">
+      <div class = "purchase-info">
+                <input class = "btn" type="number" min = "0" value = "0" name="quantity">
                <button type = "submit" onclick="addToCart()" class= "btn" name="add_to_cart">
                  Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
                </button>

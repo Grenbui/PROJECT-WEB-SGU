@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="../CSS/base.css">
     <link rel="stylesheet" href="../Font/fontawesome-free-6.2.0-web/css/all.min.css">
     <link rel="stylesheet" href="../Framework/bootstrap/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../Image/favicon.webp">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <title>Total</title>
+    <title>Admin Dashboard</title>
 </head>
 <body>
 
@@ -68,7 +69,7 @@
                                             <p class="text-1">Welcome Admin!</p>
                                             <p class="text-2">Văn Sìnl</p>
                                            <div class="profile_details">
-                                               <a href="" class="text-5">Log out <span></span></a>
+                                               <a href="./login.php" class="text-5">Log out <span></span></a>
                                            </div>
 
                                         </div>

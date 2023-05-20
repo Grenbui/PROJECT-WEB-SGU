@@ -25,10 +25,11 @@
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
 <body>
-    <?php include './ConnectDatabase/connectDatabase.php' ?>
+    
     <?php include 'header.php'; ?>
 
     <?php
+    require_once('./ConnectDatabase/connectDatabase.php');
         $customerID = $_SESSION['customerID'];
 
         $customerName = "";
@@ -45,7 +46,7 @@
             $country = $_POST['country'];
 
             try {
-                $sql = "UPDATE CUSTOMER SET customerName = :name, userNameAccount = :nickname , country = :country WHERE customerID = 'C1'";
+                $sql = "UPDATE CUSTOMER SET customerName = :name, userNameAccount = :nickname , country = :country WHERE customerID = '$customerID'";
                 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':name', $name);
