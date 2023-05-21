@@ -166,9 +166,6 @@
                                 <a href="./checkout.php" class="buy_btn">
                                     Mua hàng
                                 </a>
-                                    
-                                
-
                             </div>
                         </div>
                     </div>

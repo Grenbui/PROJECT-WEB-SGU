@@ -262,45 +262,48 @@
     </div>
    
     <?php
-      
-    //    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    //        $quantity =  $_POST['quantity'] ;
-    //    }else{
-    //     $quantity =1;
-    //    }
-    //    $productCookieArray = array(
-    //        'id' => $id,
-    //        'name' => $product['productName'],
-    //        'price' => $formatted_price,
-    //        'quantity' =>  $quantity
-    //    );
-   
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true){
             if(isset($_POST['add_to_cart'])){
-                $idCart = uniqid('CA');
+               
                 $customerID = $_SESSION['customerID'];
 
-                $idCartItem = uniqid('CAI');
-                $id = $id;
-                $quantity = $_POST['quantity'];
-                $selected = 0;
+                $stmtCheckCart = $conn->prepare("SELECT COUNT(*) FROM CART WHERE customerID = :customerID");
+                $stmtCheckCart->bindParam(':customerID', $customerID);
+                $stmtCheckCart->execute();
+                $cartExists = $stmtCheckCart->fetchColumn();
+
+                if($cartExists){
+                  $stmtCart = $conn->prepare("SELECT cartID FROM CART WHERE customerID = :customerID");
+                  $stmtCart->bindParam(':customerID', $customerID);
+                  $stmtCart->execute();
+                  $cartIDs= $stmtCart->fetchAll(PDO::FETCH_COLUMN);
+                  $idCart = $cartIDs[0];
+                  $idCartItem = uniqid('CAI');
+                  $id = $id;
+                  $quantity = $_POST['quantity'];
+                  $selected = 0;
+
+                  $stmt1 = $conn->prepare("INSERT INTO CART_ITEMS VALUES (:idCartItem, :idCart, :productId, :quantity, :selected)");
+                  $stmt1->bindParam(':idCartItem', $idCartItem);
+                  $stmt1->bindParam(':idCart', $idCart);
+                  $stmt1->bindParam(':productId', $id);
+                  $stmt1->bindParam(':quantity', $quantity);
+                  $stmt1->bindParam(':selected', $selected);
+                  $stmt1->execute();
+
+                }else{
+                  $idCart = uniqid('CA');
+                  $stmt = $conn->prepare("INSERT INTO CART VALUES (:idCart, :customerID)");
+                  $stmt->bindParam(':idCart', $idCart);
+                  $stmt->bindParam(':customerID', $customerID);
+                  $stmt->execute();
+                }
+              
                
-                $stmt = $conn->prepare("INSERT INTO CART VALUES (:idCart, :customerID)");
-                $stmt->bindParam(':idCart', $idCart);
-                $stmt->bindParam(':customerID', $customerID);
-                $stmt->execute();
+               
 
-                $stmt1 = $conn->prepare("INSERT INTO CART_ITEMS VALUES (:idCartItem, :idCart, :productId, :quantity, :selected)");
-                $stmt1->bindParam(':idCartItem', $idCartItem);
-                $stmt1->bindParam(':idCart', $idCart);
-                $stmt1->bindParam(':productId', $id);
-                $stmt1->bindParam(':quantity', $quantity);
-                $stmt1->bindParam(':selected', $selected);
-                $stmt1->execute();
-
-
-
+                
             }
         }else{
             echo "<script>alert('Vui lòng đăng nhập!');</script>";
