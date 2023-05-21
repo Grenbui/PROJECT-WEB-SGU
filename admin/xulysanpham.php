@@ -178,16 +178,17 @@ foreach ($target_files as $key => $target_file) {
                 $sql = "INSERT INTO `product_image`(`productImageID`, `productID`, `productImageURL`, `isMainImage`) VALUES ('$productImageID','$productID','$UrlImage','$isMainImage')";
             }
             
-           
-            mysqli_query($conn,$sql);
-            if(mysqli_query($conn,$sql)) {
+            $row = mysqli_query($conn,$sql);
+            echo $sql;
+            if($row) {
                 echo "Lưu thành công";
             }
+            
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
     
 }
- header('Location: admin.php?page=2');
- exit();
+//  header('Location: admin.php?page=2');
+//  exit();

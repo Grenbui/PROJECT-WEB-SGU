@@ -256,7 +256,7 @@ CREATE TABLE `product_image` (
   `productImageID` varchar(50) NOT NULL,
   `productID` varchar(50) DEFAULT NULL,
   `productImageURL` varchar(255) DEFAULT NULL,
-  `isMainImage` bit(1) DEFAULT NULL
+  `isMainImage` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
