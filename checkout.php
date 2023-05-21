@@ -36,13 +36,13 @@
                         </div>
                         <div class="address__customer row">
                             <div class="address__link col-8">
-                    
+
                             </div>
                             <div class="address-edit col-4">Thay đổi</div>
                         </div>
                     </div>
 
-                   
+
                     <div class="product-checkout ">
                         <div class="product-header row">
                             <div class="text-start col-5">Sản phẩm</div>
@@ -61,101 +61,101 @@
                                 WHERE ci.cartID IN (SELECT cartID FROM CART WHERE customerID = :customerID AND isMainImage = 1 AND selected = 1)
 
                                ");
-                                $stmt->bindParam(':customerID', $_SESSION['customerID']);
-                                $stmt->execute();
+                        $stmt->bindParam(':customerID', $_SESSION['customerID']);
+                        $stmt->execute();
 
-                                $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
-                                $stmt2->bindParam(':customerID', $_SESSION['customerID']);
-                                $stmt2->execute();
-                                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                        $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
+                        $stmt2->bindParam(':customerID', $_SESSION['customerID']);
+                        $stmt2->execute();
+                        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                                $customerName = $row2['customerName'];
-                                $address = $row2['addressLine1'];
-                                $phoneNumber = $row2['phoneNumber'];
-
-
-                                $newOrderID = uniqid('O');
-                                $orderDate = date('Y-m-d');
-                                $shippedDate = date('2023-05-17');
-                                if($shippedDate !== ''){
-                                    $status = "Chưa giao hàng";
-                                }else{
-                                    $status = "Đã giao hàng";
-                                }
-                                $stmt_insert = $conn->prepare("INSERT INTO ORDERS VALUES (:newOrderID, :orderDate, :shippedDate, :status, '',  :customerID, '')");
-                                $stmt_insert->bindParam(':newOrderID', $newOrderID);
-                                $stmt_insert->bindParam(':orderDate', $orderDate);
-                                $stmt_insert->bindParam(':shippedDate', $shippedDate);
-                                $stmt_insert->bindParam(':status', $status);
-                                $stmt_insert->bindParam(':customerID', $_SESSION['customerID']);
-                                $stmt_insert->execute();
+                        $customerName = $row2['customerName'];
+                        $address = $row2['addressLine1'];
+                        $phoneNumber = $row2['phoneNumber'];
 
 
-                                
-                                
+                        $newOrderID = uniqid('O');
+                        $orderDate = date('Y-m-d');
+                        $shippedDate = date('2023-05-17');
+                        if ($shippedDate !== '') {
+                            $status = "Chưa giao hàng";
+                        } else {
+                            $status = "Đã giao hàng";
+                        }
+                        $stmt_insert = $conn->prepare("INSERT INTO ORDERS VALUES (:newOrderID, :orderDate, :shippedDate, :status, '',  :customerID, '')");
+                        $stmt_insert->bindParam(':newOrderID', $newOrderID);
+                        $stmt_insert->bindParam(':orderDate', $orderDate);
+                        $stmt_insert->bindParam(':shippedDate', $shippedDate);
+                        $stmt_insert->bindParam(':status', $status);
+                        $stmt_insert->bindParam(':customerID', $_SESSION['customerID']);
+                        $stmt_insert->execute();
 
 
 
-                                $countItemCard = 0;
-                                $sum = 0;
-                                $orderLineNumber = 0;
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    $cartItemID = $row['cartItemID'];
-                                    $productName = $row['productName'];
-                                    $quantity = $row['quantity'];
-                                    $price = $row['buyPrice'];
-                                    $total_price = $price * $quantity;
-                                    $formatted_price = number_format($price, 0, ',', ',') . '₫';
-                                    $formatted_price1 = number_format($total_price, 0, ',', ',') . '₫';
-                                    
-                                   
-                                    
-                                    
-                                    $image = $row['productImageURL'].'.webp';
-                                    $countItemCard++;
-                                    $sum += $total_price;
 
-                                    $newOrderDetailID = uniqid('OD');
-                                    $productID = $row['productID'];
-                                    $orderLineNumber++;
 
-                                    $stmt_insert_OD = $conn->prepare("INSERT INTO ORDER_DETAIL VALUES (:newOrderDetailID, :newOrderID, :productID, :quantity, :price, :orderLineNumber)");
-                                    $stmt_insert_OD->bindParam(':newOrderDetailID', $newOrderDetailID);
-                                    $stmt_insert_OD->bindParam(':newOrderID', $newOrderID);
-                                    $stmt_insert_OD->bindParam(':productID', $productID);
-                                    $stmt_insert_OD->bindParam(':quantity', $quantity);
-                                    $stmt_insert_OD->bindParam(':price', $price);
-                                    $stmt_insert_OD->bindParam(':orderLineNumber', $orderLineNumber);
-                                    $stmt_insert_OD->execute();
 
-                                   echo '
+
+                        $countItemCard = 0;
+                        $sum = 0;
+                        $orderLineNumber = 0;
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $cartItemID = $row['cartItemID'];
+                            $productName = $row['productName'];
+                            $quantity = $row['quantity'];
+                            $price = $row['buyPrice'];
+                            $total_price = $price * $quantity;
+                            $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                            $formatted_price1 = number_format($total_price, 0, ',', ',') . '₫';
+
+
+
+
+                            $image = $row['productImageURL'] . '.webp';
+                            $countItemCard++;
+                            $sum += $total_price;
+
+                            $newOrderDetailID = uniqid('OD');
+                            $productID = $row['productID'];
+                            $orderLineNumber++;
+
+                            $stmt_insert_OD = $conn->prepare("INSERT INTO ORDER_DETAIL VALUES (:newOrderDetailID, :newOrderID, :productID, :quantity, :price, :orderLineNumber)");
+                            $stmt_insert_OD->bindParam(':newOrderDetailID', $newOrderDetailID);
+                            $stmt_insert_OD->bindParam(':newOrderID', $newOrderID);
+                            $stmt_insert_OD->bindParam(':productID', $productID);
+                            $stmt_insert_OD->bindParam(':quantity', $quantity);
+                            $stmt_insert_OD->bindParam(':price', $price);
+                            $stmt_insert_OD->bindParam(':orderLineNumber', $orderLineNumber);
+                            $stmt_insert_OD->execute();
+
+                            echo '
                                    <div class="product-contain row align-items-center">
                                    
                                    <div class="product-name text-center col-5">
                                        <span>
-                                           <p><img src="'. $image .'" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $productName .'</p>
+                                           <p><img src="' . $image . '" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">' . $productName . '</p>
                                            
                                        </span>
                                    </div>
                                    <div class="product-price text-center col-2">
                                        <span>
-                                           <p>'.$formatted_price.'</p>
+                                           <p>' . $formatted_price . '</p>
                                        </span>
                                    </div>
                                    <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
-                                       '.$quantity.'
+                                       ' . $quantity . '
                                    </div>
        
                                    <div class="product-cost text-end col-2">
                                        <span>
-                                           <p>'. $formatted_price1 .'</p>
+                                           <p>' . $formatted_price1 . '</p>
                                        </span>
                                    </div>
                                    
                                </div>
                                    ';
-                                }
-                    ?>
+                        }
+                        ?>
 
 
                     </div>
@@ -224,6 +224,42 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- <div class="tips">
+                                    Payment card number: (4) VISA, (51 -> 55) MasterCard, (36-38-39) DinersClub, (34-37) American Express, (65) Discover, (5019) dankort
+                                </div>
+
+                                <div class="container">
+                                    <div class="col1">
+                                        <div class="card">
+                                            <div class="front">
+                                                <div class="type">
+                                                    <img class="bankid" />
+                                                </div>
+                                                <span class="chip"></span>
+                                                <span class="card_number">&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; </span>
+                                                <div class="date"><span class="date_value">MM / YYYY</span></div>
+                                                <span class="fullname">FULL NAME</span>
+                                            </div>
+                                            <div class="back">
+                                                <div class="magnetic"></div>
+                                                <div class="bar"></div>
+                                                <span class="seccode">&#x25CF;&#x25CF;&#x25CF;</span>
+                                                <span class="chip"></span><span class="disclaimer">This card is property of Random Bank of Random corporation. <br> If found please return to Random Bank of Random corporation - 21968 Paris, Verdi Street, 34 </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <label>Card Number</label>
+                                        <input class="number" type="text" ng-model="ncard" maxlength="19" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                                        <label>Cardholder name</label>
+                                        <input class="inputname" type="text" placeholder="" />
+                                        <label>Expiry date</label>
+                                        <input class="expire" type="text" placeholder="MM / YYYY" />
+                                        <label>Security Number</label>
+                                        <input class="ccv" type="text" placeholder="CVC" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                                        <button class="buy"><i class="material-icons">lock</i> Pay --.-- €</button>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="checkout-payment-body">
@@ -254,29 +290,29 @@
                                 <div class="total-cost-num"><?php echo number_format($sum + 30000, 0, ',', ',') . '₫'; ?></div>
                             </div>
                         </div>
-                        
+
                         <div class="checkout-btn">
                             <a href="./deleteCart.php?cartItem=<?php echo $cartItemID; ?>" class="buy_btn">
                                 Đặt hàng
                             </a>
-                            
-                        </div>
-                    
-                        <?php
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-                                $checkNum = uniqid('PAY');
-                                $paymentDate = date('Y-m-d');;
-                                $amount = $sum + 30000;
 
-                                $stmt_insert_Payment = $conn->prepare("INSERT INTO PAYMENT VALUES(:customerID, :checkNum, :paymentDate, :amount)");
-                                $stmt_insert_Payment->bindParam(':customerID',  $_SESSION['customerID']);
-                                $stmt_insert_Payment->bindParam(':checkNum', $checkNum);
-                                $stmt_insert_Payment->bindParam(':paymentDate', $paymentDate);
-                                $stmt_insert_Payment->bindParam(':amount', $amount);
-                                $stmt_insert_Payment->execute();
-                            }
+                        </div>
+
+                        <?php
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $checkNum = uniqid('PAY');
+                            $paymentDate = date('Y-m-d');;
+                            $amount = $sum + 30000;
+
+                            $stmt_insert_Payment = $conn->prepare("INSERT INTO PAYMENT VALUES(:customerID, :checkNum, :paymentDate, :amount)");
+                            $stmt_insert_Payment->bindParam(':customerID',  $_SESSION['customerID']);
+                            $stmt_insert_Payment->bindParam(':checkNum', $checkNum);
+                            $stmt_insert_Payment->bindParam(':paymentDate', $paymentDate);
+                            $stmt_insert_Payment->bindParam(':amount', $amount);
+                            $stmt_insert_Payment->execute();
+                        }
                         ?>
-                        
+
                     </div>
                 </div>
             </form>
@@ -303,7 +339,7 @@
             </div>
         </aside>
     </div>
-    
+
 
     <script>
         $(document).ready(function() {

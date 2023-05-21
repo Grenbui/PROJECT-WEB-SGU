@@ -179,8 +179,10 @@ foreach ($target_files as $key => $target_file) {
             }
             
            
-            $row = mysqli_query($conn,$sql);
-            
+            mysqli_query($conn,$sql);
+            if(mysqli_query($conn,$sql)) {
+                echo "Lưu thành công";
+            }
         } else {
             echo "Sorry, there was an error uploading your file.";
         }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,16 +25,17 @@
     <!-- <script src="./Framework/jquery/jquery.mask.js"></script> -->
     <script src="./Framework/jquery/jquery.maskedinput.js"></script>
 </head>
+
 <body>
     <?php include 'header.php'; ?>
 
-    <?php 
+    <?php
     require_once('./admin/connectPHP.php');
 
     $customerID = $_SESSION['customerID'];
-
-    $stmt = 
-    "SELECT
+    $orderID = '';
+    $stmt =
+        "SELECT
     ORDERS.orderID, 
     ORDERS.orderDate,
     SUM(ORDER_DETAIL.quantityOrdered * ORDER_DETAIL.priceEach) AS total
@@ -43,15 +45,15 @@
   		AND ORDERS.orderID = ORDER_DETAIL.orderID
         AND order_detail.orderID = orders.orderID
         AND PRODUCT.productID = order_detail.productID
-   		AND  customer.customerID = 'C6463069a27325'
+   		AND  customer.customerID = '$customerID'
    group by ORDERS.orderID
   ";
 
-$orders = mysqli_query($conn, $stmt);
-$numOrders = mysqli_num_rows($orders);
+    $orders = mysqli_query($conn, $stmt);
+    $numOrders = mysqli_num_rows($orders);
 
-echo "Số đơn hàng: " . $numOrders;
-// $orders = mysqli_fetch_array($orders); 
+    echo "Số đơn hàng: " . $numOrders;
+    // $orders = mysqli_fetch_array($orders); 
     ?>
     <section class="user_container">
         <div class="user_content container">
@@ -83,34 +85,38 @@ echo "Số đơn hàng: " . $numOrders;
                 <div class="user_detail col-9">
                     <div class="history_detail">
                         <form action="" class="history_content">
-                        <div class="history_header">
-                            <h3 class="header_title text-center">Lịch sử đơn hàng</h3>
-                        </div>
+                            <div class="history_header">
+                                <h3 class="header_title text-center">Lịch sử đơn hàng</h3>
+                            </div>
 
-                        <div class="history_body">
-                            <div class="body_column-names row">
-                                <div class="column-name col-3">Mã Đơn Hàng</div>
-                                <div class="column-name text-center col-3">Tổng tiền</div>
-                                <div class="column-name text-center col-3">Ngày đặt hàng</div>
-                                <div class="column-name col-3"></div>
-                                
+                            <div class="history_body">
+                                <div class="body_column-names row">
+                                    <div class="column-name col-3">Mã Đơn Hàng</div>
+                                    <div class="column-name text-center col-3">Tổng tiền</div>
+                                    <div class="column-name text-center col-3">Ngày đặt hàng</div>
+                                    <div class="column-name col-3"></div>
+                                </div>
+
                                 <?php
                                 while ($row = mysqli_fetch_array($orders)) {
                                     $total = $row['total'];
-                                    echo '<div class="column-content col-3">' . $row['orderID'] . '</div>';
+                                    $orderID = $row['orderID'];
+                                    echo '<div class="body-column-content row">';
+                                    echo '<div class="column-content col-3">' . $orderID . '</div>';
                                     echo '<div class="column-content text-center col-3">' . number_format($total, 0, ',', ',') . '₫' . '</div>';
                                     echo '<div class="column-content text-center col-3">' . $row['orderDate'] . '</div>';
+                                    echo '<div class="column-content text-center col-3">
+                                        <div class="detail_btn" data-orderid="' . $orderID . '">Chi tiết</div>
+                                        </div>';
+                                    echo '</div>';
                                 }
                                 ?>
-                                                            <!-- <div class="column-content text-center col-3">
-                                    <div class="detail_btn">Chi tiết</div>
-                                </div> -->
+                                
                             </div>
-                        </div>
 
-                        <div class="history_footer row">
-                                    
-                        </div>
+                            <div class="history_footer row">
+
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -130,7 +136,23 @@ echo "Số đơn hàng: " . $numOrders;
                             </div>
                         </div>
                         <div class="address__popup-body">
+                            <?php
+                                $stmt = "SELECT * FROM `order_detail` WHERE orderID = '. $orderID. '";
+                                $orderDetail = mysqli_query($conn, $stmt);
 
+                                while ($row = mysqli_fetch_array($orders)) {
+                                    $total = $row['total'];
+                                    $orderID = $row['orderID'];
+                                    echo '<div class="body-column-content row">';
+                                    echo '<div class="column-content col-3">' . $orderID . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . number_format($total, 0, ',', ',') . '₫' . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . $row['orderDate'] . '</div>';
+                                    echo '<div class="column-content text-center col-3">
+                                        <div class="detail_btn" data-orderid="' . $orderID . '">Chi tiết</div>
+                                        </div>';
+                                    echo '</div>';
+                                }
+                            ?>
                         </div>
                         <div class="address__popup-footer">
                             <!-- <button class="address_btn cancel_btn">Huỷ</button>
@@ -145,4 +167,5 @@ echo "Số đơn hàng: " . $numOrders;
     <?php include 'footer.php'; ?>
     <script src="./Javascript/addressEdit.js"></script>
 </body>
+
 </html>
