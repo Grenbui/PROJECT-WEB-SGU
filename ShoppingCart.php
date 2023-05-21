@@ -65,7 +65,11 @@
                                 $sum = 0;
                               
                                 $idCheck = "";
-                               
+                              
+                                $count = $stmt->rowCount();
+                                $_SESSION['cartItemCount'] = $count;
+
+                                
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     $cartItemID = $row['cartItemID'];
                                     $productName = $row['productName'];

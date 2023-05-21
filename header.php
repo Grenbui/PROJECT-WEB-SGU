@@ -83,6 +83,15 @@
                             <li class="header-top-navbar-item">
                                 <a href="./ShoppingCart.php" class="header-top-navbar-link">
                                     <i class="fa-solid fa-cart-shopping"></i>
+                                    (
+                                        <?php
+                                        if (isset($_SESSION['cartItemCount'])) {
+                                            echo $_SESSION['cartItemCount'];
+                                        } else {
+                                            echo "0";
+                                        }
+                                        ?>
+                                    )
                                 </a>
                             </li>
                         </ul>
