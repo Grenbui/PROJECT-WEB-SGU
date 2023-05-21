@@ -69,7 +69,7 @@
                                 $count = $stmt->rowCount();
                                 $_SESSION['cartItemCount'] = $count;
 
-                                
+
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     $cartItemID = $row['cartItemID'];
                                     $productName = $row['productName'];
@@ -105,9 +105,9 @@
                                        </span>
                                    </div>
                                    <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
-                                       <span class="qty-btn qty-plus"><i class="fa-solid fa-plus"></i></span>
-                                       <input type="number" pattern="\d*" min="0" step="1" value="'. $quantity .'" class="qty-input">
-                                       <span class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></span>
+                                      
+                                       <input type="number" pattern="\d*" min="0" step="1" value="'. $quantity .'" class="qty-input" name="quantity" disabled>
+                                       
                                    </div>
        
                                    <div class="product-cost text-center col-2">
@@ -195,23 +195,49 @@
 
 </body>
 <script>
-const qtyInput = document.querySelector('.qty-input');
-const qtyPlusBtn = document.querySelector('.qty-plus');
-const qtyMinusBtn = document.querySelector('.qty-minus');
+const qtyInputs = document.querySelectorAll('.qty-input');
+const qtyPlusBtns = document.querySelectorAll('.qty-plus');
+const qtyMinusBtns = document.querySelectorAll('.qty-minus');
 
-
-qtyPlusBtn.addEventListener('click', function() {
-  let qty = parseInt(qtyInput.value);
-  qty += 1;
-  qtyInput.value = qty;
+qtyPlusBtns.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    let qtyInput = this.parentNode.querySelector('.qty-input');
+    let productCost = this.parentNode.nextElementSibling.querySelector('.product-cost');
+    let cartItemID = this.dataset.cartItemId;
+    
+    let qty = parseInt(qtyInput.value);
+    qty += 1;
+    qtyInput.value = qty;
+    
+    let price = parseFloat(productCost.dataset.price);
+    let total_price = price * qty;
+    let formatted_price1 = number_format(total_price, 0, ',', ',') + '₫';
+    
+    productCost.querySelector('p').textContent = formatted_price1;
+    
+    // Gửi yêu cầu cập nhật giá trị số lượng xuống cơ sở dữ liệu
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update_quantity.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        // Xử lý phản hồi từ máy chủ nếu cần thiết
+      }
+    };
+    xhr.send('cartItemID=' + cartItemID + '&quantity=' + qty);
+  });
 });
 
 
-qtyMinusBtn.addEventListener('click', function() {
-  let qty = parseInt(qtyInput.value);
-  qty = Math.max(qty - 1, 0);
-  qtyInput.value = qty;
+qtyMinusBtns.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    let qtyInput = this.parentNode.querySelector('.qty-input');
+    let qty = parseInt(qtyInput.value);
+    qty = Math.max(qty - 1, 0);
+    qtyInput.value = qty;
+  });
 });
+
 
 </script>
 

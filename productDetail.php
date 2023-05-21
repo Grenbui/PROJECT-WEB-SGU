@@ -278,7 +278,7 @@
                   $stmtCart->bindParam(':customerID', $customerID);
                   $stmtCart->execute();
                   $cartIDs= $stmtCart->fetchAll(PDO::FETCH_COLUMN);
-                  $idCart = $cartIDs[0];
+                   $idCart = $cartIDs[0];
                   $idCartItem = uniqid('CAI');
                   $id = $id;
                   $quantity = $_POST['quantity'];
