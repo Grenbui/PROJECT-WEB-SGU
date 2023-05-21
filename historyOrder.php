@@ -105,9 +105,10 @@
                                     echo '<div class="column-content col-3">' . $orderID . '</div>';
                                     echo '<div class="column-content text-center col-3">' . number_format($total, 0, ',', ',') . '₫' . '</div>';
                                     echo '<div class="column-content text-center col-3">' . $row['orderDate'] . '</div>';
-                                    echo '<div class="column-content text-center col-3">
-                                        <div class="detail_btn" data-orderid="' . $orderID . '">Chi tiết</div>
-                                        </div>';
+                                    echo '<div class="column-content text-center col-3"></div>';
+                                    // echo '<div class="column-content text-center col-3">
+                                    //     <div class="detail_btn" data-orderid="' . $orderID . '">Chi tiết</div>
+                                    //     </div>';
                                     echo '</div>';
                                 }
                                 ?>
@@ -137,19 +138,17 @@
                         </div>
                         <div class="address__popup-body">
                             <?php
-                                $stmt = "SELECT * FROM `order_detail` WHERE orderID = '. $orderID. '";
+                                $stmt = "SELECT * FROM `order_detail` WHERE orderID = '". $orderID. "'";
                                 $orderDetail = mysqli_query($conn, $stmt);
 
-                                while ($row = mysqli_fetch_array($orders)) {
-                                    $total = $row['total'];
+                                while ($row = mysqli_fetch_array($orderDetail)) {
+                                    $total = $row['priceEach'];
                                     $orderID = $row['orderID'];
                                     echo '<div class="body-column-content row">';
-                                    echo '<div class="column-content col-3">' . $orderID . '</div>';
-                                    echo '<div class="column-content text-center col-3">' . number_format($total, 0, ',', ',') . '₫' . '</div>';
-                                    echo '<div class="column-content text-center col-3">' . $row['orderDate'] . '</div>';
-                                    echo '<div class="column-content text-center col-3">
-                                        <div class="detail_btn" data-orderid="' . $orderID . '">Chi tiết</div>
-                                        </div>';
+                                    echo '<div class="column-content col-3">' . $row['orderDetailID'] . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . $row['priceEach'] . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . $row['quantityOrdered'] . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . number_format($total, 0, ',', ',') . '₫'. '</div>';
                                     echo '</div>';
                                 }
                             ?>
