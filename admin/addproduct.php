@@ -69,13 +69,13 @@ $productLines = mysqli_query($conn, $sql_1_add);
 
                             <div class="category">
                                 <div class="category_item">
-                                    <label for="cars">Nhà sản xuất</label>
+                                    <label >Nhà sản xuất</label>
                                     <input id="input_type" name="productVendor" type="text" value="">
                                 </div>
                             </div>
                             <div class="category">
                                 <div class="category_item">
-                                    <label for="cars">Mô tả <span class="infor">
+                                    <label >Mô tả <span class="infor">
                                         </span></label>
                                     <textarea name="productDescription" cols="6" rows="6"></textarea>
                                 </div>
@@ -86,13 +86,13 @@ $productLines = mysqli_query($conn, $sql_1_add);
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="add_price">
-                                            <label for="cars">Giá mua</label>
+                                            <label >Giá mua</label>
                                             <input type="text" name="buyPrice" value="" id="input_type">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="add_day">
-                                            <label for="cars">Giá bán lẻ
+                                            <label >Giá bán lẻ
                                             </label>
                                             <input id="input_type" name="MSRP" value="" type="text">
                                         </div>
@@ -100,14 +100,27 @@ $productLines = mysqli_query($conn, $sql_1_add);
 
                                     <div class="col-lg-6">
                                         <div class="add_day">
-                                            <label for="cars">Chất liệu</label>
+                                            <label >Chất liệu</label>
                                             <input id="input_type" name="productMaterial" value="" type="text">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="add_day">
-                                            <label for="cars">Số lượng</label>
+                                            <label >Số lượng</label>
                                             <input id="input_type" name="quantityInStock" value="" type="text">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="add_day">
+                                            <label >Màu sắc</label>
+                                            <input id="input_type" name="color" value="" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="add_day">
+                                            <label >Kích thước</label>
+                                            <input id="input_type" name="size" value="" type="text">
 
                                         </div>
                                     </div>
