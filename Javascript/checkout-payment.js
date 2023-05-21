@@ -28,3 +28,4 @@ var cancelBtn = document.querySelector('.cancel_btn');
 cancelBtn.addEventListener('click', () => {
     popup.classList.remove('show_popup');
 });
+
