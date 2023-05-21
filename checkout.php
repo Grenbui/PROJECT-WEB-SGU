@@ -30,7 +30,7 @@
         <div class="container-checkout-payment">
             <form action="#" method="post">
                 <div class="container form-checkout">
-                    <div class="address-receive">
+                    <!-- <div class="address-receive">
                         <div class="address-header">
                             <i class="fa-solid fa-location-dot" style="margin-right: 9px;"></i>Địa chỉ nhân hàng
                         </div>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="address-edit col-4">Thay đổi</div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="product-checkout ">
@@ -168,7 +168,7 @@
                                 <span><button type="button" class="COD-payment-btn product-variation" name="cod_payment" required>Thanh toán khi nhận hàng</button></span> -->
                                 <span class="label cod__listener">
                                     <div class="style-label selectedCODPayement">
-                                        <input type="radio" name="payment-method" value="cod" id="radioCOD">
+                                        <input type="radio" name="payment-method" value="cod" class="radioCOD">
                                         <div class="cod-method">
                                             <img class="method-icon" src="./Image/Option_Payment/COD_Payment.png" alt="" width="32" height="32">
                                             <div class="method-content">
@@ -180,7 +180,7 @@
 
                                 <span class="label card__listener">
                                     <div class="style-label selectedCardPayment">
-                                        <input type="radio" name="payment-method" value="card" id="radioCard">
+                                        <input type="radio" name="payment-method" value="card" class="radioCard">
                                         <div class="cod-method">
                                             <img class="method-icon" src="./Image/Option_Payment/Card_Payment.png" alt="" width="32" height="32">
                                             <div class="method-content d-flex flex-column">
@@ -444,6 +444,8 @@
     </script>
     <script src="./Javascript/collections.js"></script>
     <script src="./Javascript/checkout-payment.js"></script>
+
+    
 
 </body>
 

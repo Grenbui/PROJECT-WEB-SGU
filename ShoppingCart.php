@@ -40,90 +40,94 @@
 
                         
                            <?php include './ConnectDatabase/connectDatabase.php';
-                                $stmt = $conn->prepare("
-                                SELECT DISTINCT ci.cartItemID, p.productName, ci.quantity, p.buyPrice, p.productName, pi.productImageURL, pi.isMainImage
-                                FROM CART_ITEMS ci
-                                JOIN PRODUCT p ON ci.productID = p.productID
-                                JOIN PRODUCT_IMAGE pi ON p.productID = pi.productID
-                                WHERE ci.cartID IN (SELECT cartID FROM CART WHERE customerID = :customerID AND isMainImage = 1)
-
-                               ");
-                                $stmt->bindParam(':customerID', $_SESSION['customerID']);
-                                $stmt->execute();
-                              
-                                $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
-                                $stmt2->bindParam(':customerID', $_SESSION['customerID']);
-                                $stmt2->execute();
-                                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-                                $customerName = $row2['customerName'];
-                                $address = $row2['addressLine1'];
-                                $phoneNumber = $row2['phoneNumber'];
 
 
-                                $countItemCard = 0;
-                                $sum = 0;
-                              
-                                $idCheck = "";
-                              
-                                $count = $stmt->rowCount();
-                                $_SESSION['cartItemCount'] = $count;
+                            
 
-
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    $cartItemID = $row['cartItemID'];
-                                    $productName = $row['productName'];
-                                    $idCheck = $cartItemID;
-                                   
-                                    $quantity = $row['quantity'];
-                                    $price = $row['buyPrice'];
-                                    $total_price = $price * $quantity;
-                                    $formatted_price = number_format($price, 0, ',', ',') . '₫';
-                                    $formatted_price1 = number_format($total_price, 0, ',', ',') . '₫';
-                                    
+                                    $stmt = $conn->prepare("
+                                    SELECT DISTINCT ci.cartItemID, p.productName, ci.quantity, p.buyPrice, p.productName, pi.productImageURL, pi.isMainImage
+                                    FROM CART_ITEMS ci
+                                    JOIN PRODUCT p ON ci.productID = p.productID
+                                    JOIN PRODUCT_IMAGE pi ON p.productID = pi.productID
+                                    WHERE ci.cartID IN (SELECT cartID FROM CART WHERE customerID = :customerID AND isMainImage = 1)
+    
+                                   ");
+                                    $stmt->bindParam(':customerID', $_SESSION['customerID']);
+                                    $stmt->execute();
                                   
-                                    
-                                    
-                                    $image = $row['productImageURL'].'.webp';
-                                    $countItemCard += $quantity;
-                                    $sum += $total_price;
-                                   
-                                   echo '
-                                   <div class="product-contain row align-items-center">
-                                   <div class="product-select text-start col-1">
-                                       <span><input type="checkbox" data-cart-item-id1="' . $cartItemID .'"></span>
-                                   </div>
-                                   <div class="product-name text-center col-4">
-                                       <span>
-                                           <p><img src="'. $image .'" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $productName .'</p>
-                                           
-                                       </span>
-                                   </div>
-                                   <div class="product-price text-center col-1">
-                                       <span>
-                                           <p>'.$formatted_price.'</p>
-                                       </span>
-                                   </div>
-                                   <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
-                                      
-                                       <input type="number" pattern="\d*" min="0" step="1" value="'. $quantity .'" class="qty-input" name="quantity" disabled>
+                                    $stmt2 = $conn->prepare("SELECT * FROM CUSTOMER WHERE customerID = :customerID");
+                                    $stmt2->bindParam(':customerID', $_SESSION['customerID']);
+                                    $stmt2->execute();
+                                    $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+    
+                                    $customerName = $row2['customerName'];
+                                    $address = $row2['addressLine1'];
+                                    $phoneNumber = $row2['phoneNumber'];
+    
+    
+                                    $countItemCard = 0;
+                                    $sum = 0;
+                                  
+                                    $idCheck = "";
+                                  
+                                    $count = $stmt->rowCount();
+                                    $_SESSION['cartItemCount'] = $count;
+    
+    
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                        $cartItemID = $row['cartItemID'];
+                                        $productName = $row['productName'];
+                                        $idCheck = $cartItemID;
                                        
+                                        $quantity = $row['quantity'];
+                                        $price = $row['buyPrice'];
+                                        $total_price = $price * $quantity;
+                                        $formatted_price = number_format($price, 0, ',', ',') . '₫';
+                                        $formatted_price1 = number_format($total_price, 0, ',', ',') . '₫';
+                                        
+                                      
+                                        
+                                        
+                                        $image = $row['productImageURL'].'.webp';
+                                        $countItemCard += $quantity;
+                                        $sum += $total_price;
+                                       
+                                       echo '
+                                       <div class="product-contain row align-items-center">
+                                       <div class="product-select text-start col-1">
+                                           <span><input type="checkbox" data-cart-item-id1="' . $cartItemID .'"></span>
+                                       </div>
+                                       <div class="product-name text-center col-4">
+                                           <span>
+                                               <p><img src="'. $image .'" alt="Johny Classique Chelsea" style="width: 15%; margin-right: 9px">'. $productName .'</p>
+                                               
+                                           </span>
+                                       </div>
+                                       <div class="product-price text-center col-1">
+                                           <span>
+                                               <p>'.$formatted_price.'</p>
+                                           </span>
+                                       </div>
+                                       <div class="product-quality text-center col-2" style="display: flex; justify-content: center;">
+                                          
+                                           <input type="number" pattern="\d*" min="0" step="1" value="'. $quantity .'" class="qty-input" name="quantity" disabled>
+                                           
+                                       </div>
+           
+                                       <div class="product-cost text-center col-2">
+                                           <span>
+                                               <p>'. $formatted_price1 .'</p>
+                                           </span>
+                                       </div>
+                                       <div class="product-delete-icon text-center col-2" >
+                                           <span>
+                                               <p><i class="fa-solid fa-trash" data-cart-item-id="' . $cartItemID .'"></i></p>
+                                           </span>
+                                       </div>
                                    </div>
-       
-                                   <div class="product-cost text-center col-2">
-                                       <span>
-                                           <p>'. $formatted_price1 .'</p>
-                                       </span>
-                                   </div>
-                                   <div class="product-delete-icon text-center col-2" >
-                                       <span>
-                                           <p><i class="fa-solid fa-trash" data-cart-item-id="' . $cartItemID .'"></i></p>
-                                       </span>
-                                   </div>
-                               </div>
-                                   ';
-                                }
-                               
+                                       ';
+
+                                    }
                            ?> 
                          
                         
