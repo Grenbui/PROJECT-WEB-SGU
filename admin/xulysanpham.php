@@ -13,8 +13,7 @@
     $productMaterial = $_POST['productMaterial'];
     $productDescription = $_POST['productDescription'];
     $quantityInStock = $_POST['quantityInStock'];
-    $color = $_POST['color'];
-    $size = $_POST['size'];
+    
     $sql_3 = "SELECT productLineID FROM product_line WHERE productLineName = '$productLine'";
     $productLineID_query = mysqli_query($conn,$sql_3);
     $productLineID_query = mysqli_fetch_array($productLineID_query);
@@ -42,6 +41,8 @@
   
     }
     else {
+        $color = $_POST['color'];
+        $size = $_POST['size'];
         $sql = "INSERT INTO product (productID, productName, productVendor, productLineID, buyPrice, MSRP, productMaterial, productDescription, quantityInStock,productStatus) 
         VALUES ('$productID', '$productName', '$productVendor', '$productLineID', '$buyPrice', '$MSRP', '$productMaterial', '$productDescription', '$quantityInStock',1);";
        $productSizeId = generateRandomString_1();
@@ -178,8 +179,9 @@ foreach ($target_files as $key => $target_file) {
                 $sql = "INSERT INTO `product_image`(`productImageID`, `productID`, `productImageURL`, `isMainImage`) VALUES ('$productImageID','$productID','$UrlImage','$isMainImage')";
             }
             
-           
-            $row = mysqli_query($conn,$sql);
+           echo $sql;
+            mysqli_query($conn,$sql);
+            
             
         } else {
             echo "Sorry, there was an error uploading your file.";
@@ -187,5 +189,5 @@ foreach ($target_files as $key => $target_file) {
     }
     
 }
- header('Location: admin.php?page=2');
- exit();
+//  header('Location: admin.php?page=2');
+//  exit();

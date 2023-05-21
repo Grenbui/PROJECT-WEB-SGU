@@ -51,7 +51,7 @@
     </div>
     <div style="height:100%" class="input-group mb-3" >
       <select name="province" class="form-select">
-        <option value="" selected disabled>Chọn vùng</option>
+        <option  selected disabled>Chọn vùng</option>
         <?php while( $city = mysqli_fetch_array($cities)) { ?>
           <option value="<?php echo $city['city']; ?>"><?php echo $city['city']; ?></option>
         <?php } ?>
@@ -76,10 +76,18 @@
                  </tr>
                  <?php while($order = mysqli_fetch_array($orders)) { ?>
                     <tr>
-                     <td><?php echo $order['orderID']; ?> </td>
+                     <td id="orderID"><?php echo $order['orderID']; ?> </td>
                      <td><?php echo $order['orderDate'] ?></td>
                      <td><?php echo $order['shippedDate'] ?></td>
-                     <td><?php echo $order['status'] ?></td>
+                     <td>
+                     <select id="status" name="status" class="form-select">
+  <option value="Chưa giao" <?php if ($order['status'] == 'Chưa giao') echo 'selected'; ?>>Chưa giao</option>
+  <option value="Hủy đơn giao" <?php if ($order['status'] == 'Hủy đơn giao') echo 'selected'; ?>>Hủy đơn giao</option>
+  <option value="Đang được giao" <?php if ($order['status'] == 'Đang được giao') echo 'selected'; ?>>Đang được giao</option>
+</select>
+
+                    
+                    </td>
                      <td><?php echo $order['comments'] ?></td>
                      <td><?php echo $order['customerID'] ?></td>
                      <td><?php echo $order['subAddress'] ?></td>
@@ -87,6 +95,23 @@
                      </tr>
                      <?php } ?>
                 </table>
-<script>
 
+  <script>
+      
+    document.getElementById('status').onchange = function() {
+        var selectedStatus = this.value; 
+       
+        var orderID = this.closest('tr').querySelector('#orderID').innerText;
+       
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               
+            }
+        };
+       
+        xhttp.open("GET", "updateStatuspOrder.php?orderId=" +encodeURIComponent(orderID) + "&status=" + selectedStatus, true);
+        xhttp.send();
+    };
 </script>
+
