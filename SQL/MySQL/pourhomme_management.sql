@@ -7,9 +7,8 @@
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.12
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE DATABASE pourhomme_management;
+use pourhomme_management;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -257,7 +256,7 @@ CREATE TABLE `product_image` (
   `productImageID` varchar(50) NOT NULL,
   `productID` varchar(50) DEFAULT NULL,
   `productImageURL` varchar(255) DEFAULT NULL,
-  `isMainImage` bit(1) DEFAULT NULL
+  `isMainImage` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
