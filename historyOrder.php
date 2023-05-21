@@ -38,16 +38,20 @@
     ORDERS.orderDate,
     SUM(ORDER_DETAIL.quantityOrdered * ORDER_DETAIL.priceEach) AS total
   FROM 
-    ORDERS 
-    JOIN CUSTOMER ON ORDERS.customerID = CUSTOMER.customerID
-    JOIN ORDER_DETAIL ON ORDERS.orderID = ORDER_DETAIL.orderID
-    JOIN PRODUCT ON ORDER_DETAIL.productID = PRODUCT.productID
-  WHERE 
-  customer.customerID = '$customerID'
+    ORDERS, CUSTOMER, PRODUCT, ORDER_DETAIL
+  WHERE ORDERS.customerID = CUSTOMER.customerID
+  		AND ORDERS.orderID = ORDER_DETAIL.orderID
+        AND order_detail.orderID = orders.orderID
+        AND PRODUCT.productID = order_detail.productID
+   		AND  customer.customerID = 'C6463069a27325'
+   group by ORDERS.orderID
   ";
 
 $orders = mysqli_query($conn, $stmt);
-$orders = mysqli_fetch_array($orders); 
+$numOrders = mysqli_num_rows($orders);
+
+echo "Số đơn hàng: " . $numOrders;
+// $orders = mysqli_fetch_array($orders); 
     ?>
     <section class="user_container">
         <div class="user_content container">
@@ -90,22 +94,15 @@ $orders = mysqli_fetch_array($orders);
                                 <div class="column-name text-center col-3">Ngày đặt hàng</div>
                                 <div class="column-name col-3"></div>
                                 
-                                <div class="column-content col-3">
                                 <?php
-                                    echo $orders['orderID'];
+                                while ($row = mysqli_fetch_array($orders)) {
+                                    $total = $row['total'];
+                                    echo '<div class="column-content col-3">' . $row['orderID'] . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . number_format($total, 0, ',', ',') . '₫' . '</div>';
+                                    echo '<div class="column-content text-center col-3">' . $row['orderDate'] . '</div>';
+                                }
                                 ?>
-                                </div>
-                                <div class="column-content text-center col-3">
-                                <?php
-                                    echo $orders['total'];
-                                ?>
-                                </div>
-                                <div class="column-content text-center col-3">
-                                <?php
-                                    echo $orders['orderDate'];
-                                ?>
-                                </div>
-                                <!-- <div class="column-content text-center col-3">
+                                                            <!-- <div class="column-content text-center col-3">
                                     <div class="detail_btn">Chi tiết</div>
                                 </div> -->
                             </div>
